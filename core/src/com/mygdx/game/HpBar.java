@@ -6,20 +6,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class HpBar {
     private Hackmon hackmon;
     private int y, x;
-    private Texture green,red,black;
+    private static final Texture green =
+        new Texture("core/assets/hpGreen.png");
+    private static final Texture red =
+        new Texture("core/assets/hpRed.png");
+    private static final Texture black =
+        new Texture("core/assets/black.png");
 
     public HpBar(int x, int y){
         this.x = x;
         this.y = y;
-        black = new Texture(
-"core/assets/black.png"
-        );
-        green = new Texture(
-"core/assets/hpGreen.png"
-        );
-        red = new Texture(
-"core/assets/hpRed.png"
-        );
     }
 
     public void setHackmon(Hackmon hackmon) {

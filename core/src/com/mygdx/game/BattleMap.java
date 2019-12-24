@@ -7,6 +7,7 @@ public class BattleMap {
     Hackmon hackmon1, hackmon2;
     Texture bg;
     HpBar hpBar1,hpBar2;
+    BattleMenu menu;
     private int x1,y1,x2,y2;
 
     public BattleMap(){
