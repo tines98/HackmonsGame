@@ -12,7 +12,7 @@ public class BattleMap {
     public BattleMap(){
         x1=25;
         y1=25;
-        x2=800-150-96-25;
+        x2=800-96-25;
         y2=400-150-48-25;
         hpBar1 = new HpBar(x1,y1);
         hpBar2 = new HpBar(x2,y2);
@@ -20,8 +20,8 @@ public class BattleMap {
 
     public void render(SpriteBatch batch){
         batch.draw(bg,0,0);
-        hackmon1.render(batch,25,25);
-        hackmon2.render(batch,800-96-25,400-150-96-25);
+        hackmon1.render(batch,x1,y1);
+        hackmon2.render(batch,x2,y2);
         hpBar1.render(batch);
         hpBar2.render(batch);
     }
