@@ -12,13 +12,13 @@ public class HpBar {
         this.x = x;
         this.y = y;
         black = new Texture(
-"/home/tines/IdeaProjects/Hackmons/core/assets/black.png"
+"core/assets/black.png"
         );
         green = new Texture(
-"/home/tines/IdeaProjects/Hackmons/core/assets/hpGreen.png"
+"core/assets/hpGreen.png"
         );
         red = new Texture(
-"/home/tines/IdeaProjects/Hackmons/core/assets/hpRed.png"
+"core/assets/hpRed.png"
         );
     }
 

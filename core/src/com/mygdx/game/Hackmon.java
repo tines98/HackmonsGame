@@ -15,13 +15,13 @@ public class Hackmon {
         def = 10;
         speed = 100;
         sprite = new Texture(
-"/home/tines/IdeaProjects/Hackmons/core/assets/exploudback.png"
+"core/assets/exploudback.png"
         );
     }
 
     public void setToFront(){
         sprite = new Texture(
-"/home/tines/IdeaProjects/Hackmons/core/assets/exploudfront.png"
+"core/assets/exploudfront.png"
         );
     }
 

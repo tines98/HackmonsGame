@@ -18,7 +18,7 @@ public class HackmonsGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		bg = new Texture(
-"/home/tines/IdeaProjects/Hackmons/core/assets/bg.jpeg"
+"core/assets/bg.jpeg"
 		);
 		hackmon1 = new Hackmon();
 		hackmon2 = new Hackmon();
