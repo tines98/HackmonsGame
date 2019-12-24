@@ -69,14 +69,14 @@ public class Hackmon {
         }
     }
 
-    //TODO Make le better forumumula
-    //This is le supre SIMPELT.
+
+    // lv^3 er formula for medium fast leveling i pokemon
     public void receiveExp(int gain) {
         exp += gain;
-        if (exp > (lv * 1000)) {
+        if (exp > (lv^3)) {
             lv++;
             updateStats();
-            receiveExp(0);
+            receiveExp(0); // hva er poenget med denne?
         }
     }
 

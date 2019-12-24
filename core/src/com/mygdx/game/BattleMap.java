@@ -17,6 +17,7 @@ public class BattleMap {
         y2=400-150-48-25;
         hpBar1 = new HpBar(x1,y1);
         hpBar2 = new HpBar(x2,y2);
+        menu = new BattleMenu(300,10,400,100);
     }
 
     public void render(SpriteBatch batch){
@@ -25,12 +26,12 @@ public class BattleMap {
         hackmon2.render(batch,x2,y2);
         hpBar1.render(batch);
         hpBar2.render(batch);
+        menu.render(batch);
     }
 
     public void setHackmon1(Hackmon hackmon1) {
         this.hackmon1 = hackmon1;
         hpBar1.setHackmon(this.hackmon1);
-
     }
 
     public void setHackmon2(Hackmon hackmon2) {
