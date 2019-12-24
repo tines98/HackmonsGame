@@ -12,3 +12,13 @@ Type=WATER
 Name=Graswan
 Type=GRASS
 100,80,120,80,120,80,120,7,7
+
+[4]
+Name=Exploud
+Type=SOUND
+100,100,100,100,100,100,100,12,7
+
+[5]
+Name=Heracross
+Type=FIGHTING
+100,100,150,50,150,50,100,7,12

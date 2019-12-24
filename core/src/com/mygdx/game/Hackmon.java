@@ -10,20 +10,23 @@ import java.util.Scanner;
 public class Hackmon {
 
     private Texture sprite;
-    private int baseHP, baseSTAM, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED;
-    private int id, lv;
-    private int hp, stam;
-    private int maxHp, maxStam, atk, def, spAtk, spDef, speed;
+    private int baseHP, baseSTAM, baseSTR, baseDEF, baseWILL, baseRES, baseSPEED;
+    private int id, lv, exp;
+    private int currHP, currStam;
+    private int maxHP, maxStam, str, def, will, res, speed;
     private String name, type1, type2;
 
     public Hackmon(int id, int lv) {
         this.id = id;
         this.lv = lv;
         initialize(id);
+        String spriteName = name.toLowerCase();
         sprite = new Texture(
+                //TODO For some reason heracrossback.png is not renderable
+                //TODO and from what I've researched it's due to not being 8-bit exported... wtf?
                 "core/assets/exploudback.png"
         );
-        hp = maxHp;
+        currHP = maxHP;
     }
 
     private void initialize(Integer n) {
@@ -50,10 +53,10 @@ public class Hackmon {
                     String [] statList = statLine.split("=|,");
                     baseHP = Integer.parseInt(statList[0]);
                     baseSTAM = Integer.parseInt(statList[1]);
-                    baseATK = Integer.parseInt(statList[2]);
+                    baseSTR = Integer.parseInt(statList[2]);
                     baseDEF = Integer.parseInt(statList[3]);
-                    baseSPATK = Integer.parseInt(statList[4]);
-                    baseSPDEF = Integer.parseInt(statList[5]);
+                    baseWILL = Integer.parseInt(statList[4]);
+                    baseRES = Integer.parseInt(statList[5]);
                     baseSPEED = Integer.parseInt(statList[6]);
                     updateStats();
                     break;
@@ -66,19 +69,31 @@ public class Hackmon {
         }
     }
 
+    //TODO Make le better forumumula
+    //This is le supre SIMPELT.
+    public void receiveExp(int gain) {
+        exp += gain;
+        if (exp > (lv * 1000)) {
+            lv++;
+            updateStats();
+            receiveExp(0);
+        }
+    }
+
     public void updateStats() {
-        maxHp = ((2 * baseHP * lv) / 100) + lv + 10;
+        maxHP = ((2 * baseHP * lv) / 100) + lv + 10;
         maxStam = ((baseSTAM + lv) / 10) + lv;
-        atk = ((2 * baseATK * lv) / 100) + 10;
+        str = ((2 * baseSTR * lv) / 100) + 10;
         def = ((2 * baseDEF * lv) / 100) + 10;
-        spAtk = ((2 * baseSPATK * lv) / 100) + 10;
-        spDef = ((2 * baseSPDEF * lv) / 100) + 10;
+        will = ((2 * baseWILL * lv) / 100) + 10;
+        res = ((2 * baseRES * lv) / 100) + 10;
         speed = ((2 * baseSPEED * lv) / 100) + 10;
     }
 
     public void setToFront(){
+        String spriteName = name.toLowerCase();
         sprite = new Texture(
-"core/assets/exploudfront.png"
+"core/assets/" + spriteName + "front.png"
         );
     }
 
@@ -86,12 +101,16 @@ public class Hackmon {
         batch.draw(sprite,x,y);
     }
 
+    public void restoreHP() {
+        currHP = maxHP;
+    }
+
     public void takeDamage(int dmg){
-        hp -= dmg;
+        currHP -= dmg;
     }
 
     public int getCurrHP() {
-        return hp;
+        return currHP;
     }
 
     public int getDef() {
@@ -99,18 +118,24 @@ public class Hackmon {
     }
 
     public int getHp() {
-        return hp;
+        return maxHP;
     }
+
+    public int getRes() { return res; }
 
     public int getSpeed() {
         return speed;
     }
 
     public int getStr() {
-        return atk;
+        return str;
     }
 
-    public boolean isFainted(){
-        return hp<=0;
+    public int getWill() {
+        return will;
+    }
+
+    public boolean isFainted() {
+        return currHP <= 0;
     }
 }

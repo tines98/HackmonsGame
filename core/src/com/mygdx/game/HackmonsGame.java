@@ -20,8 +20,8 @@ public class HackmonsGame extends ApplicationAdapter {
 		bg = new Texture(
 "core/assets/bg.jpeg"
 		);
-		hackmon1 = new Hackmon(1, 1);
-		hackmon2 = new Hackmon(2, 2);
+		hackmon1 = new Hackmon(4, 1);
+		hackmon2 = new Hackmon(5, 2);
 		battleMap = new BattleMap();
 		battleMap.setHackmon1(hackmon1);
 		battleMap.setHackmon2(hackmon2);
