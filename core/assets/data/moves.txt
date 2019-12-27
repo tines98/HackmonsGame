@@ -3,3 +3,4 @@
 1,TACKLE,Tackle,000,BEAST,30,2,Physical,100,0,0
 2,JETSTREAM,Jet Stream,000,WATER,60,6,Special,95,0,0
 3,AQUAJET,Aqua Jet,000,WATER,20,2,Physical,0,0,2
+4,HULKSMASH,Hulk Smash,000,FIGHTING,90,10,Physical,90,0,0

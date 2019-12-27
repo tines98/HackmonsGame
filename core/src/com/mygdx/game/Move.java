@@ -16,28 +16,17 @@ public class Move {
     public Move(String name) {
         this.internalName = name;
         initialize(name);
-        //TODO Make this constructor able to find the correct move without reading the file twice :)
     }
 
     private void initialize(int n) {
         try {
             File moveList = new File("core/assets/data/moves.txt");
             Scanner sc = new Scanner(moveList);
-            char id = (char) (n + 48);
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
-                if (data.charAt(0) == id) {
-                    String [] dataList = data.split(",");
-                    internalName = dataList[1];
-                    displayName = dataList[2];
-                    functionCode = dataList[3];
-                    type = dataList[4];
-                    power = Integer.parseInt(dataList[5]);
-                    cost = Integer.parseInt(dataList[6]);
-                    category = dataList[7];
-                    accuarcy = Integer.parseInt(dataList[8]);
-                    effectAccuarcy = Integer.parseInt(dataList[9]);
-                    priority = Integer.parseInt(dataList[10]);
+                String [] dataList = data.split(",");
+                if (Integer.parseInt(dataList[0]) == n) {
+                    setValues(dataList);
                     break;
                 }
             }
@@ -56,16 +45,7 @@ public class Move {
                 String data = sc.nextLine();
                 String [] dataList = data.split(",");
                 if (name.equals(dataList[1])){
-                    internalName = dataList[1];
-                    displayName = dataList[2];
-                    functionCode = dataList[3];
-                    type = dataList[4];
-                    power = Integer.parseInt(dataList[5]);
-                    cost = Integer.parseInt(dataList[6]);
-                    category = dataList[7];
-                    accuarcy = Integer.parseInt(dataList[8]);
-                    effectAccuarcy = Integer.parseInt(dataList[9]);
-                    priority = Integer.parseInt(dataList[10]);
+                    setValues(dataList);
                     break;
                 }
             }
@@ -74,6 +54,21 @@ public class Move {
             System.out.println("ERROR: Initialization failed");
             e.printStackTrace();
         }
+    }
+
+    //Collected the duplicate code here
+    public void setValues(String [] dataList) {
+        id = Integer.parseInt(dataList[0]);
+        internalName = dataList[1];
+        displayName = dataList[2];
+        functionCode = dataList[3];
+        type = dataList[4];
+        power = Integer.parseInt(dataList[5]);
+        cost = Integer.parseInt(dataList[6]);
+        category = dataList[7];
+        accuarcy = Integer.parseInt(dataList[8]);
+        effectAccuarcy = Integer.parseInt(dataList[9]);
+        priority = Integer.parseInt(dataList[10]);
     }
 
     public int getAccuarcy() {

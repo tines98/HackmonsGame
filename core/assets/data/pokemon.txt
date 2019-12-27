@@ -17,8 +17,10 @@ Type=GRASS
 Name=Exploud
 Type=SOUND
 100,100,100,100,100,100,100,12,7
+LevelMoves=1,1,2,4
 
 [5]
 Name=Heracross
 Type=FIGHTING
 100,100,150,50,150,50,100,7,12
+LevelMoves=1,1,5,2

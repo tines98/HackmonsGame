@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Hackmon {
@@ -16,10 +17,15 @@ public class Hackmon {
     private int maxHP, maxStam, str, def, will, res, speed;
     private String name, type1, type2;
 
+    private Move [] moves = new Move [4];
+    private Move [] levelMoves = new Move [100];
+
     public Hackmon(int id, int lv) {
         this.id = id;
         this.lv = lv;
         initialize(id);
+        updateStats();
+        initialMoves();
         String spriteName = name.toLowerCase();
         sprite = new Texture(
                 //TODO For some reason heracrossback.png is not renderable
@@ -27,6 +33,12 @@ public class Hackmon {
                 "core/assets/exploudback.png"
         );
         currHP = maxHP;
+        for (int i=0; i < 4; i++) {
+            //TODO Tried to check if the moves had been updated. All are still 0, why tho?
+            if (moves[i] != null) {
+                System.out.println(moves[i].getName());
+            }
+        }
     }
 
     private void initialize(Integer n) {
@@ -40,6 +52,7 @@ public class Hackmon {
                     String nameLine = sc.nextLine();
                     String typeLine = sc.nextLine();
                     String statLine = sc.nextLine();
+                    String levelMoveLine = sc.nextLine();
 
                     String [] nameList = nameLine.split("=");
                     this.name = nameList[1];
@@ -58,7 +71,11 @@ public class Hackmon {
                     baseWILL = Integer.parseInt(statList[4]);
                     baseRES = Integer.parseInt(statList[5]);
                     baseSPEED = Integer.parseInt(statList[6]);
-                    updateStats();
+
+                    String [] levelMoveList = levelMoveLine.split("=|,");
+                    for (int i = 1; i < levelMoveList.length; i += 2) {
+                        levelMoves[Integer.parseInt(levelMoveList[i])] = new Move(levelMoveList[i+1]);
+                    }
                     break;
                 }
             }
@@ -69,6 +86,23 @@ public class Hackmon {
         }
     }
 
+    public void initialMoves() {
+        for(int i=1; i < levelMoves.length; i++) {
+            if (i <= this.lv) {
+                if (levelMoves[i] != null) {
+                    for (int j=0; j < 4; j++) {
+                        if (moves[j] == null) {
+                            moves[j] = levelMoves[i];
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                break;
+            }
+        }
+    }
 
     // lv^3 er formula for medium fast leveling i pokemon
     public void receiveExp(int gain) {

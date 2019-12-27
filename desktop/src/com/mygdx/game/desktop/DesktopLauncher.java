@@ -7,7 +7,7 @@ import com.mygdx.game.HackmonsGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-		cfg.title = "Title";
+		cfg.title = "Pokemon Johto durududududu";
 		cfg.useGL30 = true;
 		cfg.height = 400;
 		cfg.width = 800;
