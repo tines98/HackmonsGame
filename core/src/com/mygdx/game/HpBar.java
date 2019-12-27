@@ -10,13 +10,6 @@ public class HpBar {
     private int y, x;
     private float size, greenSize;
     private int prevHp;
-    private static final Texture green =
-        new Texture("core/assets/hpGreen.png");
-    private static final Texture red =
-        new Texture("core/assets/hpRed.png");
-    private static final Texture black =
-        new Texture("core/assets/black.png");
-    private static final BitmapFont font = new BitmapFont();
 
     public HpBar(int x, int y){
         this.x = x;
@@ -34,14 +27,14 @@ public class HpBar {
         prevHp = hackmon.getHp();
     }
 
-    public void render(SpriteBatch batch){
+    public void render(SpriteBatch batch, BitmapFont font){
         if (hackmon.getHp() != prevHp) {
             prevHp=hackmon.getHp();
             updateGreenSize();
         }
-        batch.draw(black,x-1,y-1,size+2,15);
-        batch.draw(red,x,y,size,13);
-        batch.draw(green,x,y,greenSize,13);
-        font.draw(batch,""+hackmon.getCurrHP()+"/"+hackmon.getHp(),x,y+13);
+        batch.draw(Colors.black,x-1,y-1,size+2,15);
+        batch.draw(Colors.red,x,y,size,13);
+        batch.draw(Colors.green,x,y,greenSize,13);
+        font.draw(batch,""+hackmon.getCurrHP()+"/"+hackmon.getHp(),x,y+12);
     }
 }

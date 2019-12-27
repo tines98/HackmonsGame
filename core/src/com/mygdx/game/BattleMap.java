@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BattleMap {
@@ -20,13 +21,13 @@ public class BattleMap {
         menu = new BattleMenu(300,10,400,100);
     }
 
-    public void render(SpriteBatch batch){
+    public void render(SpriteBatch batch, BitmapFont font){
         batch.draw(bg,0,0);
         hackmon1.render(batch,x1,y1);
         hackmon2.render(batch,x2,y2);
-        hpBar1.render(batch);
-        hpBar2.render(batch);
-        menu.render(batch);
+        hpBar1.render(batch,font);
+        hpBar2.render(batch,font);
+        menu.render(batch, font);
     }
 
     public void setHackmon1(Hackmon hackmon1) {
