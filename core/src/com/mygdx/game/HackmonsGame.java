@@ -38,7 +38,7 @@ public class HackmonsGame extends ApplicationAdapter {
 		batch.begin();
 		battleMap.render(batch, font);
 		batch.end();
-		if (Gdx.input.isKeyPressed(Input.Keys.A)) hackmon1.takeDamage(2);
+		if (Gdx.input.isKeyPressed(Input.Keys.H)) hackmon1.takeDamage(2);
 	}
 	
 	@Override

@@ -24,9 +24,11 @@ public class BattleMenuButton {
         this.text = text;
     }
 
-    public void render(SpriteBatch batch, BitmapFont font){
+    public void render(SpriteBatch batch, BitmapFont font, boolean active){
         batch.draw(Colors.black,x-1,y-1,w+2,h+2);
-        batch.draw(Colors.gray,x,y,w,h);
+        if (active)
+            batch.draw(Colors.darkGray,x,y,w,h);
+        else batch.draw(Colors.gray,x,y,w,h);
         font.draw(batch,text,textX,textY+6,0,Align.center,false);
     }
 }
