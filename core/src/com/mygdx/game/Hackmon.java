@@ -48,8 +48,8 @@ public class Hackmon {
                     if (typeList.length == 3) {
                         this.type2 = typeList[2];
                     }
-
                     this.type1 = typeList[1];
+
                     String [] statList = statLine.split("=|,");
                     baseHP = Integer.parseInt(statList[0]);
                     baseSTAM = Integer.parseInt(statList[1]);
