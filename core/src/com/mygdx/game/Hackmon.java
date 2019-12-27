@@ -74,6 +74,7 @@ public class Hackmon {
 
                     String [] levelMoveList = levelMoveLine.split("=|,");
                     for (int i = 1; i < levelMoveList.length; i += 2) {
+                        //LEARNSET MUST BE DEFINED WITH INTERNAL NAMES FOR THIS TO WORK
                         levelMoves[Integer.parseInt(levelMoveList[i])] = new Move(levelMoveList[i+1]);
                     }
                     break;
