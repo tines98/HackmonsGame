@@ -27,4 +27,22 @@ public class Trainer {
     private void updateName(String newName) {
         this.name = newName;
     }
+
+    private Hackmon getSelected() {
+        return hackmons.get(0);
+    }
+
+    private Hackmon removeMon(int i) {
+        return hackmons.remove(i);
+    }
+
+    private boolean addMon(Hackmon mon) {
+        if (hackmons.size() < 6) {
+            hackmons.add(mon);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
