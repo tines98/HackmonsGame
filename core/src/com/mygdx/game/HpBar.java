@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -24,11 +22,11 @@ public class HpBar {
 
     public void setHackmon(Hackmon hackmon) {
         this.hackmon = hackmon;
-        prevHp = hackmon.getHp();
+        prevHp = hackmon.getCurrHP();
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
-        if (hackmon.getHp() != prevHp) {
+        if (hackmon.getCurrHP() != prevHp) {
             prevHp=hackmon.getHp();
             updateGreenSize();
         }
