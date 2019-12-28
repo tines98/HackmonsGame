@@ -16,8 +16,9 @@ public class HackmonsGame extends ApplicationAdapter {
 	Hackmon hackmon2;
 	BattleMap battleMap;
 	BackPackMenu backPackMenu;
-	public static ScreenState screenState = ScreenState.BAGMENU; //just
+	public static ScreenState screenState = ScreenState.BATTLEMENU;//just
 	// change this to get battlemenu again
+	public static ScreenState prevScreenState = ScreenState.BATTLEMENU;
 
 	@Override
 	public void create () {
@@ -28,11 +29,23 @@ public class HackmonsGame extends ApplicationAdapter {
 		);
 		hackmon1 = new Hackmon(4, 100);
 		hackmon2 = new Hackmon(5, 2);
-		backPackMenu = new BackPackMenu(new BackPack(6));
+		BackPack backPack = new BackPack(5);
+		backPack.addItem(new Potion("potion",10));
+		backPack.addItem(new Potion("potion2",20));
+		backPack.addItem(new Potion("potion3",15));
+		backPack.addItem(new Potion("potion4",60));
+		backPack.addItem(new Potion("potion5",33));
+		backPackMenu = new BackPackMenu(backPack);
+
 		battleMap = new BattleMap();
 		battleMap.setHackmon1(hackmon1);
 		battleMap.setHackmon2(hackmon2);
 		battleMap.setBg(bg);
+	}
+
+	public static void changeScreenState(ScreenState state){
+		prevScreenState = screenState;
+		screenState = state;
 	}
 
 	@Override
