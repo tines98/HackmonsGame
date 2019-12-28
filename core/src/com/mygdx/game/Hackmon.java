@@ -14,7 +14,7 @@ public class Hackmon {
     private int baseHP, baseSTAM, baseSTR, baseDEF, baseWILL, baseRES, baseSPEED;
     private int id, lv, exp;
     private int currHP, currStam;
-    private int maxHP, maxStam, str, def, will, res, speed;
+    private int maxHP, maxStam, str, def, will, res, speed, crit;
     private String name, type1, type2;
 
     private Move [] moves = new Move [4];
@@ -71,6 +71,7 @@ public class Hackmon {
                     baseWILL = Integer.parseInt(statList[4]);
                     baseRES = Integer.parseInt(statList[5]);
                     baseSPEED = Integer.parseInt(statList[6]);
+                    crit = Integer.parseInt(statList[7]);
 
                     String [] levelMoveList = levelMoveLine.split("=|,");
                     for (int i = 1; i < levelMoveList.length; i += 2) {
@@ -148,6 +149,10 @@ public class Hackmon {
         return this.currHP;
     }
 
+    public int getCrit() {
+        return this.crit;
+    }
+
     public int getDef() {
         return this.def;
     }
@@ -158,6 +163,10 @@ public class Hackmon {
 
     public int getLv() {
         return this.lv;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public int getRes() { return res; }
