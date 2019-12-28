@@ -32,6 +32,12 @@ public class Trainer {
         return hackmons.get(0);
     }
 
+    private void switchMon(int n) {
+        Hackmon temp = hackmons.get(0);
+        hackmons.set(0, hackmons.get(n));
+        hackmons.set(n, temp);
+    }
+
     private Hackmon removeMon(int i) {
         return hackmons.remove(i);
     }
