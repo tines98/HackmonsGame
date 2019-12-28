@@ -145,29 +145,33 @@ public class Hackmon {
     }
 
     public int getCurrHP() {
-        return currHP;
+        return this.currHP;
     }
 
     public int getDef() {
-        return def;
+        return this.def;
     }
 
     public int getHp() {
-        return maxHP;
+        return this.maxHP;
+    }
+
+    public int getLv() {
+        return this.lv;
     }
 
     public int getRes() { return res; }
 
     public int getSpeed() {
-        return speed;
+        return this.speed;
     }
 
     public int getStr() {
-        return str;
+        return this.str;
     }
 
     public int getWill() {
-        return will;
+        return this.will;
     }
 
     public boolean isFainted() {
