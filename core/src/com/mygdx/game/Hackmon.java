@@ -33,6 +33,7 @@ public class Hackmon {
                 "core/assets/exploudback.png"
         );
         currHP = maxHP;
+        currStam = maxStam;
         for (int i=0; i < 4; i++) {
             //TODO Tried to check if the moves had been updated. All are still 0, why tho?
             if (moves[i] != null) {
@@ -137,7 +138,7 @@ public class Hackmon {
         batch.draw(sprite,x,y);
     }
 
-    public void restoreHP() {
+    public void restoreHp() {
         currHP = maxHP;
     }
 
@@ -145,8 +146,12 @@ public class Hackmon {
         currHP -= dmg;
     }
 
-    public int getCurrHP() {
+    public int getCurrHp() {
         return this.currHP;
+    }
+
+    public int getCurrStam() {
+        return this.currStam;
     }
 
     public int getCrit() {
@@ -173,6 +178,10 @@ public class Hackmon {
 
     public int getSpeed() {
         return this.speed;
+    }
+
+    public int getStam() {
+        return this.maxStam;
     }
 
     public int getStr() {
