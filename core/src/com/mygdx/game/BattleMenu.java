@@ -81,9 +81,12 @@ public class BattleMenu {
             if (selected==0) selected=1;
             if (selected==3) selected=2;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.K)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
             if (selected==BAG){
                 HackmonsGame.changeScreenState(ScreenState.BAGMENU);
+            }
+            if (selected==SWITCH){
+                HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
             }
         }
     }

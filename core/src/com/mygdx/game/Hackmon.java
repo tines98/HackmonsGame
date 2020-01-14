@@ -15,7 +15,7 @@ public class Hackmon {
     private int id, lv, exp;
     private int currHP, currStam;
     private int maxHP, maxStam, str, def, will, res, speed, crit;
-    private String name, type1, type2;
+    private String name, type1, type2, spriteName;
 
     private Move [] moves = new Move [4];
     private Move [] levelMoves = new Move [100];
@@ -26,11 +26,11 @@ public class Hackmon {
         initialize(id);
         updateStats();
         initialMoves();
-        String spriteName = name.toLowerCase();
+        spriteName = name.toLowerCase();
         sprite = new Texture(
                 //TODO For some reason heracrossback.png is not renderable
                 //TODO and from what I've researched it's due to not being 8-bit exported... wtf?
-                "core/assets/exploudback.png"
+                "core/assets/"+spriteName+"back.png"
         );
         currHP = maxHP;
         currStam = maxStam;

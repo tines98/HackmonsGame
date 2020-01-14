@@ -12,11 +12,13 @@ public class HackmonsGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	BitmapFont font;
 	Texture bg;
+	Trainer player;
 	Hackmon hackmon1;
 	Hackmon hackmon2;
 	BattleMap battleMap;
 	BackPackMenu backPackMenu;
-	public static ScreenState screenState = ScreenState.BATTLEMENU;//just
+	SwitchHackmonMenu switchHackmonMenu;
+	public static ScreenState screenState = ScreenState.SWITCHMENU;//just
 	// change this to get battlemenu again
 	public static ScreenState prevScreenState = ScreenState.BATTLEMENU;
 
@@ -29,6 +31,9 @@ public class HackmonsGame extends ApplicationAdapter {
 		);
 		hackmon1 = new Hackmon(4, 100);
 		hackmon2 = new Hackmon(5, 2);
+		player = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 100)
+		,new Hackmon(4, 69),new Hackmon(4, 50),new Hackmon(5, 10),
+				new Hackmon(4, 100),new Hackmon(4, 100)});
 		BackPack backPack = new BackPack(5);
 		backPack.addItem(new Potion("potion",10));
 		backPack.addItem(new Potion("potion2",20));
@@ -38,9 +43,10 @@ public class HackmonsGame extends ApplicationAdapter {
 		backPackMenu = new BackPackMenu(backPack);
 
 		battleMap = new BattleMap();
-		battleMap.setHackmon1(hackmon1);
+		battleMap.setTrainer1(player);
 		battleMap.setHackmon2(hackmon2);
 		battleMap.setBg(bg);
+		switchHackmonMenu = new SwitchHackmonMenu(player);
 	}
 
 	public static void changeScreenState(ScreenState state){
@@ -63,6 +69,10 @@ public class HackmonsGame extends ApplicationAdapter {
 				battleMap.render(batch, font);
 				if (Gdx.input.isKeyPressed(Input.Keys.H)) hackmon1.takeDamage(2);
 				break;
+			case SWITCHMENU:
+				switchHackmonMenu.render(batch,font);
+				break;
+
 		}
 		batch.end();
 	}

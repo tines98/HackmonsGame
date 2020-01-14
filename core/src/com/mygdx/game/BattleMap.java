@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BattleMap {
     Hackmon hackmon1, hackmon2;
+    Trainer trainer1, trainer2;
     Texture bg;
     HpBar hpBar1,hpBar2;
     BattleMenu menu;
@@ -23,6 +24,7 @@ public class BattleMap {
 
     public void render(SpriteBatch batch, BitmapFont font){
         batch.draw(bg,0,0);
+        update();
         hackmon1.render(batch,x1,y1);
         hackmon2.render(batch,x2,y2);
         hpBar1.render(batch,font);
@@ -30,9 +32,19 @@ public class BattleMap {
         menu.render(batch, font);
     }
 
+    public void update(){
+        if (trainer1.getSelected().equals(hackmon1));
+        else setHackmon1(trainer1.getSelected());
+    }
+
     public void setHackmon1(Hackmon hackmon1) {
         this.hackmon1 = hackmon1;
         hpBar1.setHackmon(this.hackmon1);
+    }
+
+    public void setTrainer1(Trainer trainer) {
+        trainer1 = trainer;
+        setHackmon1(trainer1.getSelected());
     }
 
     public void setHackmon2(Hackmon hackmon2) {
