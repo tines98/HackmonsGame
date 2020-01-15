@@ -77,13 +77,13 @@ public class SwitchHackmonMenu {
         batch.draw(Colors.darkGray,0,Gdx.graphics.getHeight()-50,
                 Gdx.graphics.getWidth(),50);
         font.draw(
-                batch,
-                "Switch Pokemon",
-                Gdx.graphics.getWidth()/2,
-                Gdx.graphics.getHeight()-25,
-                0,
-                Align.center,
-                false
+            batch,
+            "Switch Pokemon",
+            Gdx.graphics.getWidth()/2,
+            Gdx.graphics.getHeight()-25,
+            0,
+            Align.center,
+            false
         );
         renderItems(batch,font);
         input();

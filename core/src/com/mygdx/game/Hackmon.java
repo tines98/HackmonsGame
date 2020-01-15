@@ -138,8 +138,12 @@ public class Hackmon {
         );
     }
 
-    public void render(SpriteBatch batch,int x, int y){
+    public void render(SpriteBatch batch, int x, int y){
         batch.draw(sprite,x,y);
+    }
+
+    public void render(SpriteBatch batch,int x, int y, float scale){
+        batch.draw(sprite,x,y,96*scale,96*scale);
     }
 
     public void restoreHp() {

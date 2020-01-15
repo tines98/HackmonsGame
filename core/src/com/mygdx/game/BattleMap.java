@@ -27,8 +27,8 @@ public class BattleMap {
     public void render(SpriteBatch batch, BitmapFont font){
         batch.draw(bg,0,0);
         update();
-        hackmon1.render(batch,x1,y1);
-        hackmon2.render(batch,x2,y2);
+        hackmon1.render(batch,x1,y1,2);
+        hackmon2.render(batch,x2,y2,2);
         hpBar1.render(batch,font);
         hpBar2.render(batch,font);
         menu.render(batch, font);
