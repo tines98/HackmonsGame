@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Move {
-    int id, power, cost, accuarcy, effectAccuarcy, priority;
-    String internalName, displayName, functionCode, type, category;
+    private int id, power, cost, accuarcy, effectAccuarcy, priority;
+    private String internalName, displayName, functionCode, type, category;
 
     public Move(int id) {
         this.id = id;

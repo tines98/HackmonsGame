@@ -72,7 +72,6 @@ public class HackmonsGame extends ApplicationAdapter {
 			case SWITCHMENU:
 				switchHackmonMenu.render(batch,font);
 				break;
-
 		}
 		batch.end();
 	}

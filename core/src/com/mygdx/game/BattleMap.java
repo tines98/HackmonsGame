@@ -10,6 +10,7 @@ public class BattleMap {
     Texture bg;
     HpBar hpBar1,hpBar2;
     BattleMenu menu;
+    FightMenu fightMenu;
     private int x1,y1,x2,y2;
 
     public BattleMap(){
@@ -20,6 +21,7 @@ public class BattleMap {
         hpBar1 = new HpBar(x1,y1);
         hpBar2 = new HpBar(x2,y2);
         menu = new BattleMenu(300,10,400,100);
+        fightMenu = new FightMenu(300,10,400,100);
     }
 
     public void render(SpriteBatch batch, BitmapFont font){

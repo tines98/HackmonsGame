@@ -127,6 +127,10 @@ public class Hackmon {
         speed = ((2 * baseSPEED * lv) / 100) + 10;
     }
 
+    public Move[] getMoves() {
+        return moves;
+    }
+
     public void setToFront(){
         String spriteName = name.toLowerCase();
         sprite = new Texture(

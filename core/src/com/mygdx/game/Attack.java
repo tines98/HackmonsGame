@@ -4,10 +4,7 @@ import java.util.Random;
 
 public class Attack {
 
-    //TODO Move to static "chance" class
-    Random random = new Random();
-
-    public int damage(Hackmon attacker, Hackmon defender, Move move) {
+    public static int damage(Hackmon attacker, Hackmon defender, Move move) {
         if (move.getCategory().equals("Physical")) {
             return attacker.getLv() * move.getPower() * (attacker.getStr() / defender.getDef());
         }
@@ -16,15 +13,16 @@ public class Attack {
         }
     }
 
-    public double modify(Hackmon attacker, Hackmon defender, Move move) {
+    public static double modify(Hackmon attacker, Hackmon defender, Move move) {
 
-        int critical = (attacker.getCrit() > random.nextInt(100)) ? 2 : 1;
-        double variance = (100 - random.nextInt(16)) / 100;
+        int critical = RNG.chance(attacker.getCrit()) ? 2 : 1;
+        double variance = (100 - RNG.nextInt(16)) / 100;
         return critical * variance;
     }
 
-    public String attackStandard(Hackmon attacker, Hackmon defender, Move move) {
-        if (move.getAccuarcy() > random.nextInt(100)) {
+    public static String attackStandard(Hackmon attacker, Hackmon defender,
+                                  Move move) {
+        if (RNG.chance(move.getAccuarcy())) {
             int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
             if (damage == 0) {
                 return defender.getName() + " is immune...";
