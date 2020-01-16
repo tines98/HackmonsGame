@@ -11,4 +11,9 @@ public class BattleScene {
     BattleMenu menu;
     HpBar hpBar1, hpBar2;
     Trainer player, opponent;
+
+    public BattleScene(Trainer player, Trainer opponent) {
+        this.player = player;
+        this.opponent = opponent;
+    }
 }

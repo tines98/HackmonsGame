@@ -13,7 +13,7 @@ public class BattleMap {
     FightMenu fightMenu;
     private int x1,y1,x2,y2;
 
-    public BattleMap(){
+    public BattleMap() {
         x1=25;
         y1=25;
         x2=800-96-25;

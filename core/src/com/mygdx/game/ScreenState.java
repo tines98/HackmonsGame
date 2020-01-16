@@ -1,5 +1,5 @@
 package com.mygdx.game;
 
 public enum ScreenState {
-    BATTLEMENU,BAGMENU,ADVENTURE, SWITCHMENU
+    BATTLEMENU, BAGMENU, ADVENTURE, SWITCHMENU
 }

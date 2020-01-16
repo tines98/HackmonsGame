@@ -3,6 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+//TODO Replace this shitty class with a more all-encompasssing class.
+//TODO It should present HpBar, StamBar, ExpBar, Name, Lv and look good.
 public class HpBar {
     private Hackmon hackmon;
     private int y, x;
@@ -18,11 +20,17 @@ public class HpBar {
     }
 
     //TODO update method name
+    /*
+    Updates the size of the Hp bar.
+     */
     private void updateGreenSize(){
         greenSize = size * ((float)hackmon.getCurrHp()/(float)hackmon.getHp());
         blueSize = size * ((float)hackmon.getCurrStam()/(float)hackmon.getStam());
     }
 
+    /*
+    Sets the Hackmon the HpBar shall represent.
+     */
     public void setHackmon(Hackmon hackmon) {
         this.hackmon = hackmon;
         prevHp = hackmon.getCurrHp();

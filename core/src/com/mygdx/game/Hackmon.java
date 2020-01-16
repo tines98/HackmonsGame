@@ -127,6 +127,10 @@ public class Hackmon {
         speed = ((2 * baseSPEED * lv) / 100) + 10;
     }
 
+    public void updateName(String newName) {
+        this.name = newName;
+    }
+
     public Move[] getMoves() {
         return moves;
     }
