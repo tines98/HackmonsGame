@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BattleMap {
-    Trainer trainer1, trainer2;
+    Trainer player, opponent;
     Texture bg;
-    HpBar hpBar1,hpBar2;
+    HpBar playerHpBar, playerStamBar, opponentHpBar, opponentStamBar;
     BattleMenu menu;
     FightMenu fightMenu;
     private int x1,y1,x2,y2;
@@ -17,32 +17,30 @@ public class BattleMap {
         y1=25;
         x2=800-96-25;
         y2=400-150-48-25;
-        hpBar1 = new HpBar(x1,y1);
-        hpBar1.setColors(Colors.green,Colors.red);
-        hpBar2 = new HpBar(x2,y2);
-        hpBar2.setColors(Colors.green,Colors.red);
+        playerHpBar = new HpBar(x1,y1);
+        opponentHpBar = new HpBar(x2,y2);
         menu = new BattleMenu(300,10,400,100);
         fightMenu = new FightMenu(300,10,400,100);
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
         batch.draw(bg,0,0);
-        trainer1.getSelected().render(batch,x1,y1,2);
-        trainer2.getSelected().render(batch,x2,y2,2);
-        hpBar1.render(batch,font);
-        hpBar2.render(batch,font);
+        player.getSelected().render(batch,x1,y1,2);
+        opponent.getSelected().render(batch,x2,y2,2);
+        playerHpBar.render(batch,font);
+        opponentHpBar.render(batch,font);
         menu.render(batch, font);
     }
 
-    public void setTrainer1(Trainer trainer) {
-        trainer1 = trainer;
-        hpBar1.setTrainer(trainer1);
+    public void setPlayer(Trainer trainer) {
+        player = trainer;
+        playerHpBar.setTrainer(player);
     }
 
 
-    public void setTrainer2(Trainer trainer2) {
-        this.trainer2 = trainer2;
-        hpBar2.setTrainer(trainer2);
+    public void setOpponent(Trainer opponent) {
+        this.opponent = opponent;
+        opponentHpBar.setTrainer(opponent);
     }
 
     public void setBg(Texture bg) {

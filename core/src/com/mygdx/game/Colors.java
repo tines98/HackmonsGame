@@ -18,5 +18,5 @@ public class Colors {
     public static final Texture blue =
         new Texture( "core/assets/colors/blue.png");
     public static final Texture violet =
-        new Texture("core/assets/color/violet.png");
+        new Texture("core/assets/colors/violet.png");
 }

@@ -46,8 +46,8 @@ public class HackmonsGame extends ApplicationAdapter {
 		backPackMenu = new BackPackMenu(backPack);
 
 		battleMap = new BattleMap();
-		battleMap.setTrainer1(player);
-		battleMap.setTrainer2(opponent);
+		battleMap.setPlayer(player);
+		battleMap.setOpponent(opponent);
 		battleMap.setBg(bg);
 		switchHackmonMenu = new SwitchHackmonMenu(player);
 	}

@@ -1,8 +1,20 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class HpBar extends AbstractResourceBar {
     public HpBar(int x, int y) {
         super(x, y);
+    }
+
+    @Override
+    protected Texture getForeground() {
+        return Colors.green;
+    }
+
+    @Override
+    protected Texture getBackground() {
+        return Colors.red;
     }
 
     @Override

@@ -9,8 +9,6 @@ public abstract class AbstractResourceBar {
     protected int y, x;
     protected float currSize, maxSize;
     protected int prevResourceAmount;
-    protected Texture foreground, background;
-
     public AbstractResourceBar(int x, int y){
         this.x = x;
         this.y = y;
@@ -18,14 +16,13 @@ public abstract class AbstractResourceBar {
         currSize = maxSize;
     }
 
-    public void setColors(Texture foreground, Texture background) {
-        this.background = background;
-        this.foreground = foreground;
-    }
+    protected abstract Texture getForeground();
+
+    protected abstract Texture getBackground();
 
     /*
-    Sets the Hackmon the HpBar shall represent.
-     */
+        Sets the Hackmon the HpBar shall represent.
+         */
     public abstract void setTrainer(Trainer trainer);
 
     public abstract void checkChange();
@@ -35,8 +32,8 @@ public abstract class AbstractResourceBar {
     public void render(SpriteBatch batch, BitmapFont font){
         checkChange();
         batch.draw(Colors.black,x-1,y-1,maxSize+2,15);
-        batch.draw(background,x,y,maxSize,13);
-        batch.draw(foreground,x,y,currSize,13);
+        batch.draw(getBackground(),x,y,maxSize,13);
+        batch.draw(getForeground(),x,y,currSize,13);
         font.draw(batch, getText(), x, y+29);
     }
 }
