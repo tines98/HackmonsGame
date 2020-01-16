@@ -1,59 +1,27 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-//TODO Replace this shitty class with a more all-encompasssing class.
-//TODO It should present HpBar, StamBar, ExpBar, Name, Lv and look good.
-public class HpBar {
-    private Hackmon hackmon;
-    private int y, x;
-    private float size, greenSize, blueSize;
-    private int prevHp, prevStam;
-
-    public HpBar(int x, int y){
-        this.x = x;
-        this.y = y;
-        size = 100;
-        greenSize=size;
-        blueSize=size;
+public class HpBar extends AbstractResourceBar {
+    public HpBar(int x, int y) {
+        super(x, y);
     }
 
-    //TODO update method name
-    /*
-    Updates the size of the Hp bar.
-     */
-    private void updateGreenSize(){
-        greenSize = size * ((float)hackmon.getCurrHp()/(float)hackmon.getHp());
-        blueSize = size * ((float)hackmon.getCurrStam()/(float)hackmon.getStam());
+    @Override
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
+        prevResourceAmount = trainer.getSelected().getCurrHp();
     }
 
-    /*
-    Sets the Hackmon the HpBar shall represent.
-     */
-    public void setHackmon(Hackmon hackmon) {
-        this.hackmon = hackmon;
-        prevHp = hackmon.getCurrHp();
-    }
 
-    public void render(SpriteBatch batch, BitmapFont font){
-        if (hackmon.getCurrHp() != prevHp) {
-            //Changed this form .getHp() to .getCurrHp() because I think that's correct?
-            prevHp=hackmon.getCurrHp();
-            updateGreenSize();
+    @Override
+    public void checkChange() {
+        if (prevResourceAmount != trainer.getSelected().getCurrHp()){
+            currSize =
+                    maxSize * ((float)trainer.getSelected().getCurrHp()/(float)trainer.getSelected().getHp());
         }
-        if (hackmon.getCurrStam() != prevStam) {
-            prevStam = hackmon.getCurrStam();
-            updateGreenSize();
-        }
-        batch.draw(Colors.black,x-1,y-1,size+2,15);
-        batch.draw(Colors.red,x,y,size,13);
-        batch.draw(Colors.green,x,y,greenSize,13);
-        font.draw(batch,""+hackmon.getCurrHp()+"/"+hackmon.getHp(),x,y+12);
+    }
 
-        batch.draw(Colors.black, x-1, y+15, size+2, 15);
-        batch.draw(Colors.gray, x, y+16, size, 13);
-        batch.draw(Colors.yellow, x, y+16, blueSize, 13);
-        font.draw(batch, ""+hackmon.getCurrStam()+"/"+hackmon.getStam(), x, y+29);
+    @Override
+    public String getText() {
+        return "HP: "+trainer.getSelected().getCurrHp()+"/"+trainer.getSelected().getHp();
     }
 }

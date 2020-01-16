@@ -12,13 +12,13 @@ public class HackmonsGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	BitmapFont font;
 	Texture bg;
-	Trainer player;
+	Trainer player, opponent;
 	Hackmon hackmon1;
 	Hackmon hackmon2;
 	BattleMap battleMap;
 	BackPackMenu backPackMenu;
 	SwitchHackmonMenu switchHackmonMenu;
-	public static ScreenState screenState = ScreenState.SWITCHMENU;//just
+	public static ScreenState screenState = ScreenState.BATTLEMENU;//just
 	// change this to get battlemenu again
 	public static ScreenState prevScreenState = ScreenState.BATTLEMENU;
 
@@ -34,6 +34,9 @@ public class HackmonsGame extends ApplicationAdapter {
 		player = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 100)
 		,new Hackmon(4, 69),new Hackmon(4, 50),new Hackmon(5, 10),
 				new Hackmon(4, 100),new Hackmon(4, 100)});
+		opponent = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 100)
+		,new Hackmon(4, 69),new Hackmon(4, 50),new Hackmon(5, 10),
+				new Hackmon(4, 100),new Hackmon(4, 100)});
 		BackPack backPack = new BackPack(5);
 		backPack.addItem(new Potion("potion",10));
 		backPack.addItem(new Potion("potion2",20));
@@ -44,7 +47,7 @@ public class HackmonsGame extends ApplicationAdapter {
 
 		battleMap = new BattleMap();
 		battleMap.setTrainer1(player);
-		battleMap.setHackmon2(hackmon2);
+		battleMap.setTrainer2(opponent);
 		battleMap.setBg(bg);
 		switchHackmonMenu = new SwitchHackmonMenu(player);
 	}

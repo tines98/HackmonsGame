@@ -54,7 +54,8 @@ public class SwitchHackmonMenu {
         );
         //UPDATE/DRAW HP BAR
         HpBar hpBar = new HpBar(x+itemW/2,y+5);
-        hpBar.setHackmon(hackmon);
+        hpBar.setColors(Colors.green, Colors.red);
+        hpBar.setTrainer(trainer);
         hpBar.render(batch,font);
     }
 
