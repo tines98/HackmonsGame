@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Move {
@@ -10,13 +9,15 @@ public class Move {
     private String internalName, displayName, functionCode, type, category;
 
     public Move(int id) {
-        this.id = id;
         initialize(id);
     }
 
     public Move(String name) {
-        this.internalName = name;
         initialize(name);
+    }
+
+    public Move(String [] moveData) {
+        setValues(moveData);
     }
 
     private void initialize(int n) {
@@ -57,7 +58,10 @@ public class Move {
         }
     }
 
-    //Collected the duplicate code here
+    /*
+    Places the data stored in the array from the file into
+    the correct variables.
+     */
     public void setValues(String [] dataList) {
         id = Integer.parseInt(dataList[0]);
         internalName = dataList[1];
@@ -113,11 +117,6 @@ public class Move {
         System.out.println("Power: " + getPower());
         System.out.println("Cost: " + getCost());
         System.out.println("Function Code: " + getFunctionCode());
-    }
-
-    public static void main(String[] args) {
-        Move uhoh = new Move(1);
-        uhoh.output();
     }
 }
 
