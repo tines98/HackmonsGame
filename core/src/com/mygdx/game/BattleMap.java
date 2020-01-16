@@ -37,7 +37,6 @@ public class BattleMap {
         playerHpBar.setTrainer(player);
     }
 
-
     public void setOpponent(Trainer opponent) {
         this.opponent = opponent;
         opponentHpBar.setTrainer(opponent);

@@ -1,5 +1,6 @@
 --ID, Internal Name, Display name, Function code, Type, Base Power, Stamina Cost, Category, Accuarcy,
 --Additional effect accuarcy, Priority
+--Add, "Additional status effect"
 1,TACKLE,Tackle,000,BEAST,30,2,Physical,100,0,0
 2,JETSTREAM,Jet Stream,000,WATER,60,6,Special,95,0,0
 3,AQUAJET,Aqua Jet,000,WATER,20,2,Physical,0,0,2

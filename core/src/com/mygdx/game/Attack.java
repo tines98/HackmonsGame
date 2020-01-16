@@ -18,6 +18,16 @@ public class Attack {
         return critical * variance;
     }
 
+    public static void attack(Hackmon attacker, Hackmon defender, Move move) {
+        int function = Integer.parseInt(move.getFunctionCode(), 16);
+        switch (function) {
+            case 0:
+                attackStandard(attacker, defender, move);
+            default:
+                attackStandard(attacker, defender, move);
+        }
+    }
+
     public static String attackStandard(Hackmon attacker, Hackmon defender, Move move) {
         if (RNG.chance(move.getAccuarcy())) {
             int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
