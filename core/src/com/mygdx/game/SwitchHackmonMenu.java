@@ -2,14 +2,13 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 
 public class SwitchHackmonMenu {
     Trainer trainer;
-    int selected, item1x, item2x, item3x, itemY, itemW, itemH, timer, cooldown;
+    int selected, itemW, itemH, timer, cooldown;
 
 
     public SwitchHackmonMenu(Trainer trnr){
@@ -31,35 +30,15 @@ public class SwitchHackmonMenu {
         else
             batch.draw(Colors.gray,x,y,itemW,itemH);
         //DRAW SPRITE
+        hackmon.setToFront();
         hackmon.render(batch,x,y-5);
-        //DRAW NAME
-        font.draw(
-            batch,
-            hackmon.getName(),
-            x+(itemW/2)+50,
-            y+(itemH/2)+25,
-            0,
-            Align.center,
-            false
-        );
-        //DRAW LEVEL
-        font.draw(
-            batch,
-            "Lvl "+hackmon.getLv(),
-            x+(itemW/2)+50,
-            y+(itemH/2)+5,
-            0,
-            Align.center,
-            false
-        );
         //UPDATE/DRAW HP BAR
-        HpBar hpBar = new HpBar(x+itemW/2,y+5);
-        hpBar.setTrainer(trainer);
-        hpBar.render(batch,font);
+        StatusDisplay statusDisplay = new StatusDisplay(trainer,x+itemW/2,y+5);
+        statusDisplay.render(batch,font);
     }
 
     private void renderItems(SpriteBatch batch, BitmapFont font){
-        int x,y,w,h;
+        int x,y;
         boolean sel;
         for (int i = 0; i < trainer.getHackmons().size(); i++) {
             y = Gdx.graphics.getHeight()-(115*(i/2))-60-itemH;
