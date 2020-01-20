@@ -150,8 +150,17 @@ public class Hackmon {
         batch.draw(sprite,x,y,96*scale,96*scale);
     }
 
-    public void restoreHp() {
-        currHP = maxHP;
+    /**
+     * Heals specified health but doesn't exceed maxHP
+     * @param healedHP amount you want to heal
+     */
+    public void restoreHp(int healedHP) {
+        if (currHP + healedHP < maxHP) {
+            currHP += healedHP;
+        }
+        else {
+            currHP = maxHP;
+        }
     }
 
     public void takeDamage(int dmg){
