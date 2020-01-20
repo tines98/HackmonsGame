@@ -1,10 +1,13 @@
-package com.mygdx.game;
+package com.mygdx.game.battle;
 
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.HpBar;
+import com.mygdx.game.Trainer;
+import com.mygdx.game.battle.BattleMenu;
 
 //This is just a restruction of BattleMap, but didn't want to touch that class :)
 public class BattleScene {

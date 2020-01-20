@@ -1,4 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.game.battle;
+
+import com.mygdx.game.Hackmon;
+import com.mygdx.game.Move;
+import com.mygdx.game.RNG;
 
 public class Attack {
 

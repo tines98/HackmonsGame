@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.battle.BackPackMenu;
+import com.mygdx.game.battle.BattleMap;
 
 public class HackmonsGame extends ApplicationAdapter {
 	SpriteBatch batch;

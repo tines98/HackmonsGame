@@ -1,23 +1,25 @@
-package com.mygdx.game;
+package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Colors;
+import com.mygdx.game.HackmonsGame;
+import com.mygdx.game.ScreenState;
 
-import java.util.ArrayList;
-
-public class FightMenu {
+public class BattleMenu {
 
     private int x,y,w,h;
     private int buttonWidth,buttonHeight, selected = 0;
-    private BattleMenuButton button0, button1, button2, button3;
-    private ArrayList<BattleMenuButton> buttons;
-    private Trainer trainer;
-    private Hackmon hackmon;
+    private BattleMenuButton fightBtn,runBtn,bagBtn,switchBtn;
+    private static int FIGHT = 3;
+    private static int RUN = 1;
+    private static int SWITCH = 0;
+    private static int BAG = 2;
 
 
-    public FightMenu(int x, int y, int w, int h){
+    public BattleMenu(int x, int y, int w, int h){
         this.x = x;
         this.y = y;
         this.w = w;
@@ -25,60 +27,43 @@ public class FightMenu {
         buttonHeight=(h-16)/2;
         buttonWidth=(w-16)/2;
         int padding = 6;
-        button3 =
+        switchBtn =
                 new BattleMenuButton(x+padding,y+padding,buttonWidth, buttonHeight);
-        button1 =
+        runBtn =
                 new BattleMenuButton(x+padding*2+buttonWidth,y+padding,buttonWidth,
                         buttonHeight);
-        button2 =
+        bagBtn =
                 new BattleMenuButton(x+padding*2+buttonWidth,y+padding*2+buttonHeight,
                         buttonWidth, buttonHeight);
-        button0 =
+        fightBtn =
                 new BattleMenuButton(x+padding,y+padding*2+buttonHeight,buttonWidth,
                         buttonHeight);
-        button3.setText("ERROR");
-        button0.setText("ERROR");
-        button1.setText("ERROR");
-        button2.setText("ERROR");
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
-        update();
-    }
-
-    private void update(){
-        hackmon = trainer.getSelected();
-        Move[] moves = hackmon.getMoves();
-        button0.setText(moves[0].getName());
-        button1.setText(moves[1].getName());
-        button2.setText(moves[2].getName());
-        button3.setText(moves[3].getName());
+        switchBtn.setText("Switch");
+        fightBtn.setText("Fight");
+        runBtn.setText("Run");
+        bagBtn.setText("Bag");
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
         batch.draw(Colors.black,x-1,y-1,w+2,h+2);
         batch.draw(Colors.gray,x,y,w,h);
-        if (!hackmon.equals(trainer.getSelected())) {
-            update();
-        }
         input();
-        if (selected==0)
-            button0.render(batch,font,true);
+        if (selected==FIGHT)
+            fightBtn.render(batch,font,true);
         else
-            button0.render(batch,font,false);
-        if (selected==1)
-            button1.render(batch,font,true);
+            fightBtn.render(batch,font,false);
+        if (selected==RUN)
+            runBtn.render(batch,font,true);
         else
-            button1.render(batch,font,false);
-        if (selected==2)
-            button2.render(batch,font,true);
+            runBtn.render(batch,font,false);
+        if (selected==BAG)
+            bagBtn.render(batch,font,true);
         else
-            button2.render(batch,font,false);
-        if (selected==3)
-            button3.render(batch,font,true);
+            bagBtn.render(batch,font,false);
+        if (selected==SWITCH)
+            switchBtn.render(batch,font,true);
         else
-            button3.render(batch,font,false);
+            switchBtn.render(batch,font,false);
     }
 
     public void input(){
@@ -99,16 +84,16 @@ public class FightMenu {
             if (selected==3) selected=2;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
-            if (selected==0){
+            if (selected==BAG){
                 HackmonsGame.changeScreenState(ScreenState.BAGMENU);
             }
-            if (selected==1){
+            if (selected==SWITCH){
                 HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
             }
-            if (selected==2){
+            if (selected==FIGHT){
                 HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
             }
-            if (selected==3){
+            if (selected==RUN){
                 System.exit(1);
             }
         }

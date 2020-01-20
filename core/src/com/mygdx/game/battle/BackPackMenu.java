@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.BackPack;
+import com.mygdx.game.Colors;
+import com.mygdx.game.HackmonsGame;
+import com.mygdx.game.ScreenState;
 
 public class BackPackMenu {
     BackPack backPack;

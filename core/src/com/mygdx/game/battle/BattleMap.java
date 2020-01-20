@@ -1,8 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.battle;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.StatusDisplay;
+import com.mygdx.game.Trainer;
 
 public class BattleMap {
     Trainer player, opponent;
