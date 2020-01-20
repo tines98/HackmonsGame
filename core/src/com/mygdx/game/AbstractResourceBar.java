@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 
 public abstract class AbstractResourceBar {
     protected Trainer trainer;
@@ -34,6 +35,8 @@ public abstract class AbstractResourceBar {
         batch.draw(Colors.black,x-1,y-1,maxSize+2,15);
         batch.draw(getBackground(),x,y,maxSize,13);
         batch.draw(getForeground(),x,y,currSize,13);
-        font.draw(batch, getText(), x, y+29);
+        font.draw(batch,getText(),x+(maxSize/2),y+12,0,
+                Align.center,
+                false);
     }
 }
