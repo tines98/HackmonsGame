@@ -94,7 +94,7 @@ public class BattleMenu {
                 HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
             }
             if (selected==RUN){
-                System.exit(1);
+                Gdx.app.exit();
             }
         }
     }

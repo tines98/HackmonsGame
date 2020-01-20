@@ -38,7 +38,7 @@ public class StatusDisplay {
                 ,"LVL:"+trainer.getSelected().getLv()
                 ,x+(w/2)
                 ,y+h-15-3
-                ,0
+                ,7
                 ,Align.center
                 ,false
         );
