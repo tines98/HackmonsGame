@@ -35,6 +35,6 @@ public class StaminaBar extends AbstractResourceBar {
 
     @Override
     public String getText() {
-        return "STAMINA: "+trainer.getSelected().getCurrStam()+"/"+trainer.getSelected().getStam();
+        return "SP: "+trainer.getSelected().getCurrStam()+"/"+trainer.getSelected().getStam();
     }
 }
