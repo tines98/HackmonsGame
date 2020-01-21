@@ -9,7 +9,6 @@ import com.mygdx.game.Trainer;
 
 public class BattleMap {
     Trainer player, opponent;
-    Hackmon playerMon, opponentMon;
     Texture bg;
     BattleMenu menu;
     FightMenu fightMenu;
@@ -35,48 +34,53 @@ public class BattleMap {
         opponentStatusDisplay.render(batch,font);
 
         if (TurnHandler.isReady()) {
-            TurnHandler.unReady();
             switch (TurnHandler.getAction()) {
+                //ATTACK
                 case 0:
                     TurnHandler.setCurrentMove(player.getSelected().getMoves()[0]);
                     turnAttack();
                     break;
+                //ITEM
                 case 1:
-
+                    turnPass();
+                //SWITCH
                 case 2:
-
+                    turnPass();
                 case 3:
-
+                    turnPass();
                 default:
                     turnAttack();
                     break;
             }
+            TurnHandler.unReady();
         }
     }
 
     public void turnAttack() {
         if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
-            Attack.attack(playerMon, opponentMon, TurnHandler.getCurrentMove());
-            Attack.attack(opponentMon, playerMon, Opponent.doTurn());
+            Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
+            Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
         }
         else {
-            Attack.attack(opponentMon, playerMon, Opponent.doTurn());
-            Attack.attack(playerMon, opponentMon, TurnHandler.getCurrentMove());
+            Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+            Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
         }
+    }
+
+    public void turnPass() {
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
     }
 
     public void setPlayer(Trainer trainer) {
         player = trainer;
         //TEST
         playerStatusDisplay = new StatusDisplay(player,100,25);
-        playerMon = player.getSelected();
     }
 
     public void setOpponent(Trainer opponent) {
         this.opponent = opponent;
         opponentStatusDisplay = new StatusDisplay(opponent, 450,250);
         opponent.getSelected().setToFront();
-        opponentMon = opponent.getSelected();
     }
 
     public void setBg(Texture bg) {

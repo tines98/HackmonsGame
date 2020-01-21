@@ -28,8 +28,10 @@ public class Attack {
         switch (function) {
             case 0:
                 attackStandard(attacker, defender, move);
+                break;
             default:
                 attackStandard(attacker, defender, move);
+                break;
         }
     }
 
