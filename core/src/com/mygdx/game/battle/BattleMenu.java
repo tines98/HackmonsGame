@@ -17,6 +17,7 @@ public class BattleMenu {
     private static int RUN = 1;
     private static int SWITCH = 0;
     private static int BAG = 2;
+    public static boolean isFightPressed;
 
 
     public BattleMenu(int x, int y, int w, int h){
@@ -27,6 +28,7 @@ public class BattleMenu {
         buttonHeight=(h-16)/2;
         buttonWidth=(w-16)/2;
         int padding = 6;
+        isFightPressed = false;
         switchBtn =
                 new BattleMenuButton(x+padding,y+padding,buttonWidth, buttonHeight);
         runBtn =
@@ -91,8 +93,9 @@ public class BattleMenu {
                 HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
             }
             if (selected==FIGHT){
-                TurnHandler.setAction(0);
-                TurnHandler.setReady();
+//                TurnHandler.setAction(0);
+//                TurnHandler.setReady();
+                isFightPressed=true;
             }
             if (selected==RUN){
                 Gdx.app.exit();

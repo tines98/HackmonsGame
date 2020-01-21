@@ -21,7 +21,7 @@ public class BattleMap {
         opponentX = 800-(96*2)-25;
         opponentY = 400-150-48-25;
         menu = new BattleMenu(350,10,400,100);
-        fightMenu = new FightMenu(390,10,400,100);
+        fightMenu = new FightMenu(350,10,400,100);
     }
 
     //THIS IS THE MAIN LOOP
@@ -29,7 +29,12 @@ public class BattleMap {
         batch.draw(bg,0,0);
         player.getSelected().render(batch, playerX, playerY,2);
         opponent.getSelected().render(batch, opponentX, opponentY,2);
-        menu.render(batch, font);
+        if (menu.isFightPressed){
+            fightMenu.setTrainer(player);
+            fightMenu.render(batch,font);
+        }
+        else
+            menu.render(batch, font);
         playerStatusDisplay.render(batch,font);
         opponentStatusDisplay.render(batch,font);
 
@@ -37,7 +42,7 @@ public class BattleMap {
             switch (TurnHandler.getAction()) {
                 //ATTACK
                 case 0:
-                    TurnHandler.setCurrentMove(player.getSelected().getMoves()[0]);
+
                     turnAttack();
                     break;
                 //ITEM
