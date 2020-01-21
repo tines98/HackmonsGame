@@ -1,7 +1,12 @@
 package com.mygdx.game.battle;
 
+import com.mygdx.game.Move;
+
 public class TurnHandler {
     private static boolean ready = false;
+    private static int cooldown = 0;
+    private static int action = 3;
+    private static Move currentMove = null;
 
     public static boolean isReady() {
         return ready;
@@ -13,5 +18,21 @@ public class TurnHandler {
 
     public static void unReady() {
         ready = false;
+    }
+
+    public static int getAction() {
+        return action;
+    }
+
+    public static void setAction(int newAction) {
+        action = newAction;
+    }
+
+    public static Move getCurrentMove() {
+        return currentMove;
+    }
+
+    public static void setCurrentMove(Move newMove) {
+        currentMove = newMove;
     }
 }

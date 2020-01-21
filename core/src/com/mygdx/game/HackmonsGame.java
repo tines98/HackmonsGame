@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.battle.BackPackMenu;
 import com.mygdx.game.battle.BattleMap;
+import com.mygdx.game.battle.Opponent;
 
 public class HackmonsGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -49,6 +50,8 @@ public class HackmonsGame extends ApplicationAdapter {
 
 		battleMap = new BattleMap();
 		battleMap.setPlayer(player);
+		//TODO Fix this shit
+		Opponent.setTrainer(opponent);
 		battleMap.setOpponent(opponent);
 		battleMap.setBg(bg);
 		switchHackmonMenu = new SwitchHackmonMenu(player);
