@@ -17,10 +17,16 @@ public class Attack {
     }
 
     public static double modify(Hackmon attacker, Hackmon defender, Move move) {
+        double STAB = 1;
+        if (attacker.getType1().equals(move.getType()) || (attacker.getType2() != null
+                && attacker.getType2().equals(move.getType()))) {
+            STAB = 1.5;
+        }
+        System.out.println("STAB: " + STAB);
         double critical = RNG.chance(attacker.getCrit()) ? 2 : 1;
         double variance = (100.0 - RNG.nextInt(15)) / 100;
         System.out.println(critical * variance);
-        return critical * variance;
+        return STAB * critical * variance;
     }
 
     public static void attack(Hackmon attacker, Hackmon defender, Move move) {
@@ -37,11 +43,9 @@ public class Attack {
 
     public static String attackStandard(Hackmon attacker, Hackmon defender, Move move) {
         attacker.useStam(move.getCost());
-        System.out.println("Attacked");
         if (RNG.chance(move.getAccuarcy())) {
-            System.out.println("Success");
             int damage = (int) ((damage(attacker, defender, move) / 50) * modify(attacker, defender, move));
-            System.out.println(damage);
+            System.out.println("Damage: " + damage);
             if (damage == 0) {
                 return defender.getName() + " is immune...";
             }

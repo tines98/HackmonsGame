@@ -150,6 +150,14 @@ public class Hackmon {
         batch.draw(sprite,x,y,96*scale,96*scale);
     }
 
+    public String getType1() {
+        return type1;
+    }
+
+    public String getType2() {
+        return type2;
+    }
+
     /**
      * Heals specified health but doesn't exceed maxHP
      * @param healedHP amount you want to heal
