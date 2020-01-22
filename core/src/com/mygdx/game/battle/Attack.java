@@ -29,15 +29,15 @@ public class Attack {
         return STAB * critical * variance;
     }
 
-    public static void attack(Hackmon attacker, Hackmon defender, Move move) {
+    public static String attack(Hackmon attacker, Hackmon defender, Move move) {
         int function = Integer.parseInt(move.getFunctionCode(), 16);
         switch (function) {
             case 0:
-                attackStandard(attacker, defender, move);
-                break;
+                return attackStandard(attacker, defender, move);
+                //break;
             default:
-                attackStandard(attacker, defender, move);
-                break;
+                return attackStandard(attacker, defender, move);
+                //break;
         }
     }
 
@@ -50,6 +50,7 @@ public class Attack {
                 return defender.getName() + " is immune...";
             }
             defender.takeDamage(damage);
+            return move.getName() + " did " + damage + " damage!";
         }
         return "The attack missed!";
     }

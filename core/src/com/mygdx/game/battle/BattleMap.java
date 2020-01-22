@@ -12,6 +12,7 @@ public class BattleMap {
     Texture bg;
     BattleMenu menu;
     FightMenu fightMenu;
+    BattleInfoBox info;
     private int playerX, playerY, opponentX, opponentY;
     StatusDisplay playerStatusDisplay, opponentStatusDisplay;
 
@@ -20,8 +21,9 @@ public class BattleMap {
         playerY = 90;
         opponentX = 800-(96*2)-25;
         opponentY = 400-150-48-25;
-        menu = new BattleMenu(350,10,400,100);
-        fightMenu = new FightMenu(350,10,400,100);
+        info = new BattleInfoBox(0, 0, 400, 100);
+        menu = new BattleMenu(400,0,400,100);
+        fightMenu = new FightMenu(400,0,400,100);
     }
 
     //THIS IS THE MAIN LOOP
@@ -38,27 +40,22 @@ public class BattleMap {
         playerStatusDisplay.render(batch,font);
         opponentStatusDisplay.render(batch,font);
 
+        info.render(batch, font);
+
         if (TurnHandler.isReady()) {
             switch (TurnHandler.getAction()) {
                 //ATTACK
                 case 0:
                     turnAttack();
                     break;
-                //ITEM
+                //ITEM, SWITCH; RUN AWAY
                 case 1:
-                    turnPass();
-                    break;
-                //SWITCH
                 case 2:
-                    turnPass();
-                    break;
-                //RUNAWAY
                 case 3:
                     turnPass();
                     break;
                 default:
-                    turnAttack();
-                    break;
+                    throw new IllegalArgumentException();
             }
             TurnHandler.unReady();
         }
@@ -67,7 +64,8 @@ public class BattleMap {
     public void turnAttack() {
         if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
             if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
-                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
+                info.updateText(Attack.attack(
+                        player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
                 Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
             }
             else {
@@ -77,18 +75,18 @@ public class BattleMap {
         }
         else {
             Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-            Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
+            info.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
         }
     }
 
     public void turnPass() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        info.updateText(Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn()));
     }
 
     public void setPlayer(Trainer trainer) {
         player = trainer;
         //TEST
-        playerStatusDisplay = new StatusDisplay(player,100,25);
+        playerStatusDisplay = new StatusDisplay(player,275,125);
     }
 
     public void setOpponent(Trainer opponent) {
