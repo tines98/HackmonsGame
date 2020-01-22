@@ -16,10 +16,10 @@ public class StatusDisplay {
         this.y = y;
         w = 110;
         h = 70;
-        stam = new StaminaBar(x+5,y+3);
-        stam.setTrainer(trainer);
         hp = new HpBar(x+5,y+15+6);
         hp.setTrainer(trainer);
+        stam = new StaminaBar(x+5,y+3);
+        stam.setTrainer(trainer);
     }
 
     public void render(SpriteBatch batch, BitmapFont font){

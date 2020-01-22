@@ -36,6 +36,7 @@ public class Attack {
     }
 
     public static String attackStandard(Hackmon attacker, Hackmon defender, Move move) {
+        attacker.useStam(move.getCost());
         System.out.println("Attacked");
         if (RNG.chance(move.getAccuarcy())) {
             System.out.println("Success");

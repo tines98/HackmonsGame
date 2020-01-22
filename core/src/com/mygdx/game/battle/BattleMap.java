@@ -42,17 +42,20 @@ public class BattleMap {
             switch (TurnHandler.getAction()) {
                 //ATTACK
                 case 0:
-
                     turnAttack();
                     break;
                 //ITEM
                 case 1:
                     turnPass();
+                    break;
                 //SWITCH
                 case 2:
                     turnPass();
+                    break;
+                //RUNAWAY
                 case 3:
                     turnPass();
+                    break;
                 default:
                     turnAttack();
                     break;
@@ -62,9 +65,15 @@ public class BattleMap {
     }
 
     public void turnAttack() {
-        if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
-            Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
-            Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
+            if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
+                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
+                Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+            }
+            else {
+                Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
+            }
         }
         else {
             Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());

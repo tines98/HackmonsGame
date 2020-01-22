@@ -93,8 +93,6 @@ public class BattleMenu {
                 HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
             }
             if (selected==FIGHT){
-//                TurnHandler.setAction(0);
-//                TurnHandler.setReady();
                 isFightPressed=true;
             }
             if (selected==RUN){

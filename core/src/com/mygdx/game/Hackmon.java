@@ -163,8 +163,21 @@ public class Hackmon {
         }
     }
 
+    public void restoreStam(int restoredStam) {
+        if (currStam + restoredStam < maxStam) {
+            currStam += restoredStam;
+        }
+        else {
+            currStam = maxStam;
+        }
+    }
+
     public void takeDamage(int dmg){
         currHP -= dmg;
+    }
+
+    public void useStam(int cost) {
+        currStam -= cost;
     }
 
     public int getCurrHp() {

@@ -70,26 +70,23 @@ public class SwitchHackmonMenu {
     }
 
     private void input(){
-        if (timer<=0) {
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                selected = selected==0 ? trainer.getHackmons().size()-1 :
-                        selected-1;
-                timer = cooldown;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                    selected = (selected+1)%trainer.getHackmons().size();
-                    timer = cooldown;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.J)) {
-                HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
-            }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
-                trainer.switchMon(selected);
-                HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
-                TurnHandler.setAction(2);
-                TurnHandler.setReady();
-            }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+            selected = selected==0 ? trainer.getHackmons().size()-1 :
+                    selected-1;
+            timer = cooldown;
         }
-        else timer--;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                selected = (selected+1)%trainer.getHackmons().size();
+                timer = cooldown;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+            HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
+            trainer.switchMon(selected);
+            HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
+            TurnHandler.setAction(2);
+            TurnHandler.setReady();
+        }
     }
 }

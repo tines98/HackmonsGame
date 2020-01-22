@@ -5,9 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.*;
-import com.mygdx.game.battle.BattleMenuButton;
-
-import java.util.ArrayList;
 
 public class FightMenu {
 
@@ -99,26 +96,9 @@ public class FightMenu {
             if (selected==2) selected=3;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
-            if (selected==0){
-                TurnHandler.setAction(0);
-                TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[0]);
-                TurnHandler.setReady();
-            }
-            if (selected==1){
-                TurnHandler.setAction(0);
-                TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[1]);
-                TurnHandler.setReady();
-            }
-            if (selected==2){
-                TurnHandler.setAction(0);
-                TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[2]);
-                TurnHandler.setReady();
-            }
-            if (selected==3){
-                TurnHandler.setAction(0);
-                TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[3]);
-                TurnHandler.setReady();
-            }
+            TurnHandler.setAction(0);
+            TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[selected]);
+            TurnHandler.setReady();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
             BattleMenu.isFightPressed = false;
