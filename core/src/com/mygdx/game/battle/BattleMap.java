@@ -62,22 +62,26 @@ public class BattleMap {
 
     public void turnAttack() {
         if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
-            info.updateText(Attack.attack(
-                    player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-            Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+            playerFirst();
+        }
+        else if (TurnHandler.getCurrentMove().getPriority() < Opponent.doTurn().getPriority()) {
+            opponentFirst();
         }
         else {
             if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
-                info.updateText(Attack.attack(
-                        player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-                Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+                playerFirst();
+            }
+            else if (player.getSelected().getSpeed() < opponent.getSelected().getSpeed()){
+                opponentFirst();
             }
             else {
-                Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
+                if (RNG.chance(50)) {
+                    playerFirst();
+                }
+                else {
+                    opponentFirst();
+                }
             }
-            Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-            info.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
         }
         if (player.getSelected().isFainted()) {
             HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
@@ -89,11 +93,13 @@ public class BattleMap {
     }
 
     public void playerFirst() {
-
+        info.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
     }
 
     public void opponentFirst() {
-
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        info.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
     }
 
     public void turnPass() {
@@ -102,7 +108,6 @@ public class BattleMap {
 
     public void setPlayer(Trainer trainer) {
         player = trainer;
-        //TEST
         playerStatusDisplay = new StatusDisplay(player,275,125);
     }
 
