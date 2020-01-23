@@ -54,8 +54,7 @@ public class FightMenu {
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
-        batch.draw(Colors.black,x-1,y-1,w+2,h+2);
-        batch.draw(Colors.gray,x,y,w,h);
+        ShapeDrawer.drawBox(batch,x,y,w,h);
         if (!hackmon.equals(trainer.getSelected())) {
             update();
         }
