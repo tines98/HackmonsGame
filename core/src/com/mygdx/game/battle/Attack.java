@@ -9,10 +9,10 @@ public class Attack {
     public static int damage(Hackmon attacker, Hackmon defender, Move move) {
         if (move.getCategory().equals("Physical")) {
             System.out.println(attacker.getStr() + " " + defender.getDef());
-            return (attacker.getLv() / 4) * move.getPower() * (attacker.getStr() / defender.getDef()) + 2;
+            return (attacker.getLv() / 4) * move.getPower() * (attacker.getStr() / defender.getDef());
         }
         else {
-            return (attacker.getLv() / 4 )* move.getPower() * (attacker.getWill() / defender.getRes()) + 2;
+            return (attacker.getLv() / 4 )* move.getPower() * (attacker.getWill() / defender.getRes());
         }
     }
 
@@ -44,7 +44,8 @@ public class Attack {
     public static String attackStandard(Hackmon attacker, Hackmon defender, Move move) {
         attacker.useStam(move.getCost());
         if (RNG.chance(move.getAccuarcy())) {
-            int damage = (int) ((damage(attacker, defender, move) / 50) * modify(attacker, defender, move));
+            int damage = (int) ((damage(attacker, defender, move) / 50) *
+                    modify(attacker, defender, move)) + RNG.nextInt(2);
             System.out.println("Damage: " + damage);
             if (damage == 0) {
                 return defender.getName() + " is immune...";

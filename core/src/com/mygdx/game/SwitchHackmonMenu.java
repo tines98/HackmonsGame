@@ -38,15 +38,15 @@ public class SwitchHackmonMenu {
     private void renderItems(SpriteBatch batch, BitmapFont font){
         int x,y = (400-itemH)/8;
         boolean sel;
-        for (int i = 0; i < trainer.getHackmons().size()-1; i++) {
+        for (int i = 0; i < trainer.getParty().size()-1; i++) {
             x = i*100+i*25+25;
             if (selected==i+1) continue;
-            renderHackmonBox(batch,font,x,y,trainer.getHackmons().get(i+1),
+            renderHackmonBox(batch,font,x,y,trainer.getParty().get(i+1),
                     false);
         }
         renderHackmonBox(batch,font,(800-itemW)/2,
                 (400*2-itemH)/8,
-                trainer.getHackmons().get(selected),
+                trainer.getParty().get(selected),
                 true);
         //BRUH
         renderHackmonBox(batch,font,(800-itemW)/2,
@@ -76,11 +76,11 @@ public class SwitchHackmonMenu {
 
     private void input(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            selected = selected==1 ? trainer.getHackmons().size()-1 :
+            selected = selected==1 ? trainer.getParty().size()-1 :
                     selected-1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-                selected = (selected+1)%trainer.getHackmons().size();
+                selected = (selected+1)%trainer.getParty().size();
                 if (selected==0)selected = 1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {

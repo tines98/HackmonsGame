@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Hackmon;
-import com.mygdx.game.StatusDisplay;
-import com.mygdx.game.Trainer;
+import com.mygdx.game.*;
 
 public class BattleMap {
     Trainer player, opponent;
@@ -64,6 +62,11 @@ public class BattleMap {
 
     public void turnAttack() {
         if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
+            info.updateText(Attack.attack(
+                    player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+            Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        }
+        else {
             if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
                 info.updateText(Attack.attack(
                         player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
@@ -73,10 +76,14 @@ public class BattleMap {
                 Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
                 Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
             }
-        }
-        else {
             Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
             info.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+        }
+        if (player.getSelected().isFainted()) {
+            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
+        }
+        if (opponent.getSelected().isFainted()) {
+            opponent.switchMon(opponent.nextMon());
         }
     }
 
