@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -41,11 +42,11 @@ public class HackmonsGame extends ApplicationAdapter {
 		,new Hackmon(4, 69),new Hackmon(4, 50),new Hackmon(5, 10),
 				new Hackmon(4, 100),new Hackmon(4, 100)});
 		BackPack backPack = new BackPack(5);
-		backPack.addItem(new Potion("potion",10));
-		backPack.addItem(new Potion("potion2",20));
-		backPack.addItem(new Potion("potion3",15));
-		backPack.addItem(new Potion("potion4",60));
-		backPack.addItem(new Potion("potion5",33));
+		backPack.addItem(new Potion("Uh Oh",10));
+		backPack.addItem(new Potion("Stinky",20));
+		backPack.addItem(new Potion("Poop",15));
+		backPack.addItem(new Potion("Alalalala",60));
+		backPack.addItem(new Potion("Funny poop",33));
 		backPackMenu = new BackPackMenu(backPack);
 
 		battleMap = new BattleMap();
@@ -75,7 +76,6 @@ public class HackmonsGame extends ApplicationAdapter {
 				break;
 			case BATTLEMENU:
 				battleMap.render(batch, font);
-				if (Gdx.input.isKeyPressed(Input.Keys.H)) hackmon1.takeDamage(2);
 				break;
 			case SWITCHMENU:
 				switchHackmonMenu.render(batch,font);
