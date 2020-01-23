@@ -84,7 +84,16 @@ public class BattleMap {
         }
         if (opponent.getSelected().isFainted()) {
             opponent.switchMon(opponent.nextMon());
+            opponent.getSelected().setToFront();
         }
+    }
+
+    public void playerFirst() {
+
+    }
+
+    public void opponentFirst() {
+
     }
 
     public void turnPass() {

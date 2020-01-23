@@ -24,3 +24,9 @@ Name=Heracross
 Type=FIGHTING
 100,100,150,50,150,50,100,7,12
 LevelMoves=1,TACKLE,5,AQUAJET
+
+[6]
+Name=Shoeqwill
+Type=AIR, DARK
+90,80,200,70,120,90,170,7,12
+LevelMoves=1,PECK,10,AERIALACE
