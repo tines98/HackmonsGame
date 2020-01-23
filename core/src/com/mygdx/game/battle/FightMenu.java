@@ -22,7 +22,7 @@ public class FightMenu {
         this.h = h;
         buttonHeight=(h-16)/2;
         buttonWidth=(w-16)/2;
-        int padding = 6;
+        int padding = 5;
         buttons = new BattleMenuButton[]{
                 new BattleMenuButton(x+padding,y+padding*2+buttonHeight,buttonWidth,
                         buttonHeight),

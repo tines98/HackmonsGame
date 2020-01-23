@@ -16,9 +16,9 @@ public class StatusDisplay {
         this.y = y;
         w = 110;
         h = 70;
-        hp = new HpBar(x+5,y+15+6);
+        hp = new HpBar(x+5,y+15+7);
         hp.setTrainer(trainer);
-        stam = new StaminaBar(x+5,y+3);
+        stam = new StaminaBar(x+5,y+5);
         stam.setTrainer(trainer);
     }
 
@@ -32,7 +32,7 @@ public class StatusDisplay {
                 batch
                 ,hackmon.getName()
                 ,x+(w/2)
-                ,y+h-3
+                ,y+h-4
                 ,0
                 , Align.center
                 ,false
@@ -41,8 +41,8 @@ public class StatusDisplay {
                 batch
                 ,"LVL:"+hackmon.getLv()
                 ,x+(w/2)
-                ,y+h-15-3
-                ,7
+                ,y+h-15-4
+                ,0
                 ,Align.center
                 ,false
         );
