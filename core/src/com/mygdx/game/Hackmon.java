@@ -34,12 +34,6 @@ public class Hackmon {
         );
         currHP = maxHP;
         currStam = maxStam;
-        for (int i=0; i < 4; i++) {
-            //TODO Tried to check if the moves had been updated. All are still 0, why tho?
-            if (moves[i] != null) {
-                System.out.println(moves[i].getName());
-            }
-        }
     }
 
     private void initialize(Integer n) {
