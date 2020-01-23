@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Colors;
 import com.mygdx.game.HackmonsGame;
 import com.mygdx.game.ScreenState;
+import com.mygdx.game.ShapeDrawer;
 
 public class BattleMenu {
 
@@ -27,7 +28,7 @@ public class BattleMenu {
         this.h = h;
         buttonHeight=(h-16)/2;
         buttonWidth=(w-16)/2;
-        int padding = 6;
+        int padding = 5;
         isFightPressed = false;
         switchBtn =
                 new BattleMenuButton(x+padding,y+padding,buttonWidth, buttonHeight);
@@ -47,8 +48,7 @@ public class BattleMenu {
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
-        batch.draw(Colors.black,x-1,y-1,w+2,h+2);
-        batch.draw(Colors.gray,x,y,w,h);
+        ShapeDrawer.drawBox(batch,x,y,w,h);
         input();
         if (selected==FIGHT)
             fightBtn.render(batch,font,true);
