@@ -6,27 +6,24 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.BackPack;
-import com.mygdx.game.Colors;
-import com.mygdx.game.HackmonsGame;
-import com.mygdx.game.ScreenState;
+import com.mygdx.game.*;
 
 public class BackPackMenu {
     BackPack backPack;
-    int selected, item1x, item2x, item3x, itemY, itemW, itemH, timer, cooldown;
+    Trainer trainer;
+    int selected, item1x, item2x, item3x, itemY, itemW, itemH;
 
 
-    public BackPackMenu(BackPack pack){
+    public BackPackMenu(BackPack pack, Trainer trainer){
         backPack = pack;
         selected = 1;
         itemW = 300;
         itemH = 100;
-        item2x = (Gdx.graphics.getWidth()-itemW)/2;
+        item2x = (800-itemW)/2;
         item1x = item2x-itemW-50;
         item3x = item2x+itemW+50;
-        itemY = Gdx.graphics.getHeight()-50-50-itemH;
-        timer = 0;
-        cooldown = 10;
+        itemY = 400-50-50-itemH;
+        this.trainer = trainer;
     }
 
     private void renderItemBox(SpriteBatch batch,BitmapFont font,int x,int i,
@@ -52,37 +49,43 @@ public class BackPackMenu {
     }
 
     private void renderItems(SpriteBatch batch, BitmapFont font){
-        if (selected>0){
-            renderItemBox(batch,font,item1x,selected-1,Colors.darkGray);
+        if (backPack.getContents().isEmpty());
+        else if (backPack.getContents().size()==1){
+            selected=0;
+            renderItemBox(batch,font,item2x,selected,Colors.gray);
         }
-        renderItemBox(batch,font,item2x,selected,Colors.gray);
-        if (selected<backPack.getContents().size()-1){
-            renderItemBox(batch,font,item3x,selected+1,Colors.darkGray);
+        else {
+            if (selected > 0) {
+                renderItemBox(batch, font, item1x, selected - 1, Colors.darkGray);
+            }
+            renderItemBox(batch, font, item2x, selected, Colors.gray);
+            if (selected < backPack.getContents().size() - 1) {
+                renderItemBox(batch, font, item3x, selected + 1, Colors.darkGray);
+            }
         }
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
         //RENDERS BACKGROUND COLOR
-        batch.draw(Colors.yellow,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        batch.draw(Colors.yellow,0,0, 800,400);
         //RENDERS UPPER BAR AND BACKPACK TEXT
-        batch.draw(Colors.darkGray,0,Gdx.graphics.getHeight()-50,
+        batch.draw(Colors.darkGray,0,400-50,
                 Gdx.graphics.getWidth(),50);
         font.draw(
                 batch,
                 "Backpack",
-                Gdx.graphics.getWidth()/2,
-                Gdx.graphics.getHeight()-25,
+                800/2,
+                400-25,
                 0,
                 Align.center,
                 false
         );
         renderItems(batch,font);
-        batch.draw(Colors.darkGray,0,0,
-                Gdx.graphics.getWidth(),50);
+        batch.draw(Colors.darkGray,0,0,800,50);
         font.draw(
                 batch,
                 backPack.getContents().get(selected).getDesc(),
-                Gdx.graphics.getWidth()/2,
+                800/2,
                 50-10,
                 0,
                 Align.center,
@@ -92,24 +95,25 @@ public class BackPackMenu {
     }
 
     private void input(){
-        if (timer<=0) {
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                if (selected > 0) {
-                    selected--;
-                    timer = cooldown;
-                }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+            if (selected > 0) {
+                selected--;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                if (selected < backPack.getContents().size()-1) {
-                    selected++;
-                    timer = cooldown;
-                }
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.J)) {
-                HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
-            }
-
         }
-        else timer--;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+            if (selected < backPack.getContents().size()-1) {
+                selected++;
+            }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+            HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
+            backPack.popItem(selected).useItem(trainer.getSelected());
+            selected=0;
+            TurnHandler.setAction(1);
+            TurnHandler.setReady();
+            HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
+        }
     }
 }

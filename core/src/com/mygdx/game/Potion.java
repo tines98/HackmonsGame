@@ -18,8 +18,8 @@ public class Potion implements IConsumable{
     }
 
     @Override
-    public void useItem() {
-
+    public void useItem(Hackmon applyTo) {
+        applyTo.restoreHp(healAmount);
     }
 
     @Override

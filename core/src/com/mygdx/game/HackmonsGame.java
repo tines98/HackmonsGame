@@ -47,7 +47,7 @@ public class HackmonsGame extends ApplicationAdapter {
 		backPack.addItem(new Potion("Poop",15));
 		backPack.addItem(new Potion("Alalalala",60));
 		backPack.addItem(new Potion("Funny poop",33));
-		backPackMenu = new BackPackMenu(backPack);
+		backPackMenu = new BackPackMenu(backPack,player);
 
 		battleMap = new BattleMap();
 		battleMap.setPlayer(player);

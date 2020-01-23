@@ -26,6 +26,14 @@ public class BackPack {
             return null;
     }
 
+    public IItem getItem(int i){
+        return data.get(i);
+    }
+
+    public IItem popItem(int i){
+        return data.remove(i);
+    }
+
     public ArrayList<IItem> getContents() {
         return data;
     }
