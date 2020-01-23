@@ -9,58 +9,63 @@ import com.mygdx.game.battle.TurnHandler;
 
 public class SwitchHackmonMenu {
     Trainer trainer;
-    int selected, itemW, itemH, timer, cooldown;
+    int selected, itemW, itemH;
 
 
     public SwitchHackmonMenu(Trainer trnr){
         trainer = trnr;
-        selected = 0;
+        selected = 1;
         itemW = 225;
         itemH = 100;
-        timer = 0;
-        cooldown = 10;
     }
 
-    private void renderHackmonBox(SpriteBatch batch, BitmapFont font, int x,
-                                int y,
+    private void renderHackmonBox(SpriteBatch batch, BitmapFont font, int x, int y,
                                Hackmon hackmon, boolean sel){
         //DRAW BACKGROUND BOX
-        batch.draw(Colors.black,x-1,y-1,itemW+2,itemH+2);
         if (sel)
-            batch.draw(Colors.darkGray,x,y,itemW,itemH);
+            ShapeDrawer.drawBox(batch,x,y,itemW,itemH,Colors.darkGray);
         else
-            batch.draw(Colors.gray,x,y,itemW,itemH);
+            ShapeDrawer.drawBox(batch,x,y,itemW,itemH);
         //DRAW SPRITE
         hackmon.setToFront();
         hackmon.render(batch,x,y-5);
+        hackmon.setToBack();
         //UPDATE/DRAW HP BAR
         StatusDisplay statusDisplay = new StatusDisplay(trainer,x+itemW/2,y+5);
         statusDisplay.render(batch,font);
     }
 
     private void renderItems(SpriteBatch batch, BitmapFont font){
-        int x,y;
+        int x,y = (400-itemH)/8;
         boolean sel;
-        for (int i = 0; i < trainer.getHackmons().size(); i++) {
-            y = Gdx.graphics.getHeight()-(115*(i/2))-60-itemH;
-            x = i%2==0 ? 75 : Gdx.graphics.getWidth() - 75 - itemW;
-            if (selected==i) sel = true;
-            else sel = false;
-            renderHackmonBox(batch,font,x,y,trainer.getHackmons().get(i),sel);
+        for (int i = 0; i < trainer.getHackmons().size()-1; i++) {
+            x = i*100+i*25+25;
+            if (selected==i+1) continue;
+            renderHackmonBox(batch,font,x,y,trainer.getHackmons().get(i+1),
+                    false);
         }
+        renderHackmonBox(batch,font,(800-itemW)/2,
+                (400*2-itemH)/8,
+                trainer.getHackmons().get(selected),
+                true);
+        //BRUH
+        renderHackmonBox(batch,font,(800-itemW)/2,
+                (400*5-itemH)/8,trainer.getSelected(),
+                false);
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
         //RENDERS BACKGROUND COLOR
-        batch.draw(Colors.yellow,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        batch.draw(Colors.yellow, 0,0,800,
+                400);
         //RENDERS UPPER BAR AND BACKPACK TEXT
-        batch.draw(Colors.darkGray,0,Gdx.graphics.getHeight()-50,
-                Gdx.graphics.getWidth(),50);
+        ShapeDrawer.drawBox(batch,0,400-50,
+                800,50);
         font.draw(
             batch,
             "Switch Pokemon",
-            Gdx.graphics.getWidth()/2,
-            Gdx.graphics.getHeight()-25,
+            800/2,
+            400-25,
             0,
             Align.center,
             false
@@ -71,13 +76,12 @@ public class SwitchHackmonMenu {
 
     private void input(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            selected = selected==0 ? trainer.getHackmons().size()-1 :
+            selected = selected==1 ? trainer.getHackmons().size()-1 :
                     selected-1;
-            timer = cooldown;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
                 selected = (selected+1)%trainer.getHackmons().size();
-                timer = cooldown;
+                if (selected==0)selected = 1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
             HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
