@@ -142,6 +142,13 @@ public class Hackmon {
         );
     }
 
+    public void setToBack(){
+        String spriteName = name.toLowerCase();
+        sprite = new Texture(
+"core/assets/" + spriteName + "back.png"
+        );
+    }
+
     public void render(SpriteBatch batch, int x, int y){
         batch.draw(sprite,x,y);
     }
