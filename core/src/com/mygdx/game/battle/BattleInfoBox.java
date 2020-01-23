@@ -23,8 +23,8 @@ public class BattleInfoBox {
     }
 
     public void render(SpriteBatch batch, BitmapFont font) {
-        batch.draw(Colors.black, x, y, w+1, h+1);
-        ShapeDrawer.drawBox(batch, x, y, w-1, h-1, Colors.gray);
+//        batch.draw(Colors.black, x, y, w+1, h+1);
+        ShapeDrawer.drawBox(batch, x, y, w, h, Colors.gray);
         font.draw(batch, text, x+4, h-4, 0, Align.topLeft, false);
     }
 }
