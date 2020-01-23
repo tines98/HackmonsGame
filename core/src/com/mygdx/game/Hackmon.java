@@ -181,11 +181,21 @@ public class Hackmon {
     }
 
     public void takeDamage(int dmg){
-        currHP -= dmg;
+        if (currHP - dmg > 0) {
+            currHP -= dmg;
+        }
+        else {
+            currHP = 0;
+        }
     }
 
     public void useStam(int cost) {
-        currStam -= cost;
+        if (currStam - cost > 0) {
+            currStam -= cost;
+        }
+        else {
+            currStam = 0;
+        }
     }
 
     public int getCurrHp() {

@@ -1,6 +1,7 @@
 package com.mygdx.game.battle;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,6 +11,7 @@ import com.mygdx.game.Colors;
 
 public class BattleMenuButton {
     int x, y, w, h, textX, textY;
+    Texture color;
     String text = "ERROR";
 
     public BattleMenuButton(int x, int y, int w, int h){
@@ -19,6 +21,14 @@ public class BattleMenuButton {
         this.h = h;
         textX = x+(w/2);
         textY = y+(h/2);
+    }
+
+    public BattleMenuButton(int x, int y, int w, int h, Texture color) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.color = color;
     }
 
     public void setText(String text) {
