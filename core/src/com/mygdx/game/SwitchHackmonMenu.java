@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.battle.BattleInfoBox;
 import com.mygdx.game.battle.TurnHandler;
 
 public class SwitchHackmonMenu {

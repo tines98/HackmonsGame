@@ -11,7 +11,6 @@ public class BattleMap {
     Texture bg;
     BattleMenu menu;
     FightMenu fightMenu;
-    BattleInfoBox info;
     private int playerX, playerY, opponentX, opponentY;
     StatusDisplay playerStatusDisplay, opponentStatusDisplay;
 
@@ -20,7 +19,6 @@ public class BattleMap {
         playerY = 90;
         opponentX = 800-(96*2)-25;
         opponentY = 400-150-48-25;
-        info = new BattleInfoBox(0, 0, 400, 100);
         menu = new BattleMenu(400,0,400,100);
         fightMenu = new FightMenu(400,0,400,100);
     }
@@ -39,7 +37,7 @@ public class BattleMap {
         playerStatusDisplay.render(batch,font);
         opponentStatusDisplay.render(batch,font);
 
-        info.render(batch, font);
+        BattleInfoBox.render(batch, font);
 
         if (TurnHandler.isReady()) {
             switch (TurnHandler.getAction()) {
@@ -50,6 +48,7 @@ public class BattleMap {
                 //ITEM, SWITCH; RUN AWAY
                 case 1:
                 case 2:
+                    BattleInfoBox.updateText("Player switched into " + player.getSelected().getName() + "!");
                 case 3:
                     turnPass();
                     break;
@@ -93,17 +92,17 @@ public class BattleMap {
     }
 
     public void playerFirst() {
-        info.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+        BattleInfoBox.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
         Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
     }
 
     public void opponentFirst() {
         Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        info.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+        BattleInfoBox.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
     }
 
     public void turnPass() {
-        info.updateText(Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn()));
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
     }
 
     public void setPlayer(Trainer trainer) {
