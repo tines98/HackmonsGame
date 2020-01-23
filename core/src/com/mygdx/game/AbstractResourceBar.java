@@ -26,16 +26,20 @@ public abstract class AbstractResourceBar {
          */
     public abstract void setTrainer(Trainer trainer);
 
-    public abstract void checkChange();
+    public abstract void checkChange(Hackmon hackmon);
 
-    public abstract String getText();
+    public abstract String getText(Hackmon hackmon);
 
     public void render(SpriteBatch batch, BitmapFont font){
-        checkChange();
+        render(batch,font,trainer.getSelected());
+    }
+
+    public void render(SpriteBatch batch, BitmapFont font, Hackmon hackmon){
+        checkChange(hackmon);
         batch.draw(Colors.black,x-1,y-1,maxSize+2,15);
         batch.draw(getBackground(),x,y,maxSize,13);
         batch.draw(getForeground(),x,y,currSize,13);
-        font.draw(batch,getText(),x+(maxSize/2),y+12,0,
+        font.draw(batch,getText(hackmon),x+(maxSize/2),y+12,0,
                 Align.center,
                 false);
     }

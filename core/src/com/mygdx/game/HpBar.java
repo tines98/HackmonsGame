@@ -25,15 +25,15 @@ public class HpBar extends AbstractResourceBar {
 
 
     @Override
-    public void checkChange() {
-        if (prevResourceAmount != trainer.getSelected().getCurrHp()){
+    public void checkChange(Hackmon hackmon) {
+//        if (prevResourceAmount != hackmon.getCurrHp()){
             currSize =
-                    maxSize * ((float)trainer.getSelected().getCurrHp()/(float)trainer.getSelected().getHp());
-        }
+                maxSize * ((float)hackmon.getCurrHp()/(float)hackmon.getHp());
+//        }
     }
 
     @Override
-    public String getText() {
-        return "HP: "+trainer.getSelected().getCurrHp()+"/"+trainer.getSelected().getHp();
+    public String getText(Hackmon hackmon) {
+        return "HP: "+hackmon.getCurrHp()+"/"+hackmon.getHp();
     }
 }

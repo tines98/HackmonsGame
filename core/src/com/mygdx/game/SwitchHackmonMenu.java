@@ -32,7 +32,7 @@ public class SwitchHackmonMenu {
         hackmon.setToBack();
         //UPDATE/DRAW HP BAR
         StatusDisplay statusDisplay = new StatusDisplay(trainer,x+itemW/2,y+5);
-        statusDisplay.render(batch,font);
+        statusDisplay.render(batch,font,hackmon);
     }
 
     private void renderItems(SpriteBatch batch, BitmapFont font){

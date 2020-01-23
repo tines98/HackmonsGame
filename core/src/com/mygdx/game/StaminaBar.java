@@ -26,15 +26,15 @@ public class StaminaBar extends AbstractResourceBar {
 
 
     @Override
-    public void checkChange() {
-        if (prevResourceAmount != trainer.getSelected().getCurrStam()){
+    public void checkChange(Hackmon hackmon) {
+//        if (prevResourceAmount != hackmon.getCurrStam()){
             currSize =
-                    maxSize * ((float)trainer.getSelected().getCurrStam()/(float)trainer.getSelected().getStam());
-        }
+                    maxSize * ((float)hackmon.getCurrStam()/(float)hackmon.getStam());
+//        }
     }
 
     @Override
-    public String getText() {
-        return "SP: "+trainer.getSelected().getCurrStam()+"/"+trainer.getSelected().getStam();
+    public String getText(Hackmon hackmon) {
+        return "SP: "+hackmon.getCurrStam()+"/"+hackmon.getStam();
     }
 }

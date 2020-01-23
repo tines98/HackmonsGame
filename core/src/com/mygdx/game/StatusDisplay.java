@@ -23,10 +23,14 @@ public class StatusDisplay {
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
+        render(batch,font,trainer.getSelected());
+    }
+
+    public void render(SpriteBatch batch, BitmapFont font, Hackmon hackmon){
         ShapeDrawer.drawBox(batch,x,y,w,h);
         font.draw(
                 batch
-                ,trainer.getSelected().getName()
+                ,hackmon.getName()
                 ,x+(w/2)
                 ,y+h-3
                 ,0
@@ -35,14 +39,14 @@ public class StatusDisplay {
         );
         font.draw(
                 batch
-                ,"LVL:"+trainer.getSelected().getLv()
+                ,"LVL:"+hackmon.getLv()
                 ,x+(w/2)
                 ,y+h-15-3
                 ,7
                 ,Align.center
                 ,false
         );
-        hp.render(batch,font);
-        stam.render(batch,font);
+        hp.render(batch,font,hackmon);
+        stam.render(batch,font,hackmon);
     }
 }
