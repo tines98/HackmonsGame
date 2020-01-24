@@ -75,10 +75,6 @@ project(":core") {
     }
 }
 
-dependencies {
-    implementation 'org.testng:testng:6.9.6'
-}
-
 tasks.eclipse.doLast {
     delete ".project"
 }

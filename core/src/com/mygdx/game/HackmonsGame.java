@@ -52,7 +52,7 @@ public class HackmonsGame extends ApplicationAdapter {
 					new Hackmon(4, 100)
 				}
 			);
-		player.getSelected().receiveExp(100);
+		player.getSelected().receiveExp(15000);
 		BackPack backPack = new BackPack();
 		backPack.addItem(new Potion("Uh Oh",50));
 		backPack.addItem(new Ether("Stinky",30));

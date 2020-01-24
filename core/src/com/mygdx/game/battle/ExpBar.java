@@ -31,8 +31,9 @@ public class ExpBar extends AbstractResourceBar {
 
     @Override
     public void checkChange(Hackmon hackmon) {
-        currSize =
-                maxSize * (hackmon.getExp()/(float)Math.pow(hackmon.getLv(),3));
+        currSize = maxSize *
+                ((hackmon.getExp() - (float) Math.pow(hackmon.getLv(), 3)) /
+                        (float) (Math.pow(hackmon.getLv() + 1, 3) - Math.pow(hackmon.getLv(), 3)));
     }
 
     @Override
