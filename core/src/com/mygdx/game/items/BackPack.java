@@ -1,4 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.items;
+
+import com.mygdx.game.items.IItem;
 
 import java.util.ArrayList;
 

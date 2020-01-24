@@ -1,7 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.game.items;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Hackmon;
 
 public class Potion implements IConsumable{
 
