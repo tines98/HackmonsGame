@@ -38,6 +38,10 @@ public class Trainer {
         return party;
     }
 
+    public Hackmon getMon(int n) {
+        return party.get(n);
+    }
+
     public void switchMon(int n) {
         Hackmon temp = party.get(0);
         party.set(0, party.get(n));

@@ -38,14 +38,14 @@ public class HackmonsGame extends ApplicationAdapter {
 					new Hackmon(4, 69),
 					new Hackmon(6, 50),
 					new Hackmon(5, 10),
-					new Hackmon(4, 100),
+					new Hackmon(7, 100),
 					new Hackmon(4, 100)
 				}
 			);
 		opponent = new Trainer("Titty Mustard",
 				new Hackmon[]{
-					new Hackmon(6, 100),
-					new Hackmon(4, 69),
+					new Hackmon(7, 100),
+					new Hackmon(6, 69),
 					new Hackmon(6, 50),
 					new Hackmon(5, 10),
 					new Hackmon(4, 100),

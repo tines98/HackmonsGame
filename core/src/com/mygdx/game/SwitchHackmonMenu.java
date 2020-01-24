@@ -87,10 +87,18 @@ public class SwitchHackmonMenu {
             HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
-            player.switchMon(selected);
-            HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
-            TurnHandler.setAction(2);
-            TurnHandler.setReady();
+            if (!player.getMon(selected).isFainted()) {
+                if (player.getSelected().isFainted()) {
+                    player.switchMon(selected);
+                    HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
+                }
+                else {
+                    player.switchMon(selected);
+                    HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
+                    TurnHandler.setAction(2);
+                    TurnHandler.setReady();
+                }
+            }
         }
     }
 }

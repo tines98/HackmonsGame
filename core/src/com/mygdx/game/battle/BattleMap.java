@@ -82,27 +82,37 @@ public class BattleMap {
                 }
             }
         }
+    }
+
+    public void playerFirst() {
+        BattleInfoBox.updateText(
+                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+        if (opponent.getSelected().isFainted()) {
+            opponent.switchMon(opponent.nextMon());
+            opponent.getSelected().setToFront();
+        }
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
         if (player.getSelected().isFainted()) {
             HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
         }
+    }
+
+    public void opponentFirst() {
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        if (player.getSelected().isFainted()) {
+            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
+        }
+        BattleInfoBox.updateText(
+                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
         if (opponent.getSelected().isFainted()) {
             opponent.switchMon(opponent.nextMon());
             opponent.getSelected().setToFront();
         }
     }
 
-    public void playerFirst() {
-        BattleInfoBox.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-    }
-
-    public void opponentFirst() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        BattleInfoBox.updateText(Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-    }
-
     public void turnPass() {
         Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        player.getSelected().restoreStam(player.getSelected().getStam() / 8);
     }
 
     public void setPlayer(Trainer trainer) {
