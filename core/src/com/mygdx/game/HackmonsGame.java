@@ -18,8 +18,6 @@ public class HackmonsGame extends ApplicationAdapter {
 	BitmapFont font;
 	Texture bg;
 	Trainer player, opponent;
-	Hackmon hackmon1;
-	Hackmon hackmon2;
 	BattleMap battleMap;
 	BackPackMenu backPackMenu;
 	SwitchHackmonMenu switchHackmonMenu;
@@ -34,8 +32,6 @@ public class HackmonsGame extends ApplicationAdapter {
 		bg = new Texture(
 "core/assets/bg.jpeg"
 		);
-		hackmon1 = new Hackmon(4, 100);
-		hackmon2 = new Hackmon(5, 2);
 		player = new Trainer("Ass Ketchup",
 				new Hackmon[]{
 					new Hackmon(4, 99),
