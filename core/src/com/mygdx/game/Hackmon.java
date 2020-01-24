@@ -31,7 +31,7 @@ public class Hackmon {
         sprite = new Texture(
                 //TODO For some reason heracrossback.png is not renderable
                 //TODO and from what I've researched it's due to not being 8-bit exported... wtf?
-                "core/assets/"+spriteName+"back.png"
+                "core/assets/hackmons/"+spriteName+"back.png"
         );
         currHP = maxHP;
         currStam = maxStam;
@@ -133,14 +133,14 @@ public class Hackmon {
     public void setToFront(){
         String spriteName = name.toLowerCase();
         sprite = new Texture(
-"core/assets/" + spriteName + "front.png"
+"core/assets/hackmons/" + spriteName + "front.png"
         );
     }
 
     public void setToBack(){
         String spriteName = name.toLowerCase();
         sprite = new Texture(
-"core/assets/" + spriteName + "back.png"
+"core/assets/hackmons/" + spriteName + "back.png"
         );
     }
 
