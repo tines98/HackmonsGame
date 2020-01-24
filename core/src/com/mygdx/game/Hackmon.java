@@ -23,6 +23,7 @@ public class Hackmon {
     public Hackmon(int id, int lv) {
         this.id = id;
         this.lv = lv;
+        this.exp = (int)Math.pow(lv,3);
         initialize(id);
         updateStats();
         initialMoves();
@@ -104,10 +105,10 @@ public class Hackmon {
     // lv^3 er formula for medium fast leveling i pokemon
     public void receiveExp(int gain) {
         exp += gain;
-        if (exp > (lv^3)) {
+        if (exp > (Math.pow(lv+1,3))) {
             lv++;
             updateStats();
-            receiveExp(0); // hva er poenget med denne?
+            receiveExp(0);
         }
     }
 
@@ -221,6 +222,10 @@ public class Hackmon {
 
     public int getLv() {
         return this.lv;
+    }
+
+    public int getExp() {
+        return exp;
     }
 
     public String getName() {

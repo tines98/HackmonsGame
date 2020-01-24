@@ -2,8 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,6 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.battle.BackPackMenu;
 import com.mygdx.game.battle.BattleMap;
 import com.mygdx.game.battle.Opponent;
+import com.mygdx.game.items.BackPack;
+import com.mygdx.game.items.Ether;
+import com.mygdx.game.items.Potion;
 
 public class HackmonsGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -35,19 +36,24 @@ public class HackmonsGame extends ApplicationAdapter {
 		);
 		hackmon1 = new Hackmon(4, 100);
 		hackmon2 = new Hackmon(5, 2);
-		player = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 100)
+		player = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 99)
 		,new Hackmon(4, 69),new Hackmon(6, 50),new Hackmon(5, 10),
 				new Hackmon(4, 100),new Hackmon(4, 100)});
 		opponent = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 100)
 		,new Hackmon(4, 69),new Hackmon(4, 50),new Hackmon(5, 10),
 				new Hackmon(4, 100),new Hackmon(4, 100)});
+		player.getSelected().receiveExp(100);
 		BackPack backPack = new BackPack(5);
-		backPack.addItem(new Potion("Uh Oh",10));
-		backPack.addItem(new Potion("Stinky",20));
-		backPack.addItem(new Potion("Poop",15));
+		backPack.addItem(new Potion("Uh Oh",50));
+		backPack.addItem(new Ether("Stinky",30));
+		backPack.addItem(new Ether("Poop",50));
 		backPack.addItem(new Potion("Alalalala",60));
-		backPack.addItem(new Potion("Funny poop",33));
+		backPack.addItem(new Potion("Funny poop",100));
 		backPackMenu = new BackPackMenu(backPack,player);
+
+
+
+
 
 		battleMap = new BattleMap();
 		battleMap.setPlayer(player);
