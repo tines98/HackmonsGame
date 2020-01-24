@@ -9,11 +9,13 @@ public abstract class AbstractResourceBar {
     protected Trainer trainer;
     protected int y, x;
     protected float currSize, maxSize;
+    protected float height;
     protected int prevResourceAmount;
     public AbstractResourceBar(int x, int y){
         this.x = x;
         this.y = y;
         maxSize = 100;
+        height = 13;
         currSize = maxSize;
     }
 
@@ -36,9 +38,9 @@ public abstract class AbstractResourceBar {
 
     public void render(SpriteBatch batch, BitmapFont font, Hackmon hackmon){
         checkChange(hackmon);
-        batch.draw(Colors.black,x-1,y-1,maxSize+2,15);
-        batch.draw(getBackground(),x,y,maxSize,13);
-        batch.draw(getForeground(),x,y,currSize,13);
+        batch.draw(Colors.black,x-1,y-1,maxSize+2,height);
+        batch.draw(getBackground(),x,y,maxSize,height);
+        batch.draw(getForeground(),x,y,currSize,height);
         font.draw(batch,getText(hackmon),x+(maxSize/2),y+12,0,
                 Align.center,
                 false);
