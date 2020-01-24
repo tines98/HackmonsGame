@@ -3,11 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.battle.ExpBar;
 
 public class StatusDisplay {
     int x, y, w, h;
     HpBar hp;
     StaminaBar stam;
+    ExpBar exp;
     Trainer trainer;
 
     public StatusDisplay(Trainer trainer, int x, int y){
@@ -20,6 +22,7 @@ public class StatusDisplay {
         hp.setTrainer(trainer);
         stam = new StaminaBar(x+5,y+5);
         stam.setTrainer(trainer);
+        exp = new ExpBar(x+5,y-5);
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
@@ -48,5 +51,6 @@ public class StatusDisplay {
         );
         hp.render(batch,font,hackmon);
         stam.render(batch,font,hackmon);
+        exp.render(batch,font,hackmon);
     }
 }
