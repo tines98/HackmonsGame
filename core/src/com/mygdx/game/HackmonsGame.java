@@ -57,7 +57,7 @@ public class HackmonsGame extends ApplicationAdapter {
 				}
 			);
 		player.getSelected().receiveExp(100);
-		BackPack backPack = new BackPack(5);
+		BackPack backPack = new BackPack();
 		backPack.addItem(new Potion("Uh Oh",50));
 		backPack.addItem(new Ether("Stinky",30));
 		backPack.addItem(new Ether("Poop",50));

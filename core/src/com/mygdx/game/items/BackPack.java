@@ -6,17 +6,13 @@ import java.util.ArrayList;
 
 public class BackPack {
     private ArrayList<IItem> data;
-    private int size;
 
-    public BackPack(int size){
-        this.size = size;
+    public BackPack(){
         data = new ArrayList<IItem>();
     }
 
-    public boolean addItem(IItem item){
-        if (data.size()==size) return false;
+    public void addItem(IItem item){
         data.add(item);
-        return true;
     }
 
     public IItem removeItem(IItem item){
