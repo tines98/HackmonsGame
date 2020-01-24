@@ -95,9 +95,14 @@ public class FightMenu {
             if (selected==2) selected=3;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
-            TurnHandler.setAction(0);
-            TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[selected]);
-            TurnHandler.setReady();
+            if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
+                BattleInfoBox.updateText(trainer.getSelected().getName() + " is too exhausted for this!");
+            }
+            else {
+                TurnHandler.setAction(0);
+                TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[selected]);
+                TurnHandler.setReady();
+            }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
             BattleMenu.isFightPressed = false;
