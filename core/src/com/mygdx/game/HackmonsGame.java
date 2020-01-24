@@ -36,12 +36,26 @@ public class HackmonsGame extends ApplicationAdapter {
 		);
 		hackmon1 = new Hackmon(4, 100);
 		hackmon2 = new Hackmon(5, 2);
-		player = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 99)
-		,new Hackmon(4, 69),new Hackmon(6, 50),new Hackmon(5, 10),
-				new Hackmon(4, 100),new Hackmon(4, 100)});
-		opponent = new Trainer("Ass Ketchup",new Hackmon[]{new Hackmon(4, 100)
-		,new Hackmon(4, 69),new Hackmon(4, 50),new Hackmon(5, 10),
-				new Hackmon(4, 100),new Hackmon(4, 100)});
+		player = new Trainer("Ass Ketchup",
+				new Hackmon[]{
+					new Hackmon(4, 99),
+					new Hackmon(4, 69),
+					new Hackmon(6, 50),
+					new Hackmon(5, 10),
+					new Hackmon(4, 100),
+					new Hackmon(4, 100)
+				}
+			);
+		opponent = new Trainer("Titty Mustard",
+				new Hackmon[]{
+					new Hackmon(4, 100),
+					new Hackmon(4, 69),
+					new Hackmon(4, 50),
+					new Hackmon(5, 10),
+					new Hackmon(4, 100),
+					new Hackmon(4, 100)
+				}
+			);
 		player.getSelected().receiveExp(100);
 		BackPack backPack = new BackPack(5);
 		backPack.addItem(new Potion("Uh Oh",50));
@@ -50,14 +64,8 @@ public class HackmonsGame extends ApplicationAdapter {
 		backPack.addItem(new Potion("Alalalala",60));
 		backPack.addItem(new Potion("Funny poop",100));
 		backPackMenu = new BackPackMenu(backPack,player);
-
-
-
-
-
 		battleMap = new BattleMap();
 		battleMap.setPlayer(player);
-		//TODO Fix this shit
 		Opponent.setTrainer(opponent);
 		battleMap.setOpponent(opponent);
 		battleMap.setBg(bg);
