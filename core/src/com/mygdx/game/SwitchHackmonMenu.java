@@ -5,16 +5,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.battle.BattleInfoBox;
 import com.mygdx.game.battle.TurnHandler;
 
 public class SwitchHackmonMenu {
-    Trainer trainer;
+    Trainer player;
     int selected, itemW, itemH;
 
 
     public SwitchHackmonMenu(Trainer trnr){
-        trainer = trnr;
+        player = trnr;
         selected = 1;
         itemW = 225;
         itemH = 100;
@@ -32,26 +31,26 @@ public class SwitchHackmonMenu {
         hackmon.render(batch,x,y-5);
         hackmon.setToBack();
         //UPDATE/DRAW HP BAR
-        StatusDisplay statusDisplay = new StatusDisplay(trainer,x+itemW/2,y+5);
+        StatusDisplay statusDisplay = new StatusDisplay(player,x+itemW/2,y+5);
         statusDisplay.render(batch,font,hackmon);
     }
 
     private void renderItems(SpriteBatch batch, BitmapFont font){
         int x,y = (400-itemH)/8;
         boolean sel;
-        for (int i = 0; i < trainer.getParty().size()-1; i++) {
+        for (int i = 0; i < player.getParty().size()-1; i++) {
             x = i*100+i*25+25;
             if (selected==i+1) continue;
-            renderHackmonBox(batch,font,x,y,trainer.getParty().get(i+1),
+            renderHackmonBox(batch,font,x,y, player.getParty().get(i+1),
                     false);
         }
         renderHackmonBox(batch,font,(800-itemW)/2,
                 (400*2-itemH)/8,
-                trainer.getParty().get(selected),
+                player.getParty().get(selected),
                 true);
         //BRUH
         renderHackmonBox(batch,font,(800-itemW)/2,
-                (400*5-itemH)/8,trainer.getSelected(),
+                (400*5-itemH)/8, player.getSelected(),
                 false);
     }
 
@@ -77,18 +76,18 @@ public class SwitchHackmonMenu {
 
     private void input(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            selected = selected==1 ? trainer.getParty().size()-1 :
+            selected = selected==1 ? player.getParty().size()-1 :
                     selected-1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-                selected = (selected+1)%trainer.getParty().size();
+                selected = (selected+1)% player.getParty().size();
                 if (selected==0)selected = 1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
             HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
-            trainer.switchMon(selected);
+            player.switchMon(selected);
             HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
             TurnHandler.setAction(2);
             TurnHandler.setReady();
