@@ -3,7 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
-import java.util.Random;
+
+import static com.badlogic.gdx.math.MathUtils.random;
 
 public class Trainer {
 
@@ -11,15 +12,14 @@ public class Trainer {
     private String name;
 
     private ArrayList<Hackmon> party = new ArrayList();
-    private Random random = new Random();
 
     public Trainer(String name) {
-        this.id = random.nextInt(65536);
+        this.id = RNG.nextInt(65535);
         this.name = name;
     }
 
     public Trainer(String name, Hackmon [] mons) {
-        this.id = random.nextInt(65536);
+        this.id = random.nextInt(65535);
         this.name = name;
         for (Hackmon mon : mons) {
             party.add(mon);
