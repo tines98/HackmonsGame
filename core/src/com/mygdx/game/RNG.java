@@ -13,7 +13,7 @@ public class RNG {
      * @return True if success, false otherwise.
      */
     public static boolean chance(int prob){
-        return (prob > random.nextInt(100));
+        return (prob > random.nextInt(99));
     }
 
     /**

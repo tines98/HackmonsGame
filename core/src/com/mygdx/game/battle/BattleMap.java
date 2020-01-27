@@ -43,14 +43,14 @@ public class BattleMap {
             switch (TurnHandler.getAction()) {
                 //ATTACK
                 case 0:
-                    turnAttack();
+                    BattleLogic.turnAttack();
                     break;
                 //ITEM, SWITCH; RUN AWAY
                 case 1:
                 case 2:
                     BattleInfoBox.updateText("Player switched into " + player.getSelected().getName() + "!");
                 case 3:
-                    turnPass();
+                    BattleLogic.turnPass();
                     break;
                 default:
                     throw new IllegalArgumentException();
@@ -59,71 +59,17 @@ public class BattleMap {
         }
     }
 
-    public void turnAttack() {
-        if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
-            playerFirst();
-        }
-        else if (TurnHandler.getCurrentMove().getPriority() < Opponent.doTurn().getPriority()) {
-            opponentFirst();
-        }
-        else {
-            if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
-                playerFirst();
-            }
-            else if (player.getSelected().getSpeed() < opponent.getSelected().getSpeed()){
-                opponentFirst();
-            }
-            else {
-                if (RNG.chance(50)) {
-                    playerFirst();
-                }
-                else {
-                    opponentFirst();
-                }
-            }
-        }
-    }
-
-    public void playerFirst() {
-        BattleInfoBox.updateText(
-                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
-        }
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        if (player.getSelected().isFainted()) {
-            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
-        }
-    }
-
-    public void opponentFirst() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        if (player.getSelected().isFainted()) {
-            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
-        }
-        BattleInfoBox.updateText(
-                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
-        }
-    }
-
-    public void turnPass() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        player.getSelected().restoreStam(player.getSelected().getStam() / 8);
-    }
-
-    public void setPlayer(Trainer trainer) {
-        player = trainer;
+    public void setPlayer(Trainer newTrainer) {
+        player = newTrainer;
         playerStatusDisplay = new StatusDisplay(player,275,125);
+        BattleLogic.setPlayer(player);
     }
 
-    public void setOpponent(Trainer opponent) {
-        this.opponent = opponent;
+    public void setOpponent(Trainer newOpponent) {
+        this.opponent = newOpponent;
         opponentStatusDisplay = new StatusDisplay(opponent, 450,250);
         opponent.getSelected().setToFront();
+        BattleLogic.setOpponent(opponent);
     }
 
     public void setBg(Texture bg) {

@@ -7,3 +7,4 @@
 4,HULKSMASH,Hulk Smash,000,FIGHTING,90,10,Physical,90,0,0
 5,PECK,Peck,000,AIR,40,6,Physical,100,0,0
 6,AERIALACE,Aerial Ace,000,AIR,90,12,Physical,95,0,0
+7,FURYSWIPES,Fury Swipes,001,BEAST,25,8,Physical,95,0,0
