@@ -11,6 +11,7 @@ import com.mygdx.game.battle.BattleMap;
 import com.mygdx.game.battle.Opponent;
 import com.mygdx.game.items.BackPack;
 import com.mygdx.game.items.Ether;
+import com.mygdx.game.items.ItemContainer;
 import com.mygdx.game.items.Potion;
 
 public class HackmonsGame extends ApplicationAdapter {
@@ -54,11 +55,11 @@ public class HackmonsGame extends ApplicationAdapter {
 			);
 		player.getSelected().receiveExp(15000);
 		BackPack backPack = new BackPack();
-		backPack.addItem(new Potion("Uh Oh",50));
-		backPack.addItem(new Ether("Stinky",30));
-		backPack.addItem(new Ether("Poop",50));
-		backPack.addItem(new Potion("Alalalala",60));
-		backPack.addItem(new Potion("Funny poop",100));
+		backPack.addItem(ItemContainer.ether);
+		backPack.addItem(ItemContainer.superEther);
+		backPack.addItem(ItemContainer.potion);
+		backPack.addItem(ItemContainer.superPotion);
+		backPack.addItem(ItemContainer.maxPotion);
 		backPackMenu = new BackPackMenu(backPack,player);
 		battleMap = new BattleMap();
 		battleMap.setPlayer(player);
