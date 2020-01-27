@@ -3,7 +3,12 @@ package com.mygdx.game.battle;
 import com.mygdx.game.Hackmon;
 import com.mygdx.game.Move;
 import com.mygdx.game.RNG;
+import com.mygdx.game.StatusEffect;
+import jdk.net.SocketFlow;
 
+/**
+ * A class controlling all forms for attacks a move can do, and does all the calculations necessary
+ */
 public class Attack {
 
     public static double damage(Hackmon attacker, Hackmon defender, Move move) {
@@ -11,11 +16,22 @@ public class Attack {
             System.out.println(attacker.getStr() + " " + defender.getDef());
             return (attacker.getLv() / 4) * move.getPower() * (attacker.getStr() / defender.getDef()) / 50;
         }
-        else {
+        if (move.getCategory().equals("Special")) {
             return (attacker.getLv() / 4 )* move.getPower() * (attacker.getWill() / defender.getRes()) / 50;
+        }
+        else {
+            return 0;
         }
     }
 
+    /**
+     * Calculated all elements that can affect the base damage a move will do: STAB, critical hit,
+     * type effectiveness and random variance.
+     * @param attacker the one that performs the attacks
+     * @param defender the one that is being attacked
+     * @param move what move is being used
+     * @return the modifier (between 0 and ~ 6)
+     */
     public static double modify(Hackmon attacker, Hackmon defender, Move move) {
         double STAB = 1;
         if (attacker.getType1().equals(move.getType()) || (attacker.getType2() != null
@@ -39,6 +55,8 @@ public class Attack {
                 break;
             case 1:
                 attackMultiHit(attacker, defender, move);
+            case 160:
+                attackBurn(attacker, defender, move);
             default:
                 attackStandard(attacker, defender, move);
                 break;
@@ -53,7 +71,9 @@ public class Attack {
             System.out.println("Damage: " + damage);
             defender.takeDamage(damage);
         }
-        BattleInfoBox.updateText("The attack missed!");
+        else {
+            BattleInfoBox.updateText("The attack missed!");
+        }
     }
 
     public static void attackMultiHit(Hackmon attacker, Hackmon defender, Move move) {
@@ -71,6 +91,16 @@ public class Attack {
             }
             BattleInfoBox.updateText("It hit " + hits + " times!");
             System.out.println("It hit " + hits + " times!");
+        }
+    }
+
+    public static void attackBurn(Hackmon attacker, Hackmon defender, Move move) {
+        if (RNG.chance(move.getAccuarcy())) {
+            int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
+            defender.takeDamage(damage);
+            if (RNG.chance(move.getEffectAccuarcy())) {
+                defender.setStatus(StatusEffect.BURN);
+            }
         }
     }
 }

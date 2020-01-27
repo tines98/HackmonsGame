@@ -1,9 +1,6 @@
 package com.mygdx.game.battle;
 
-import com.mygdx.game.HackmonsGame;
-import com.mygdx.game.RNG;
-import com.mygdx.game.ScreenState;
-import com.mygdx.game.Trainer;
+import com.mygdx.game.*;
 
 public class BattleLogic {
 
@@ -44,6 +41,8 @@ public class BattleLogic {
         if (player.getSelected().isFainted()) {
             HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
         }
+        statusCheck(player.getSelected());
+        statusCheck(opponent.getSelected());
     }
 
     public static void opponentFirst() {
@@ -56,11 +55,28 @@ public class BattleLogic {
             opponent.switchMon(opponent.nextMon());
             opponent.getSelected().setToFront();
         }
+        statusCheck(player.getSelected());
+        statusCheck(opponent.getSelected());
+    }
+
+    public static void statusCheck(Hackmon mon) {
+        switch(mon.getStatus()) {
+            case BURN:
+                mon.takeDamage(mon.getHp() / 16);
+                break;
+            case POISON:
+                mon.takeDamage(mon.getHp() / 8);
+                break;
+            default:
+                break;
+        }
     }
 
     public static void turnPass() {
         Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
         player.getSelected().restoreStam(player.getSelected().getStam() / 8);
+        statusCheck(player.getSelected());
+        statusCheck(opponent.getSelected());
     }
 
     public static void setPlayer(Trainer newPlayer) {
