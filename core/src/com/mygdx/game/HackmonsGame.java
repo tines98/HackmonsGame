@@ -36,27 +36,28 @@ public class HackmonsGame extends ApplicationAdapter {
 		player = new Trainer("Ass Ketchup",
 				new Hackmon[]{
 					new Hackmon(4, 99),
-					new Hackmon(4, 69),
-					new Hackmon(6, 50),
-					new Hackmon(5, 10),
-					new Hackmon(7, 100),
-					new Hackmon(4, 100)
+					new Hackmon(5, 100),
+					new Hackmon(6, 98),
+					new Hackmon(7, 99),
+					new Hackmon(8, 100),
+					new Hackmon(9, 100)
 				}
 			);
 		opponent = new Trainer("Titty Mustard",
 				new Hackmon[]{
-					new Hackmon(7, 100),
+					new Hackmon(9, 69),
+					new Hackmon(8, 69),
+					new Hackmon(7, 69),
 					new Hackmon(6, 69),
-					new Hackmon(6, 50),
-					new Hackmon(5, 10),
-					new Hackmon(4, 100),
-					new Hackmon(4, 100)
+					new Hackmon(5, 69),
+					new Hackmon(4, 69)
 				}
 			);
 		player.getSelected().receiveExp(15000);
 		BackPack backPack = new BackPack();
 		backPack.addItem(ItemContainer.ether);
 		backPack.addItem(ItemContainer.superEther);
+		backPack.addItem(ItemContainer.maxEther);
 		backPack.addItem(ItemContainer.potion);
 		backPack.addItem(ItemContainer.superPotion);
 		backPack.addItem(ItemContainer.maxPotion);
