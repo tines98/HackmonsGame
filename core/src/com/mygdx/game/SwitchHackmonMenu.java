@@ -28,7 +28,7 @@ public class SwitchHackmonMenu {
             ShapeDrawer.drawBox(batch,x,y,itemW,itemH);
         //DRAW SPRITE
         hackmon.setToFront();
-        hackmon.render(batch,x,y-5);
+        hackmon.render(batch,x,y);
         hackmon.setToBack();
         //UPDATE/DRAW HP BAR
         StatusDisplay statusDisplay = new StatusDisplay(player,x+itemW/2,y+5);
