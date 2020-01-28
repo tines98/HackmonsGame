@@ -125,6 +125,7 @@ public class FightMenu {
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
             if (moveList[selected].equals("Rest")){
                 TurnHandler.setAction(BattleAction.REST);
+                TurnHandler.setReady();
                 return;
             }
             if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
