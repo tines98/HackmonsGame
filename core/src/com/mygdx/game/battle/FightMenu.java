@@ -11,9 +11,7 @@ import com.mygdx.game.*;
 
 public class FightMenu {
 
-    private int x,y,w,h;
-    private int buttonWidth,buttonHeight, selected = 0;
-    private BattleMenuButton[] buttons;
+    private int x,y,w,h,selected = 0;
     private Texture gradient;
     private Trainer trainer;
     private String[] moveList;
@@ -24,22 +22,6 @@ public class FightMenu {
         this.w = w;
         this.h = h;
         gradient = new Texture("core/assets/gradient.png");
-        buttonHeight=(h-16)/2;
-        buttonWidth=(w-16)/2;
-        int padding = 5;
-        buttons = new BattleMenuButton[]{
-                new BattleMenuButton(x+padding,y+padding*2+buttonHeight,buttonWidth,
-                        buttonHeight),
-                new BattleMenuButton(x+padding*2+buttonWidth,y+padding*2+buttonHeight,
-                        buttonWidth, buttonHeight),
-                new BattleMenuButton(x+padding,y+padding,buttonWidth,
-                        buttonHeight),
-                new BattleMenuButton(x+padding*2+buttonWidth,y+padding,buttonWidth,
-                        buttonHeight)
-        };
-        for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setText("ERROR");
-        }
     }
 
     public void setTrainer(Trainer trainer) {
