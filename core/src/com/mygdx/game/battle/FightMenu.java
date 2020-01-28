@@ -124,13 +124,13 @@ public class FightMenu {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
             if (moveList[selected].equals("Rest")){
-                TurnHandler.setAction(4);
+                TurnHandler.setAction(BattleAction.REST);
             }
             if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
                 BattleInfoBox.updateText(trainer.getSelected().getName() + " is too exhausted for this!");
             }
             else {
-                TurnHandler.setAction(0);
+                TurnHandler.setAction(BattleAction.ATTACK);
                 TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[selected]);
                 TurnHandler.setReady();
             }
