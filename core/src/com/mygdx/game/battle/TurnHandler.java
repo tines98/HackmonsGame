@@ -5,7 +5,7 @@ import com.mygdx.game.Move;
 public class TurnHandler {
     private static boolean ready = false;
     private static int cooldown = 0;
-    private static int action = 2;
+    private static BattleAction action;
     private static Move currentMove = null;
 
     public static boolean isReady() {
@@ -20,11 +20,11 @@ public class TurnHandler {
         ready = false;
     }
 
-    public static int getAction() {
+    public static BattleAction getAction() {
         return action;
     }
 
-    public static void setAction(int newAction) {
+    public static void setAction(BattleAction newAction) {
         action = newAction;
     }
 

@@ -29,7 +29,6 @@ public class BattleMap {
         player.getSelected().render(batch, playerX, playerY,2);
         opponent.getSelected().render(batch, opponentX, opponentY,2);
         if (menu.isFightPressed){
-            fightMenu.setTrainer(player);
             fightMenu.render(batch,font);
         }
         else
@@ -42,14 +41,21 @@ public class BattleMap {
         if (TurnHandler.isReady()) {
             switch (TurnHandler.getAction()) {
                 //ATTACK
-                case 0:
+                case ATTACK:
                     turnAttack();
                     break;
                 //ITEM, SWITCH; RUN AWAY
-                case 1:
-                case 2:
+                case ITEM:
+                    turnPass();
+                    break;
+                case SWITCH:
                     BattleInfoBox.updateText("Player switched into " + player.getSelected().getName() + "!");
-                case 3:
+                    turnPass();
+                    break;
+                case FLEE:
+                    turnPass();
+                    break;
+                case REST:
                     turnPass();
                     break;
                 default:
@@ -118,6 +124,7 @@ public class BattleMap {
     public void setPlayer(Trainer trainer) {
         player = trainer;
         playerStatusDisplay = new StatusDisplay(player,275,125);
+        fightMenu.setTrainer(player);
     }
 
     public void setOpponent(Trainer opponent) {

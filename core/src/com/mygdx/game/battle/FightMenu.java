@@ -2,8 +2,11 @@ package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.*;
 
 public class FightMenu {
@@ -11,15 +14,17 @@ public class FightMenu {
     private int x,y,w,h;
     private int buttonWidth,buttonHeight, selected = 0;
     private BattleMenuButton[] buttons;
+    private Texture gradient;
     private Trainer trainer;
     private Hackmon hackmon;
-
+    private String[] moveList;
 
     public FightMenu(int x, int y, int w, int h){
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+        gradient = new Texture("core/assets/gradient.png");
         buttonHeight=(h-16)/2;
         buttonWidth=(w-16)/2;
         int padding = 5;
@@ -40,61 +45,87 @@ public class FightMenu {
 
     public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
-        update();
     }
 
     private void update(){
-        hackmon = trainer.getSelected();
-        Move[] moves = hackmon.getMoves();
-        for (int i = 0; i < moves.length; i++) {
-            if (moves[i] != null){
-                buttons[i].setText(moves[i].getName());
+        moveList = new String[trainer.getSelected().getMoves().length+1];
+        for (int i = 0; i < trainer.getSelected().getMoves().length; i++) {
+            if (trainer.getSelected().getMoves()[i]==null){
+                moveList[i] = "Rest";
             }
+            else
+                moveList[i] = trainer.getSelected().getMoves()[i].getName();
         }
+        moveList[trainer.getSelected().getMoves().length] = "Rest";
+    }
+
+    private void infoBox(Move move){
+        BattleInfoBox.updateText(
+                "Type:"+move.getType()
+                +"\n"+
+                "Power: "+move.getPower()
+                +"\n"+
+                "Acc:"+move.getAccuarcy()
+                +"\n"+
+                "SP Cost:"+move.getCost()
+            );
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
-        ShapeDrawer.drawBox(batch,x,y,w,h);
-        if (!hackmon.equals(trainer.getSelected())) {
-            update();
-        }
+        batch.draw(gradient,400,0,400,100);
+        update();
         input();
-        if (selected==0)
-            buttons[0].render(batch,font,true);
-        else
-            buttons[0].render(batch,font,false);
-        if (selected==1)
-            buttons[1].render(batch,font,true);
-        else
-            buttons[1].render(batch,font,false);
-        if (selected==2)
-            buttons[2].render(batch,font,true);
-        else
-            buttons[2].render(batch,font,false);
-        if (selected==3)
-            buttons[3].render(batch,font,true);
-        else
-            buttons[3].render(batch,font,false);
+        if (selected > 0){
+            font.setColor(Color.GRAY);
+            font.draw(
+                batch,
+                moveList[selected-1],
+                400+100,
+                50,
+                0,
+                Align.center,
+                true
+            );
+            font.setColor(Color.WHITE);
+        }
+        font.draw(
+            batch,
+            moveList[selected],
+            400+200,
+            50+10,
+            0,
+            Align.center,
+            true
+        );
+        if (moveList[selected].equals("ERROR") || moveList[selected].equals(
+                "Rest"));
+        else infoBox(trainer.getSelected().getMoves()[selected]);
+        if (selected<4){
+            font.setColor(Color.GRAY);
+            font.draw(
+                batch,
+                moveList[selected+1],
+                400+300,
+                50,
+                0,
+                Align.center,
+                true
+            );
+            font.setColor(Color.WHITE);
+        }
     }
 
     public void input(){
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            if (selected==2) selected=0;
-            if (selected==3) selected=1;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)){
+            if (selected>0) selected--;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
-            if (selected==1) selected=0;
-            if (selected==3) selected=2;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            if (selected==0) selected=2;
-            if (selected==1) selected=3;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-            if (selected==0) selected=1;
-            if (selected==2) selected=3;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)){
+            if (selected<4) selected++;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
+            if (moveList[selected].equals("Rest")){
+                TurnHandler.setAction(4);
+            }
             if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
                 BattleInfoBox.updateText(trainer.getSelected().getName() + " is too exhausted for this!");
             }
