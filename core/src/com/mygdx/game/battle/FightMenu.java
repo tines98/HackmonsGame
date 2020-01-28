@@ -125,6 +125,7 @@ public class FightMenu {
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
             if (moveList[selected].equals("Rest")){
                 TurnHandler.setAction(BattleAction.REST);
+                return;
             }
             if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
                 BattleInfoBox.updateText(trainer.getSelected().getName() + " is too exhausted for this!");
