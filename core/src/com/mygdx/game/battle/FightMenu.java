@@ -96,8 +96,10 @@ public class FightMenu {
             Align.center,
             true
         );
-        if (moveList[selected].equals("ERROR") || moveList[selected].equals(
-                "Rest"));
+        if (moveList[selected].equals("ERROR")
+                || moveList[selected].equals("Rest")){
+            BattleInfoBox.updateText("Skip your turn to restore some stamina");
+        }
         else infoBox(trainer.getSelected().getMoves()[selected]);
         if (selected<4){
             font.setColor(Color.GRAY);
