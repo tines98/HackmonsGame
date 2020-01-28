@@ -16,7 +16,6 @@ public class FightMenu {
     private BattleMenuButton[] buttons;
     private Texture gradient;
     private Trainer trainer;
-    private Hackmon hackmon;
     private String[] moveList;
 
     public FightMenu(int x, int y, int w, int h){
