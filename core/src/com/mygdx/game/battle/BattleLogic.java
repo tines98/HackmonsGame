@@ -3,37 +3,51 @@ package com.mygdx.game.battle;
 import com.mygdx.game.*;
 
 public class BattleLogic {
-    static Trainer player, opponent;
-    static int playerSleepTimer = 0;
-    static int opponentSleepTimer = 0;
+    private static Trainer player, opponent;
+    private static int playerSleepTimer = 0;
+    private static int opponentSleepTimer = 0;
+
+    private static int [] playerModifiers = {1, 1, 1, 1, 1};
+    private static int [] opponentModifiers = {1, 1, 1, 1, 1};
 
     public static void turn(BattleAction playerAction, BattleAction opponentAction) {
         switch(playerAction) {
             case ATTACK:
                 switch(opponentAction) {
                     case ATTACK:
-                        //STATUS CHECK
-                        if (player_First()) { ;
-                            turn_attack(player, opponent, true);
+                        if (player_First()) {
+                            if (statusCheckBeforeAction(player.getSelected())) {
+                                turn_attack(player, opponent, true);
+                            }
                             if (!check_fainted(opponent.getSelected(), false)) {
-                                turn_attack(opponent, player, false);
+                                if (statusCheckBeforeAction(opponent.getSelected())) {
+                                    turn_attack(opponent, player, false);
+                                }
                                 check_fainted(player.getSelected(), true);
                             }
                         }
                         else {
-                            turn_attack(opponent, player, false);
+                            if (statusCheckBeforeAction(opponent.getSelected())) {
+                                turn_attack(opponent, player, false);
+                            }
                             if (!check_fainted(player.getSelected(), false)) {
-                                turn_attack(player, player, true);
+                                if (statusCheckBeforeAction(player.getSelected())) {
+                                    turn_attack(player, opponent, true);
+                                }
                                 check_fainted(opponent.getSelected(), false);
                             }
                         }
                         break;
                     default:
-                        turn_attack(player, opponent, true);
+                        if (statusCheckBeforeAction(player.getSelected())) {
+                            turn_attack(player, opponent, true);
+                        }
                 }
                 break;
             default:
-                turn_attack(opponent, player, false);
+                if (statusCheckBeforeAction(opponent.getSelected())) {
+                    turn_attack(opponent, player, false);
+                }
                 break;
         }
         statusCheckAfterAction(player.getSelected());
@@ -50,10 +64,16 @@ public class BattleLogic {
             return false;
         }
         else {
-            if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
+            double playerParalyzed = player.getSelected().getStatus() == StatusEffect.PARALYZED ? 0.5 : 1;
+            double  opponentParalyzed = opponent.getSelected().getStatus() == StatusEffect.PARALYZED ? 0.5 : 1;
+            System.out.println("P speed: " + player.getSelected().getSpeed() * playerParalyzed
+            + " O speed: " + opponent.getSelected().getSpeed() * opponentParalyzed);
+            if (player.getSelected().getSpeed() * playerParalyzed >
+                    opponent.getSelected().getSpeed() * opponentParalyzed) {
                 return true;
             }
-            else if (player.getSelected().getSpeed() < opponent.getSelected().getSpeed()){
+            else if (player.getSelected().getSpeed() * playerParalyzed <
+                    opponent.getSelected().getSpeed() * opponentParalyzed){
                 return false;
             }
             else {
@@ -90,79 +110,27 @@ public class BattleLogic {
         return false;
     }
 
-    public static void turnAttack() {
-        if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
-            playerFirst();
-        }
-        else if (TurnHandler.getCurrentMove().getPriority() < Opponent.doTurn().getPriority()) {
-            opponentFirst();
-        }
-        else {
-            if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
-                playerFirst();
-            }
-            else if (player.getSelected().getSpeed() < opponent.getSelected().getSpeed()){
-                opponentFirst();
-            }
-            else {
-                if (RNG.chance(50)) {
-                    playerFirst();
-                }
-                else {
-                    opponentFirst();
-                }
-            }
-        }
-    }
-
-    public static void playerFirst() {
-        Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
-        }
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        if (player.getSelected().isFainted()) {
-            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
-        }
-        statusCheckAfterAction(player.getSelected());
-        statusCheckAfterAction(opponent.getSelected());
-    }
-
-    public static void opponentFirst() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        if (player.getSelected().isFainted()) {
-            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
-        }
-        Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
-        }
-        statusCheckAfterAction(player.getSelected());
-        statusCheckAfterAction(opponent.getSelected());
-    }
-
-    public static void statusCheckBeforeAction(Trainer trainer, Hackmon mon) {
+    public static boolean statusCheckBeforeAction(Hackmon mon) {
         switch(mon.getStatus()) {
+            case FROZEN:
+                if (RNG.chance(40)) {
+                    mon.setStatus(StatusEffect.NONE);
+                    return true;
+                }
+                return false;
             case PARALYZED:
                 if (RNG.chance(50)) {
-                    turnAttack();
+                    return true;
                 }
-                else {
-                    turnPlayer();
-                }
-                break;
+                return false;
             case SLEEP:
-                if (RNG.chance(50)) {
+                if (RNG.chance(45)) {
                     mon.setStatus(StatusEffect.NONE);
-                    turnAttack();
+                    return true;
                 }
-                else {
-                    turnPlayer();
-                }
+                return false;
             default:
-                break;
+                return true;
         }
     }
 
@@ -176,28 +144,6 @@ public class BattleLogic {
                 break;
             default:
                 break;
-        }
-    }
-
-    public static void turnPlayer() {
-        Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove());
-        opponent.getSelected().restoreStam(player.getSelected().getStam() / 8);
-        statusCheckAfterAction(player.getSelected());
-        statusCheckAfterAction(opponent.getSelected());
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
-        }
-    }
-
-    public static void turnPass() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        player.getSelected().restoreStam(player.getSelected().getStam() / 8);
-        statusCheckAfterAction(player.getSelected());
-        statusCheckAfterAction(opponent.getSelected());
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
         }
     }
 
