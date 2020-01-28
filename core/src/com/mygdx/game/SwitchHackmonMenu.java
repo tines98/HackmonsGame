@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.battle.BattleAction;
 import com.mygdx.game.battle.TurnHandler;
 
 public class SwitchHackmonMenu {
@@ -95,7 +96,7 @@ public class SwitchHackmonMenu {
                 else {
                     player.switchMon(selected);
                     HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
-                    TurnHandler.setAction(2);
+                    TurnHandler.setAction(BattleAction.SWITCH);
                     TurnHandler.setReady();
                 }
             }
