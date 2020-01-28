@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import jdk.net.SocketFlow;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,8 +16,6 @@ public class Hackmon {
     private int currHP, currStam;
     private int maxHP, maxStam, str, def, will, res, speed, crit;
     private String name, type1, type2, spriteName;
-
-    private StatusEffect status = StatusEffect.NONE;
 
     private Move [] moves = new Move [4];
     private Move [] levelMoves = new Move [100];
@@ -213,14 +210,6 @@ public class Hackmon {
 
     public int getCrit() {
         return this.crit;
-    }
-
-    public StatusEffect getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEffect newStatus) {
-        status = newStatus;
     }
 
     public int getDef() {

@@ -29,7 +29,6 @@ public class BattleMap {
         player.getSelected().render(batch, playerX, playerY,2);
         opponent.getSelected().render(batch, opponentX, opponentY,2);
         if (menu.isFightPressed){
-            fightMenu.setTrainer(player);
             fightMenu.render(batch,font);
         }
         else
@@ -42,15 +41,22 @@ public class BattleMap {
         if (TurnHandler.isReady()) {
             switch (TurnHandler.getAction()) {
                 //ATTACK
-                case 0:
-                    BattleLogic.turnAttack();
+                case ATTACK:
+                    turnAttack();
                     break;
                 //ITEM, SWITCH; RUN AWAY
-                case 1:
-                case 2:
+                case ITEM:
+                    turnPass();
+                    break;
+                case SWITCH:
                     BattleInfoBox.updateText("Player switched into " + player.getSelected().getName() + "!");
-                case 3:
-                    BattleLogic.turnPass();
+                    turnPass();
+                    break;
+                case FLEE:
+                    turnPass();
+                    break;
+                case REST:
+                    turnPass();
                     break;
                 default:
                     throw new IllegalArgumentException();
@@ -59,17 +65,72 @@ public class BattleMap {
         }
     }
 
-    public void setPlayer(Trainer newTrainer) {
-        player = newTrainer;
-        playerStatusDisplay = new StatusDisplay(player,275,125);
-        BattleLogic.setPlayer(player);
+    public void turnAttack() {
+        if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
+            playerFirst();
+        }
+        else if (TurnHandler.getCurrentMove().getPriority() < Opponent.doTurn().getPriority()) {
+            opponentFirst();
+        }
+        else {
+            if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
+                playerFirst();
+            }
+            else if (player.getSelected().getSpeed() < opponent.getSelected().getSpeed()){
+                opponentFirst();
+            }
+            else {
+                if (RNG.chance(50)) {
+                    playerFirst();
+                }
+                else {
+                    opponentFirst();
+                }
+            }
+        }
     }
 
-    public void setOpponent(Trainer newOpponent) {
-        this.opponent = newOpponent;
+    public void playerFirst() {
+        BattleInfoBox.updateText(
+                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+        if (opponent.getSelected().isFainted()) {
+            opponent.switchMon(opponent.nextMon());
+            opponent.getSelected().setToFront();
+        }
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        if (player.getSelected().isFainted()) {
+            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
+        }
+    }
+
+    public void opponentFirst() {
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        if (player.getSelected().isFainted()) {
+            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
+        }
+        BattleInfoBox.updateText(
+                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
+        if (opponent.getSelected().isFainted()) {
+            opponent.switchMon(opponent.nextMon());
+            opponent.getSelected().setToFront();
+        }
+    }
+
+    public void turnPass() {
+        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
+        player.getSelected().restoreStam(player.getSelected().getStam() / 8);
+    }
+
+    public void setPlayer(Trainer trainer) {
+        player = trainer;
+        playerStatusDisplay = new StatusDisplay(player,275,125);
+        fightMenu.setTrainer(player);
+    }
+
+    public void setOpponent(Trainer opponent) {
+        this.opponent = opponent;
         opponentStatusDisplay = new StatusDisplay(opponent, 450,250);
         opponent.getSelected().setToFront();
-        BattleLogic.setOpponent(opponent);
     }
 
     public void setBg(Texture bg) {

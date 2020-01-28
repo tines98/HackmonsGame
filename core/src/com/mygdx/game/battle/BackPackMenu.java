@@ -112,7 +112,7 @@ public class BackPackMenu {
         if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
             backPack.popItem(selected).useItem(trainer.getSelected());
             selected=0;
-            TurnHandler.setAction(1);
+            TurnHandler.setAction(BattleAction.ITEM);
             TurnHandler.setReady();
             HackmonsGame.changeScreenState(ScreenState.BATTLEMENU);
         }

@@ -52,10 +52,5 @@ public class StatusDisplay {
         hp.render(batch,font,hackmon);
         stam.render(batch,font,hackmon);
         exp.render(batch,font,hackmon);
-
-        //TEST
-        if (trainer.getSelected().getStatus().equals(StatusEffect.BURN)) {
-            ShapeDrawer.drawBox(batch, x+5, y+40, 20, 15, Colors.red);
-        }
     }
 }
