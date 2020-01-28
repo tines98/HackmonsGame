@@ -1,6 +1,5 @@
 package com.mygdx.game.battle;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -42,21 +41,21 @@ public class BattleMap {
             switch (TurnHandler.getAction()) {
                 //ATTACK
                 case ATTACK:
-                    turnAttack();
+                    BattleLogic.turnAttack();
                     break;
                 //ITEM, SWITCH; RUN AWAY
                 case ITEM:
-                    turnPass();
+                    BattleLogic.turnPass();
                     break;
                 case SWITCH:
                     BattleInfoBox.updateText("Player switched into " + player.getSelected().getName() + "!");
-                    turnPass();
+                    BattleLogic.turnPass();
                     break;
                 case FLEE:
-                    turnPass();
+                    BattleLogic.turnPass();
                     break;
                 case REST:
-                    turnPass();
+                    BattleLogic.turnPass();
                     break;
                 default:
                     throw new IllegalArgumentException();
@@ -65,72 +64,18 @@ public class BattleMap {
         }
     }
 
-    public void turnAttack() {
-        if (TurnHandler.getCurrentMove().getPriority() > Opponent.doTurn().getPriority()) {
-            playerFirst();
-        }
-        else if (TurnHandler.getCurrentMove().getPriority() < Opponent.doTurn().getPriority()) {
-            opponentFirst();
-        }
-        else {
-            if (player.getSelected().getSpeed() > opponent.getSelected().getSpeed()) {
-                playerFirst();
-            }
-            else if (player.getSelected().getSpeed() < opponent.getSelected().getSpeed()){
-                opponentFirst();
-            }
-            else {
-                if (RNG.chance(50)) {
-                    playerFirst();
-                }
-                else {
-                    opponentFirst();
-                }
-            }
-        }
-    }
-
-    public void playerFirst() {
-        BattleInfoBox.updateText(
-                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
-        }
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        if (player.getSelected().isFainted()) {
-            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
-        }
-    }
-
-    public void opponentFirst() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        if (player.getSelected().isFainted()) {
-            HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
-        }
-        BattleInfoBox.updateText(
-                Attack.attack(player.getSelected(), opponent.getSelected(), TurnHandler.getCurrentMove()));
-        if (opponent.getSelected().isFainted()) {
-            opponent.switchMon(opponent.nextMon());
-            opponent.getSelected().setToFront();
-        }
-    }
-
-    public void turnPass() {
-        Attack.attack(opponent.getSelected(), player.getSelected(), Opponent.doTurn());
-        player.getSelected().restoreStam(player.getSelected().getStam() / 8);
-    }
-
-    public void setPlayer(Trainer trainer) {
-        player = trainer;
+    public void setPlayer(Trainer newPlayer) {
+        player = newPlayer;
         playerStatusDisplay = new StatusDisplay(player,275,125);
         fightMenu.setTrainer(player);
+        BattleLogic.setPlayer(player);
     }
 
-    public void setOpponent(Trainer opponent) {
-        this.opponent = opponent;
+    public void setOpponent(Trainer newOpponent) {
+        opponent = newOpponent;
         opponentStatusDisplay = new StatusDisplay(opponent, 450,250);
         opponent.getSelected().setToFront();
+        BattleLogic.setOpponent(opponent);
     }
 
     public void setBg(Texture bg) {

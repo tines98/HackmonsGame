@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import jdk.net.SocketFlow;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +17,8 @@ public class Hackmon {
     private int currHP, currStam;
     private int maxHP, maxStam, str, def, will, res, speed, crit;
     private String name, type1, type2, spriteName;
+
+    private StatusEffect status = StatusEffect.NONE;
 
     private Move [] moves = new Move [4];
     private Move [] levelMoves = new Move [100];
@@ -133,14 +136,14 @@ public class Hackmon {
     public void setToFront(){
         String spriteName = name.toLowerCase();
         sprite = new Texture(
-"core/assets/hackmons/" + spriteName + "front.png"
+                "core/assets/hackmons/" + spriteName + "front.png"
         );
     }
 
     public void setToBack(){
         String spriteName = name.toLowerCase();
         sprite = new Texture(
-"core/assets/hackmons/" + spriteName + "back.png"
+                "core/assets/hackmons/" + spriteName + "back.png"
         );
     }
 
@@ -210,6 +213,14 @@ public class Hackmon {
 
     public int getCrit() {
         return this.crit;
+    }
+
+    public StatusEffect getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEffect newStatus) {
+        status = newStatus;
     }
 
     public int getDef() {
