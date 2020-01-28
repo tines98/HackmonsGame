@@ -57,5 +57,11 @@ public class StatusDisplay {
         if (trainer.getSelected().getStatus().equals(StatusEffect.BURN)) {
             ShapeDrawer.drawBox(batch, x+5, y+40, 20, 15, Colors.red);
         }
+        if (trainer.getSelected().getStatus().equals(StatusEffect.PARALYZED)) {
+            ShapeDrawer.drawBox(batch, x+5, y+40, 20, 15, Colors.yellow);
+        }
+        if (trainer.getSelected().getStatus().equals(StatusEffect.SLEEP)) {
+            ShapeDrawer.drawBox(batch, x+5, y+40, 20, 15, Colors.green);
+        }
     }
 }

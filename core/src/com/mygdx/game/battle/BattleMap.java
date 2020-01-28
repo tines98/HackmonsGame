@@ -41,21 +41,21 @@ public class BattleMap {
             switch (TurnHandler.getAction()) {
                 //ATTACK
                 case ATTACK:
-                    BattleLogic.turnAttack();
+                    BattleLogic.turn(BattleAction.ATTACK, BattleAction.ATTACK);
                     break;
                 //ITEM, SWITCH; RUN AWAY
                 case ITEM:
-                    BattleLogic.turnPass();
+                    BattleLogic.turn(BattleAction.ITEM, BattleAction.ATTACK);
                     break;
                 case SWITCH:
                     BattleInfoBox.updateText("Player switched into " + player.getSelected().getName() + "!");
-                    BattleLogic.turnPass();
+                    BattleLogic.turn(BattleAction.SWITCH, BattleAction.ATTACK);
                     break;
                 case FLEE:
-                    BattleLogic.turnPass();
+                    BattleLogic.turn(BattleAction.FLEE, BattleAction.ATTACK);
                     break;
                 case REST:
-                    BattleLogic.turnPass();
+                    BattleLogic.turn(BattleAction.REST, BattleAction.ATTACK);
                     break;
                 default:
                     throw new IllegalArgumentException();

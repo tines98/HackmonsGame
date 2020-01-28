@@ -55,8 +55,16 @@ public class Attack {
                 break;
             case 1:
                 attackMultiHit(attacker, defender, move);
+                break;
             case 160:
                 attackBurn(attacker, defender, move);
+                break;
+            case 176:
+                attackParalyze(attacker, defender, move);
+                break;
+            case 192:
+                attackSleep(attacker, defender, move);
+                break;
             default:
                 attackStandard(attacker, defender, move);
                 break;
@@ -100,6 +108,26 @@ public class Attack {
             defender.takeDamage(damage);
             if (RNG.chance(move.getEffectAccuarcy())) {
                 defender.setStatus(StatusEffect.BURN);
+            }
+        }
+    }
+
+    public static void attackParalyze(Hackmon attacker, Hackmon defender, Move move) {
+        if (RNG.chance(move.getAccuarcy())) {
+            int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
+            defender.takeDamage(damage);
+            if (RNG.chance(move.getEffectAccuarcy())) {
+                defender.setStatus(StatusEffect.PARALYZED);
+            }
+        }
+    }
+
+    public static void attackSleep(Hackmon attacker, Hackmon defender, Move move) {
+        if (RNG.chance(move.getAccuarcy())) {
+            int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
+            defender.takeDamage(damage);
+            if (RNG.chance(move.getEffectAccuarcy())) {
+                defender.setStatus(StatusEffect.SLEEP);
             }
         }
     }
