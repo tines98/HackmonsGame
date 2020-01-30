@@ -11,7 +11,17 @@ import jdk.net.SocketFlow;
  */
 public class Attack {
 
+    private static void printShit(Hackmon attacker, Hackmon defender, Move move) {
+        System.out.println("Attacker: " + attacker.getName() + " Defender: " + defender.getName());
+        System.out.println("A Lv: " + attacker.getLv() + " D Lv: " + defender.getLv());
+        System.out.println("A Stats: " + attacker.getStr() + " " + attacker.getDef() + " " +
+                attacker.getWill() + " " + attacker.getRes() + " " + attacker.getSpeed());
+        System.out.println("D Stats: " + defender.getStr() + " " + defender.getDef() + " " +
+                defender.getWill() + " " + defender.getRes() + " " + defender.getSpeed());
+    }
+
     public static double damage(Hackmon attacker, Hackmon defender, Move move) {
+        printShit(attacker, defender, move);
         if (move.getCategory().equals("Physical")) {
             System.out.println(attacker.getStr() + " " + defender.getDef());
             return (attacker.getLv() / 4) * move.getPower() *
@@ -78,8 +88,7 @@ public class Attack {
     public static void attackStandard(Hackmon attacker, Hackmon defender, Move move) {
         attacker.useStam(move.getCost());
         if (RNG.chance(move.getAccuarcy())) {
-            int damage = (int) (damage(attacker, defender, move) *
-                    modify(attacker, defender, move));
+            int damage = (int) ((damage(attacker, defender, move) + 2) * modify(attacker, defender, move));
             System.out.println("Damage: " + damage);
             defender.takeDamage(damage);
         }
@@ -92,7 +101,7 @@ public class Attack {
         if (RNG.chance(move.getAccuarcy())) {
             int hits = RNG.nextInt(3) + 2;
             for (int i=0; i < hits; i++) {
-                int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
+                int damage = (int) ((damage(attacker, defender, move) + 2) * modify(attacker, defender, move));
                 System.out.println("Damage: " + damage);
                 defender.takeDamage(damage);
                 if (defender.isFainted()) {
@@ -108,7 +117,7 @@ public class Attack {
 
     public static void attackBurn(Hackmon attacker, Hackmon defender, Move move) {
         if (RNG.chance(move.getAccuarcy())) {
-            int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
+            int damage = (int) ((damage(attacker, defender, move) + 2) * modify(attacker, defender, move));
             defender.takeDamage(damage);
             if (RNG.chance(move.getEffectAccuarcy())) {
                 defender.setStatus(StatusEffect.BURN);
@@ -118,7 +127,7 @@ public class Attack {
 
     public static void attackParalyze(Hackmon attacker, Hackmon defender, Move move) {
         if (RNG.chance(move.getAccuarcy())) {
-            int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
+            int damage = (int) ((damage(attacker, defender, move) + 2) * modify(attacker, defender, move));
             defender.takeDamage(damage);
             if (RNG.chance(move.getEffectAccuarcy())) {
                 defender.setStatus(StatusEffect.PARALYZED);
@@ -128,7 +137,7 @@ public class Attack {
 
     public static void attackSleep(Hackmon attacker, Hackmon defender, Move move) {
         if (RNG.chance(move.getAccuarcy())) {
-            int damage = (int) (damage(attacker, defender, move) * modify(attacker, defender, move));
+            int damage = (int) ((damage(attacker, defender, move) + 2) * modify(attacker, defender, move));
             defender.takeDamage(damage);
             if (RNG.chance(move.getEffectAccuarcy())) {
                 defender.setStatus(StatusEffect.SLEEP);

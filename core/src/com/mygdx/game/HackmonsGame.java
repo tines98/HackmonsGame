@@ -35,7 +35,7 @@ public class HackmonsGame extends ApplicationAdapter {
 		);
 		player = new Trainer("Ass Ketchup",
 				new Hackmon[]{
-					new Hackmon(4, 99),
+					new Hackmon(4, 100),
 					new Hackmon(5, 100),
 					new Hackmon(6, 98),
 					new Hackmon(7, 99),
@@ -45,7 +45,7 @@ public class HackmonsGame extends ApplicationAdapter {
 			);
 		opponent = new Trainer("Titty Mustard",
 				new Hackmon[]{
-					new Hackmon(9, 69),
+					new Hackmon(9, 100),
 					new Hackmon(8, 69),
 					new Hackmon(7, 69),
 					new Hackmon(6, 69),
