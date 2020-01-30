@@ -60,7 +60,7 @@ public class Attack {
     }
 
     public static void attack(Hackmon attacker, Hackmon defender, Move move) {
-        BattleInfoBox.updateText(attacker.getName() + " used " + move.getName());
+        BattleInfoBox.addToText(attacker.getName() + " used " + move.getName());
         attacker.useStam(move.getCost());
         int function = Integer.parseInt(move.getFunctionCode(), 16);
         switch (function) {
@@ -93,7 +93,7 @@ public class Attack {
             defender.takeDamage(damage);
         }
         else {
-            BattleInfoBox.updateText("The attack missed!");
+            BattleInfoBox.addToText("The attack missed!");
         }
     }
 
@@ -105,12 +105,12 @@ public class Attack {
                 System.out.println("Damage: " + damage);
                 defender.takeDamage(damage);
                 if (defender.isFainted()) {
-                    BattleInfoBox.updateText("It hit " + i + " times!");
+                    BattleInfoBox.addToText("It hit " + i + " times!");
                     System.out.println("It hit " + i + " times!");
                     return;
                 }
             }
-            BattleInfoBox.updateText("It hit " + hits + " times!");
+            BattleInfoBox.addToText("It hit " + hits + " times!");
             System.out.println("It hit " + hits + " times!");
         }
     }

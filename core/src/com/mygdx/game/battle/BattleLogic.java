@@ -8,6 +8,7 @@ public class BattleLogic {
     private static int opponentSleepTimer = 0;
 
     public static void turn(BattleAction playerAction, BattleAction opponentAction) {
+        BattleInfoBox.flush();
         switch(playerAction) {
             case ATTACK:
                 switch(opponentAction) {

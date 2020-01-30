@@ -109,6 +109,7 @@ public class FightMenu {
             if (moveList[selected].equals("Rest")){
                 TurnHandler.setAction(BattleAction.REST);
                 TurnHandler.setReady();
+                BattleMenu.isFightPressed = false;
                 return;
             }
             if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
@@ -119,6 +120,7 @@ public class FightMenu {
                 TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[selected]);
                 TurnHandler.setReady();
             }
+            BattleMenu.isFightPressed = false;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
             BattleMenu.isFightPressed = false;

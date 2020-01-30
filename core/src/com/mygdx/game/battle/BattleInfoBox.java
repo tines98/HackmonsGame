@@ -12,15 +12,42 @@ public class BattleInfoBox {
     static private int y = 0;
     static private int w = 400;
     static private int h = 100;
-    static String text = "Hello Buddah";
+    static private int timer=0;
+    static private int nextDelay;
+    static private String text = "Hello Buddah";
+    static private String nextText = text;
 
     public static void updateText(String newText) {
-        text = newText;
+        updateText(newText,10);
+    }
+
+    public static void updateText(String newText, int delay){
+        nextDelay = delay;
+        nextText = newText;
+    }
+
+    public static void flush(){
+        nextText = "";
+    }
+
+    public static void addToText(String newLine){
+        if (nextText.equals("")){
+            nextText = newLine;
+        }
+        else {
+            nextText = nextText + "\n" + newLine;
+        }
     }
 
     public static void render(SpriteBatch batch, BitmapFont font) {
+        if (timer==0){
+            text = nextText;
+            timer = nextDelay;
+            nextDelay=0;
+        }
+        else timer--;
         ShapeDrawer.drawBox(batch, x, y, w, h, Colors.gray);
-        font.draw(batch, text, x+4, h-4, 0, Align.topLeft, false);
+        font.draw(batch, text, x+4, h-4, w, Align.topLeft, false);
     }
 
 }
