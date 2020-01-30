@@ -48,7 +48,7 @@ public class BattleMap {
                     BattleLogic.turn(BattleAction.ITEM, BattleAction.ATTACK);
                     break;
                 case SWITCH:
-                    BattleInfoBox.updateText("Player switched into " + player.getSelected().getName() + "!");
+                    BattleInfoBox.addToText("Player switched into " + player.getSelected().getName() + "!");
                     BattleLogic.turn(BattleAction.SWITCH, BattleAction.ATTACK);
                     break;
                 case FLEE:

@@ -1,5 +1,5 @@
 package com.mygdx.game;
 
 public enum StatusEffect {
-    NONE, BURN, FROZEN, PARALYZED, POISON, SLEEP, TOXIC
+    NONE, BURN, FEAR, FROZEN, PARALYZED, POISON, SLEEP, TOXIC
 }

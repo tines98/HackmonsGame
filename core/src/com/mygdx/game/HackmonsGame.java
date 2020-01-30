@@ -33,6 +33,9 @@ public class HackmonsGame extends ApplicationAdapter {
 		bg = new Texture(
 "core/assets/bg.jpeg"
 		);
+		if (RNG.chance(50)) {
+			bg = new Texture("core/assets/bg2.png");
+		}
 		player = new Trainer("Ass Ketchup",
 				new Hackmon[]{
 					new Hackmon(4, 100),

@@ -48,7 +48,16 @@ public class BattleLogic {
                 break;
             case SWITCH:
                 player.getSelected().resetModifiers();
+                if (statusCheckBeforeAction(opponent.getSelected())) {
+                    turnAttack(opponent, player, false);
+                }
                 break;
+            case REST:
+                player.getSelected().restoreStam(player.getSelected().getStam() / 4);
+                BattleInfoBox.addToText(player.getSelected().getName() + " rested!");
+                if (statusCheckBeforeAction(opponent.getSelected())) {
+                    turnAttack(opponent, player, false);
+                }
             default:
                 if (statusCheckBeforeAction(opponent.getSelected())) {
                     turnAttack(opponent, player, false);

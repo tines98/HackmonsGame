@@ -1,6 +1,5 @@
 --ID, Internal Name, Display name, Function code, Type, Base Power, Stamina Cost, Category, Accuarcy,
 --Additional effect accuarcy, Priority
---Add, "Additional status effect"
 1,TACKLE,Tackle,000,BEAST,30,2,Physical,100,0,0
 2,JETSTREAM,Jet Stream,000,WATER,60,6,Special,95,0,0
 3,AQUAJET,Aqua Jet,000,WATER,20,2,Physical,100,0,2
@@ -8,6 +7,10 @@
 5,PECK,Peck,000,AIR,40,6,Physical,100,0,0
 6,AERIALACE,Aerial Ace,000,AIR,90,12,Physical,95,0,0
 7,FURYSWIPES,Fury Swipes,001,BEAST,25,8,Physical,95,0,0
-8,ROAST,Roast,0A0,FIRE,0,4,Status,100,100,0
-9,CRIPPLE,Cripple,0B0,ELECTRIC,0,4,Status,100,100,0
-10,SILENTFILMRANT,Silent Film Rant,0C0,BEAST,0,4,Status,100,100,0
+--,--,--
+8,ROAST,Roast,200,FIRE,0,4,Status,100,100,0
+9,SPOOK,Spook,210,GHOST,0,4,Status,100,100,0
+10,BITCHBLIKK,Bitch Blikk,220,ICE,0,4,Status,100,100,0
+11,CRIPPLE,Cripple,230,ELECTRIC,0,4,Status,100,100,0
+12,HERSKETEKNIKK,Hersketeknikk,240,TOXIC,0,4,Status,100,100,0
+13,SILENTFILMRANT,Silent Film Rant,250,BEAST,0,4,Status,100,100,0

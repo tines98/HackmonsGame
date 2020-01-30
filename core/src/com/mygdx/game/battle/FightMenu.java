@@ -41,7 +41,7 @@ public class FightMenu {
     }
 
     private void infoBox(Move move){
-        BattleInfoBox.updateText(
+        BattleInfoBox.addToText(
                 "Type:"+move.getType()
                 +"\n"+
                 "Power: "+move.getPower()
@@ -80,7 +80,7 @@ public class FightMenu {
         );
         if (moveList[selected].equals("ERROR")
                 || moveList[selected].equals("Rest")){
-            BattleInfoBox.updateText("Skip your turn to restore some stamina");
+            BattleInfoBox.addToText("Skip your turn to restore some stamina");
         }
         else infoBox(trainer.getSelected().getMoves()[selected]);
         if (selected<4){
@@ -113,7 +113,7 @@ public class FightMenu {
                 return;
             }
             if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
-                BattleInfoBox.updateText(trainer.getSelected().getName() + " is too exhausted for this!");
+                BattleInfoBox.addToText(trainer.getSelected().getName() + " is too exhausted for this!");
             }
             else {
                 TurnHandler.setAction(BattleAction.ATTACK);
