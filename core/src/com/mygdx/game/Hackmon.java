@@ -23,6 +23,8 @@ public class Hackmon {
     private Move [] moves = new Move [4];
     private Move [] levelMoves = new Move [100];
 
+    private Fraction [] modifiers = {new Fraction(), new Fraction(), new Fraction(), new Fraction(), new Fraction()};
+
     public Hackmon(int id, int lv) {
         this.id = id;
         this.lv = lv;
@@ -263,5 +265,15 @@ public class Hackmon {
 
     public boolean isFainted() {
         return currHP <= 0;
+    }
+
+    public Fraction getModifier(int i) {
+        return modifiers[i];
+    }
+
+    public void resetModifiers() {
+        for (int i=0; i < 5; i++) {
+            modifiers[i].reset();
+        }
     }
 }

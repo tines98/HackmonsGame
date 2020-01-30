@@ -14,10 +14,14 @@ public class Attack {
     public static double damage(Hackmon attacker, Hackmon defender, Move move) {
         if (move.getCategory().equals("Physical")) {
             System.out.println(attacker.getStr() + " " + defender.getDef());
-            return (attacker.getLv() / 4) * move.getPower() * (attacker.getStr() / defender.getDef()) / 50;
+            return (attacker.getLv() / 4) * move.getPower() *
+                    ((attacker.getStr() * attacker.getModifier(0).getDecimal()) /
+                            (defender.getDef() * defender.getModifier(1).getDecimal())) / 50;
         }
         if (move.getCategory().equals("Special")) {
-            return (attacker.getLv() / 4 )* move.getPower() * (attacker.getWill() / defender.getRes()) / 50;
+            return (attacker.getLv() / 4 )* move.getPower() *
+                    ((attacker.getWill() *  attacker.getModifier(2).getDecimal()
+                            / (defender.getRes() * defender.getModifier(3).getDecimal()))) / 50;
         }
         else {
             return 0;

@@ -7,9 +7,6 @@ public class BattleLogic {
     private static int playerSleepTimer = 0;
     private static int opponentSleepTimer = 0;
 
-    private static int [] playerModifiers = {1, 1, 1, 1, 1};
-    private static int [] opponentModifiers = {1, 1, 1, 1, 1};
-
     public static void turn(BattleAction playerAction, BattleAction opponentAction) {
         switch(playerAction) {
             case ATTACK:
@@ -17,43 +14,50 @@ public class BattleLogic {
                     case ATTACK:
                         if (player_First()) {
                             if (statusCheckBeforeAction(player.getSelected())) {
-                                turn_attack(player, opponent, true);
+                                turnAttack(player, opponent, true);
                             }
-                            if (!check_fainted(opponent.getSelected(), false)) {
+                            if (!checkFainted(opponent.getSelected(), false)) {
                                 if (statusCheckBeforeAction(opponent.getSelected())) {
-                                    turn_attack(opponent, player, false);
+                                    turnAttack(opponent, player, false);
                                 }
-                                check_fainted(player.getSelected(), true);
+                                checkFainted(player.getSelected(), true);
                             }
                         }
                         else {
                             if (statusCheckBeforeAction(opponent.getSelected())) {
-                                turn_attack(opponent, player, false);
+                                turnAttack(opponent, player, false);
                             }
-                            if (!check_fainted(player.getSelected(), false)) {
+                            if (!checkFainted(player.getSelected(), false)) {
                                 if (statusCheckBeforeAction(player.getSelected())) {
-                                    turn_attack(player, opponent, true);
+                                    turnAttack(player, opponent, true);
                                 }
-                                check_fainted(opponent.getSelected(), false);
+                                checkFainted(opponent.getSelected(), false);
                             }
                         }
                         break;
+                    case SWITCH:
+                        for (int i=0; i < 5; i++) {
+                            opponent.getSelected().resetModifiers();
+                        }
                     default:
                         if (statusCheckBeforeAction(player.getSelected())) {
-                            turn_attack(player, opponent, true);
+                            turnAttack(player, opponent, true);
                         }
                 }
                 break;
+            case SWITCH:
+                player.getSelected().resetModifiers();
+                break;
             default:
                 if (statusCheckBeforeAction(opponent.getSelected())) {
-                    turn_attack(opponent, player, false);
+                    turnAttack(opponent, player, false);
                 }
                 break;
         }
         statusCheckAfterAction(player.getSelected());
         statusCheckAfterAction(opponent.getSelected());
-        check_fainted(opponent.getSelected(), false);
-        check_fainted(player.getSelected(), true);
+        checkFainted(opponent.getSelected(), false);
+        checkFainted(player.getSelected(), true);
     }
 
     public static boolean player_First() {
@@ -67,13 +71,18 @@ public class BattleLogic {
             double playerParalyzed = player.getSelected().getStatus() == StatusEffect.PARALYZED ? 0.5 : 1;
             double  opponentParalyzed = opponent.getSelected().getStatus() == StatusEffect.PARALYZED ? 0.5 : 1;
             System.out.println("P speed: " + player.getSelected().getSpeed() * playerParalyzed
+
             + " O speed: " + opponent.getSelected().getSpeed() * opponentParalyzed);
-            if (player.getSelected().getSpeed() * playerParalyzed >
-                    opponent.getSelected().getSpeed() * opponentParalyzed) {
+            if (player.getSelected().getSpeed() * playerParalyzed *
+                    player.getSelected().getModifier(4).getDecimal() >
+                    opponent.getSelected().getSpeed() * opponentParalyzed *
+                    opponent.getSelected().getModifier(4).getDecimal()) {
                 return true;
             }
-            else if (player.getSelected().getSpeed() * playerParalyzed <
-                    opponent.getSelected().getSpeed() * opponentParalyzed){
+            else if (player.getSelected().getSpeed() * playerParalyzed *
+                    player.getSelected().getModifier(4).getDecimal() <
+                    opponent.getSelected().getSpeed() * opponentParalyzed *
+                    opponent.getSelected().getModifier(4).getDecimal()) {
                 return false;
             }
             else {
@@ -87,7 +96,7 @@ public class BattleLogic {
         }
     }
 
-    public static void turn_attack(Trainer attacker, Trainer defender, boolean isPlayer) {
+    public static void turnAttack(Trainer attacker, Trainer defender, boolean isPlayer) {
         if (isPlayer) {
             Attack.attack(attacker.getSelected(), defender.getSelected(), TurnHandler.getCurrentMove());
         }
@@ -96,7 +105,7 @@ public class BattleLogic {
         }
     }
 
-    public static boolean check_fainted(Hackmon mon, boolean isPlayer) {
+    public static boolean checkFainted(Hackmon mon, boolean isPlayer) {
         if (mon.isFainted()) {
             if (isPlayer) {
                 HackmonsGame.changeScreenState(ScreenState.SWITCHMENU);
