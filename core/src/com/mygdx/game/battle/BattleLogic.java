@@ -58,6 +58,7 @@ public class BattleLogic {
                 if (statusCheckBeforeAction(opponent.getSelected())) {
                     turnAttack(opponent, player, false);
                 }
+                break;
             default:
                 if (statusCheckBeforeAction(opponent.getSelected())) {
                     turnAttack(opponent, player, false);
