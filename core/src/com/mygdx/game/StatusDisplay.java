@@ -31,24 +31,28 @@ public class StatusDisplay {
 
     public void render(SpriteBatch batch, BitmapFont font, Hackmon hackmon){
         ShapeDrawer.drawBox(batch,x,y,w,h);
+        for (int i = 0; i < trainer.getParty().size(); i++) {
+            batch.draw(Colors.green, x+15+(i*15), y + h-5, 5, 10);
+        }
         font.draw(
-                batch
-                ,hackmon.getName()
-                ,x+(w/2)
-                ,y+h-4
-                ,0
-                , Align.center
-                ,false
+            batch
+            ,hackmon.getName()
+            ,x+(w/2)
+            ,y+h-4
+            ,0
+            , Align.center
+            ,false
         );
         font.draw(
-                batch
-                ,"LVL:"+hackmon.getLv()
-                ,x+(w/2)
-                ,y+h-15-4
-                ,0
-                ,Align.center
-                ,false
+            batch
+            ,"LVL:"+hackmon.getLv()
+            ,x+(w/2)
+            ,y+h-15-4
+            ,0
+            ,Align.center
+            ,false
         );
+
         hp.render(batch,font,hackmon);
         stam.render(batch,font,hackmon);
         exp.render(batch,font,hackmon);
