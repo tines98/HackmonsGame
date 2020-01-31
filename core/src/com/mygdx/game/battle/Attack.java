@@ -82,13 +82,16 @@ public class Attack {
                 break;
             case 528:
                 attackFear(attacker, defender, move);
+                break;
             case 544:
                 attackFreeze(attacker, defender, move);
+                break;
             case 560:
                 attackParalyze(attacker, defender, move);
                 break;
             case 576:
                 attackPoison(attacker, defender, move);
+                break;
             case 592:
                 attackSleep(attacker, defender, move);
                 break;
@@ -109,6 +112,7 @@ public class Attack {
                 break;
             case 773:
                 decreaseStrength(attacker, 3);
+                break;
             case 774:
                 increaseStrength(defender, 1);
                 break;
@@ -126,6 +130,7 @@ public class Attack {
                 break;
             case 779:
                 decreaseStrength(defender, 3);
+                break;
             case 784:
                 increaseDefense(attacker, 1);
                 break;
@@ -143,6 +148,7 @@ public class Attack {
                 break;
             case 789:
                 decreaseDefense(attacker, 3);
+                break;
             case 790:
                 increaseDefense(defender, 1);
                 break;
@@ -160,6 +166,7 @@ public class Attack {
                 break;
             case 795:
                 decreaseDefense(defender, 3);
+                break;
             default:
                 attackStandard(attacker, defender, move);
                 break;
