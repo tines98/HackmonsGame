@@ -18,7 +18,7 @@ public class BattleInfoBox {
     static private String nextText = text;
 
     public static void updateText(String newText) {
-        updateText(newText,10);
+        updateText(newText,0);
     }
 
     public static void updateText(String newText, int delay){
