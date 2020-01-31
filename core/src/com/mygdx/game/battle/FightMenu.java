@@ -41,7 +41,7 @@ public class FightMenu {
     }
 
     private void infoBox(Move move){
-        BattleInfoBox.addToText(
+        BattleInfoBox.updateText(
                 "Type:"+move.getType()
                 +"\n"+
                 "Power: "+move.getPower()
@@ -55,7 +55,6 @@ public class FightMenu {
     public void render(SpriteBatch batch, BitmapFont font){
         batch.draw(gradient,400,0,400,100);
         update();
-        input();
         if (selected > 0){
             font.setColor(Color.GRAY);
             font.draw(
@@ -80,7 +79,7 @@ public class FightMenu {
         );
         if (moveList[selected].equals("ERROR")
                 || moveList[selected].equals("Rest")){
-            BattleInfoBox.addToText("Skip your turn to restore some stamina");
+            BattleInfoBox.updateText("Skip your turn to restore some stamina");
         }
         else infoBox(trainer.getSelected().getMoves()[selected]);
         if (selected<4){
@@ -96,6 +95,7 @@ public class FightMenu {
             );
             font.setColor(Color.WHITE);
         }
+        input();
     }
 
     public void input(){
@@ -113,14 +113,15 @@ public class FightMenu {
                 return;
             }
             if (trainer.getSelected().getMoves()[selected].getCost() > trainer.getSelected().getCurrStam()) {
-                BattleInfoBox.addToText(trainer.getSelected().getName() + " is too exhausted for this!");
+                BattleInfoBox.updateText(trainer.getSelected().getName() + " is too " +
+                        "exhausted for this!",60);
             }
             else {
                 TurnHandler.setAction(BattleAction.ATTACK);
                 TurnHandler.setCurrentMove(trainer.getSelected().getMoves()[selected]);
                 TurnHandler.setReady();
+                BattleMenu.isFightPressed = false;
             }
-            BattleMenu.isFightPressed = false;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
             BattleMenu.isFightPressed = false;
