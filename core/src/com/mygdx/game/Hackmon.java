@@ -90,15 +90,12 @@ public class Hackmon {
     }
 
     public void initialMoves() {
+        int slot = 0;
         for(int i=1; i < levelMoves.length; i++) {
             if (i <= this.lv) {
                 if (levelMoves[i] != null) {
-                    for (int j=0; j < 4; j++) {
-                        if (moves[j] == null) {
-                            moves[j] = levelMoves[i];
-                            break;
-                        }
-                    }
+                    moves[slot] = levelMoves[i];
+                    slot = (slot < 3) ? slot + 1 : 0;
                 }
             }
             else {

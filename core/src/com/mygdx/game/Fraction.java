@@ -2,12 +2,12 @@ package com.mygdx.game;
 
 public class Fraction {
 
-    private int numerator;
-    private int denominator;
+    private double numerator;
+    private double denominator;
 
     public Fraction () {
-        numerator = 2;
-        denominator = 2;
+        numerator = 2.0;
+        denominator = 2.0;
     }
 
     public Fraction(int numr, int denr) {
@@ -47,7 +47,7 @@ public class Fraction {
     }
 
     public void reset() {
-        numerator = 2;
-        denominator = 2;
+        numerator = 2.0;
+        denominator = 2.0;
     }
 }

@@ -81,9 +81,10 @@ public class BattleLogic {
         else {
             double playerParalyzed = player.getSelected().getStatus() == StatusEffect.PARALYZED ? 0.5 : 1;
             double  opponentParalyzed = opponent.getSelected().getStatus() == StatusEffect.PARALYZED ? 0.5 : 1;
-            System.out.println("P speed: " + player.getSelected().getSpeed() * playerParalyzed
-
-            + " O speed: " + opponent.getSelected().getSpeed() * opponentParalyzed);
+            System.out.println("P speed: " + player.getSelected().getSpeed()
+                    * playerParalyzed * player.getSelected().getModifier(4).getDecimal()
+            + " O speed: " + opponent.getSelected().getSpeed()
+                    * opponentParalyzed * opponent.getSelected().getModifier(4).getDecimal());
             if (player.getSelected().getSpeed() * playerParalyzed *
                     player.getSelected().getModifier(4).getDecimal() >
                     opponent.getSelected().getSpeed() * opponentParalyzed *
