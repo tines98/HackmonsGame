@@ -14,7 +14,7 @@ public enum StatusEffect {
             case FEAR:
                 return new Texture("core/assets/status/feared.png");
             case TOXIC:
-                return new Texture("core/assets/status/sleeping.png");
+                return new Texture("core/assets/status/toxic.png");
             case FROZEN:
                 return new Texture("core/assets/status/frozen.png");
             case POISON:
