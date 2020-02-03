@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.adventure.GridMap;
 import com.mygdx.game.adventure.NPC;
 import com.mygdx.game.adventure.Player;
 import com.mygdx.game.battle.BackPackMenu;
@@ -30,6 +31,8 @@ public class HackmonsGame extends ApplicationAdapter {
 	// change this to get battlemenu again
 	public static ScreenState prevScreenState = ScreenState.BATTLEMENU;
 
+	GridMap mapu;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -37,6 +40,7 @@ public class HackmonsGame extends ApplicationAdapter {
 		bg = new Texture(
 "core/assets/bg.jpeg"
 		);
+		mapu = new GridMap("Route1");
 		if (RNG.chance(50)) {
 			bg = new Texture("core/assets/bg2.png");
 		}
@@ -96,6 +100,7 @@ public class HackmonsGame extends ApplicationAdapter {
 				break;
 			case ADVENTURE:
 				batch.draw(Colors.green,0,0,1600,900);
+				mapu.render(batch);
 				testPlayer.render(batch);
 				testNPC.render(batch);
 				break;
