@@ -53,14 +53,15 @@ public class FightMenu {
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
-        batch.draw(gradient,400,0,400,100);
+        batch.draw(gradient,HackmonsGame.SCREENWIDTH/2,0,
+                HackmonsGame.SCREENWIDTH/2,HackmonsGame.SCREENHEIGHT/4);
         update();
         if (selected > 0){
             font.setColor(Color.GRAY);
             font.draw(
                 batch,
                 moveList[selected-1],
-                400+100,
+                5*HackmonsGame.SCREENWIDTH/8,
                 50,
                 0,
                 Align.center,
@@ -71,7 +72,7 @@ public class FightMenu {
         font.draw(
             batch,
             moveList[selected],
-            400+200,
+            3*HackmonsGame.SCREENWIDTH/4,
             50+10,
             0,
             Align.center,
@@ -87,7 +88,7 @@ public class FightMenu {
             font.draw(
                 batch,
                 moveList[selected+1],
-                400+300,
+                7*HackmonsGame.SCREENWIDTH/8,
                 50,
                 0,
                 Align.center,

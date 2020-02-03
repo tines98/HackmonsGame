@@ -4,14 +4,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Colors;
+import com.mygdx.game.HackmonsGame;
 import com.mygdx.game.ShapeDrawer;
 
 public class BattleInfoBox {
 
     static private int x = 0;
     static private int y = 0;
-    static private int w = 400;
-    static private int h = 100;
+    static private int w = HackmonsGame.SCREENWIDTH/2;
+    static private int h = HackmonsGame.SCREENHEIGHT/4;
     static private int timer=0;
     static private int nextDelay;
     static private String text = "Hello Buddah";

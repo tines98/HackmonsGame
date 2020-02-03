@@ -14,19 +14,21 @@ public class BattleMap {
     StatusDisplay playerStatusDisplay, opponentStatusDisplay;
 
     public BattleMap() {
-        playerX = 50;
-        playerY = 90;
-        opponentX = 800-(96*2)-25;
-        opponentY = 400-150-48-25;
-        menu = new BattleMenu(400,0,400,100);
-        fightMenu = new FightMenu(400,0,400,100);
+        playerX = HackmonsGame.SCREENWIDTH/16;
+        playerY = HackmonsGame.SCREENHEIGHT/4;
+        opponentX = HackmonsGame.SCREENWIDTH-(96*4)-25;
+        opponentY = HackmonsGame.SCREENHEIGHT-(96*4)-25;
+        menu = new BattleMenu(HackmonsGame.SCREENWIDTH/2,0,
+                HackmonsGame.SCREENWIDTH/2,HackmonsGame.SCREENHEIGHT/4);
+        fightMenu = new FightMenu(HackmonsGame.SCREENWIDTH/2,0,
+                HackmonsGame.SCREENWIDTH/2,HackmonsGame.SCREENHEIGHT/4);
     }
 
     //THIS IS THE MAIN LOOP
     public void render(SpriteBatch batch, BitmapFont font){
-        batch.draw(bg,0,0);
-        player.getSelected().render(batch, playerX, playerY,2);
-        opponent.getSelected().render(batch, opponentX, opponentY,2);
+        batch.draw(bg,0,0,HackmonsGame.SCREENWIDTH,HackmonsGame.SCREENHEIGHT);
+        player.getSelected().render(batch, playerX, playerY,4);
+        opponent.getSelected().render(batch, opponentX, opponentY,4);
         if (menu.isFightPressed){
             fightMenu.render(batch,font);
         }
@@ -66,14 +68,16 @@ public class BattleMap {
 
     public void setPlayer(Trainer newPlayer) {
         player = newPlayer;
-        playerStatusDisplay = new StatusDisplay(player,275,125);
+        playerStatusDisplay = new StatusDisplay(player,
+                11*HackmonsGame.SCREENWIDTH/32,5*HackmonsGame.SCREENHEIGHT/16);
         fightMenu.setTrainer(player);
         BattleLogic.setPlayer(player);
     }
 
     public void setOpponent(Trainer newOpponent) {
         opponent = newOpponent;
-        opponentStatusDisplay = new StatusDisplay(opponent, 450,250);
+        opponentStatusDisplay = new StatusDisplay(opponent,
+                18*HackmonsGame.SCREENWIDTH/32,10*HackmonsGame.SCREENHEIGHT/16);
         opponent.getSelected().setToFront();
         BattleLogic.setOpponent(opponent);
     }

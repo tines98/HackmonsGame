@@ -19,8 +19,8 @@ public class StatusDisplay {
         this.trainer = trainer;
         this.x = x;
         this.y = y;
-        w = 110;
-        h = 70;
+        w = HackmonsGame.SCREENWIDTH/8;
+        h = HackmonsGame.SCREENHEIGHT/8;
         hp = new HpBar(x+5,y+15+7);
         hp.setTrainer(trainer);
         stam = new StaminaBar(x+5,y+5);

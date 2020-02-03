@@ -16,8 +16,8 @@ public class SwitchHackmonMenu {
     public SwitchHackmonMenu(Trainer trnr){
         player = trnr;
         selected = 1;
-        itemW = 225;
-        itemH = 100;
+        itemW = 9*HackmonsGame.SCREENWIDTH/32;
+        itemH = HackmonsGame.SCREENHEIGHT/4;
     }
 
     private void renderHackmonBox(SpriteBatch batch, BitmapFont font, int x, int y,
@@ -29,15 +29,15 @@ public class SwitchHackmonMenu {
             ShapeDrawer.drawBox(batch,x,y,itemW,itemH);
         //DRAW SPRITE
         hackmon.setToFront();
-        hackmon.render(batch,x,y);
+        hackmon.render(batch,x,y,2);
         hackmon.setToBack();
         //UPDATE/DRAW HP BAR
-        StatusDisplay statusDisplay = new StatusDisplay(player,x+itemW/2,y+5);
+        StatusDisplay statusDisplay = new StatusDisplay(player,x+itemW/2, y+5);
         statusDisplay.render(batch,font,hackmon);
     }
 
     private void renderItems(SpriteBatch batch, BitmapFont font){
-        int x,y = (400-itemH)/8;
+        int x,y = (HackmonsGame.SCREENHEIGHT-itemH)/8;
         boolean sel;
         for (int i = 0; i < player.getParty().size()-1; i++) {
             x = i*100+i*25+25;
@@ -45,28 +45,28 @@ public class SwitchHackmonMenu {
             renderHackmonBox(batch,font,x,y, player.getParty().get(i+1),
                     false);
         }
-        renderHackmonBox(batch,font,(800-itemW)/2,
-                (400*2-itemH)/8,
+        renderHackmonBox(batch,font,(HackmonsGame.SCREENWIDTH-itemW)/2,
+                (HackmonsGame.SCREENHEIGHT*2-itemH)/8,
                 player.getParty().get(selected),
                 true);
         //BRUH
-        renderHackmonBox(batch,font,(800-itemW)/2,
-                (400*5-itemH)/8, player.getSelected(),
+        renderHackmonBox(batch,font,(HackmonsGame.SCREENWIDTH-itemW)/2,
+                (HackmonsGame.SCREENHEIGHT*5-itemH)/8, player.getSelected(),
                 false);
     }
 
     public void render(SpriteBatch batch, BitmapFont font){
         //RENDERS BACKGROUND COLOR
-        batch.draw(Colors.yellow, 0,0,800,
-                400);
+        batch.draw(Colors.yellow, 0,0,HackmonsGame.SCREENWIDTH,
+                HackmonsGame.SCREENHEIGHT);
         //RENDERS UPPER BAR AND BACKPACK TEXT
-        ShapeDrawer.drawBox(batch,0,400-50,
-                800,50);
+        ShapeDrawer.drawBox(batch,0,7*HackmonsGame.SCREENHEIGHT/8,
+                HackmonsGame.SCREENWIDTH,HackmonsGame.SCREENHEIGHT/8);
         font.draw(
             batch,
             "Switch Pokemon",
-            800/2,
-            400-25,
+            HackmonsGame.SCREENWIDTH/2,
+            HackmonsGame.SCREENHEIGHT-25,
             0,
             Align.center,
             false

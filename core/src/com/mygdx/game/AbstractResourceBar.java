@@ -14,7 +14,7 @@ public abstract class AbstractResourceBar {
     public AbstractResourceBar(int x, int y){
         this.x = x;
         this.y = y;
-        maxSize = 100;
+        maxSize = HackmonsGame.SCREENWIDTH/8-10;
         height = 13;
         currSize = maxSize;
     }

@@ -18,12 +18,12 @@ public class BackPackMenu {
     public BackPackMenu(BackPack pack, Trainer trainer){
         backPack = pack;
         selected = 1;
-        itemW = 300;
-        itemH = 100;
-        item2x = (800-itemW)/2;
+        itemW = 3*HackmonsGame.SCREENWIDTH/4;
+        itemH = HackmonsGame.SCREENHEIGHT/4;
+        item2x = (HackmonsGame.SCREENWIDTH-itemW)/2;
         item1x = item2x-itemW-50;
         item3x = item2x+itemW+50;
-        itemY = 400-50-50-itemH;
+        itemY = HackmonsGame.SCREENHEIGHT-50-50-itemH;
         this.trainer = trainer;
     }
 
@@ -68,25 +68,25 @@ public class BackPackMenu {
 
     public void render(SpriteBatch batch, BitmapFont font){
         //RENDERS BACKGROUND COLOR
-        batch.draw(Colors.yellow,0,0, 800,400);
+        batch.draw(Colors.yellow,0,0, HackmonsGame.SCREENWIDTH,HackmonsGame.SCREENHEIGHT);
         //RENDERS UPPER BAR AND BACKPACK TEXT
-        batch.draw(Colors.darkGray,0,400-50,
+        batch.draw(Colors.darkGray,0,HackmonsGame.SCREENHEIGHT-50,
                 Gdx.graphics.getWidth(),50);
         font.draw(
                 batch,
                 "Backpack",
-                800/2,
-                400-25,
+                HackmonsGame.SCREENWIDTH/2,
+                HackmonsGame.SCREENHEIGHT-25,
                 0,
                 Align.center,
                 false
         );
         renderItems(batch,font);
-        batch.draw(Colors.darkGray,0,0,800,50);
+        batch.draw(Colors.darkGray,0,0,HackmonsGame.SCREENWIDTH,50);
         font.draw(
                 batch,
                 backPack.getContents().get(selected).getDesc(),
-                800/2,
+                HackmonsGame.SCREENWIDTH/2,
                 50-10,
                 0,
                 Align.center,

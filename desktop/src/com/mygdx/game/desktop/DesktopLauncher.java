@@ -9,8 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Pokemon Johto durududududu";
 		cfg.useGL30 = true;
-		cfg.height = 400;
-		cfg.width = 800;
+		cfg.height = HackmonsGame.SCREENHEIGHT;
+		cfg.width = HackmonsGame.SCREENWIDTH;
 		new LwjglApplication(new HackmonsGame(), cfg);
 	}
 }
