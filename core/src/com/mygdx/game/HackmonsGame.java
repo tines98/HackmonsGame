@@ -11,9 +11,7 @@ import com.mygdx.game.battle.BackPackMenu;
 import com.mygdx.game.battle.BattleMap;
 import com.mygdx.game.battle.Opponent;
 import com.mygdx.game.items.BackPack;
-import com.mygdx.game.items.Ether;
 import com.mygdx.game.items.ItemContainer;
-import com.mygdx.game.items.Potion;
 
 public class HackmonsGame extends ApplicationAdapter {
 	public static final int SCREENWIDTH=1600;
@@ -26,7 +24,7 @@ public class HackmonsGame extends ApplicationAdapter {
 	BattleMap battleMap;
 	BackPackMenu backPackMenu;
 	SwitchHackmonMenu switchHackmonMenu;
-	public static ScreenState screenState = ScreenState.BATTLEMENU;//just
+	public static ScreenState screenState = ScreenState.ADVENTURE;//just
 	// change this to get battlemenu again
 	public static ScreenState prevScreenState = ScreenState.BATTLEMENU;
 
