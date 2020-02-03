@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
@@ -11,6 +12,8 @@ public class StatusDisplay {
     StaminaBar stam;
     ExpBar exp;
     Trainer trainer;
+    private static final Texture ball = new Texture("core/assets/pokeball.png");
+    private static final Texture noBall = new Texture("core/assets/pokeballDead.png");
 
     public StatusDisplay(Trainer trainer, int x, int y){
         this.trainer = trainer;
@@ -32,7 +35,13 @@ public class StatusDisplay {
     public void render(SpriteBatch batch, BitmapFont font, Hackmon hackmon){
         ShapeDrawer.drawBox(batch,x,y,w,h);
         for (int i = 0; i < trainer.getParty().size(); i++) {
-            batch.draw(Colors.green, x+15+(i*15), y + h-5, 5, 10);
+            if (trainer.getParty().get(i).isFainted()){
+                batch.draw(noBall, x+5+(i*(w/trainer.getParty().size())),
+                        y + h-5);
+            }
+            else
+                batch.draw(ball, x+5+(i*(w/trainer.getParty().size())),
+                    y + h-5);
         }
         font.draw(
             batch
