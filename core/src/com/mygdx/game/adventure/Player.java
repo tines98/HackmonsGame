@@ -7,25 +7,22 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Player {
-    int x, y;
-    Animation<TextureRegion> walkRightAnimation,walkLeftAnimation,
-            walkUpAnimation, walkDownAnimation;
-    Texture walkSheet;
-    float stateTime=0;
-    AnimationState animationState;
-    TextureRegion currentFrame;
-
+public class Player extends AbstractActor {
 
     public Player(int x, int y){
-        this.x = x;
-        this.y = y;
+        super(x,y);
         loadAnimations();
     }
 
-    private void loadAnimations(){
+    @Override
+    protected Texture getWalkSheet() {
+        return new Texture("core/assets/redWalkSheet.png");
+    }
+
+    @Override
+    protected void loadAnimations(){
         animationState = AnimationState.WALK_RIGHT;
-        walkSheet = new Texture("core/assets/redWalkSheet.png");
+        walkSheet = getWalkSheet();
         TextureRegion[][] tmp = TextureRegion.split(walkSheet,
                 walkSheet.getWidth()/4,walkSheet.getHeight()/4);
         TextureRegion[] walkFramesDown = new TextureRegion[4];
@@ -54,33 +51,10 @@ public class Player {
         else
             stateTime += Gdx.graphics.getDeltaTime();
         updateSprite();
-        batch.draw(currentFrame,x,y,96*4,96*4);
+        batch.draw(currentFrame,x,y,96*1,96*1);
         input();
     }
 
-    public void updateSprite(){
-        switch (animationState){
-            case STANDING:
-//                currentFrame = walkRightAnimation.getKeyFrame(0, true);
-                break;
-            case WALK_LEFT:
-                currentFrame = walkLeftAnimation.getKeyFrame(stateTime, true);
-                x-=1;
-                break;
-            case WALK_RIGHT:
-                currentFrame = walkRightAnimation.getKeyFrame(stateTime, true);
-                x+=1;
-                break;
-            case WALK_UP:
-                currentFrame = walkUpAnimation.getKeyFrame(stateTime,true);
-                y+=1;
-                break;
-            case WALK_DOWN:
-                currentFrame = walkDownAnimation.getKeyFrame(stateTime,true);
-                y-=1;
-                break;
-        }
-    }
     public void input(){
         if (Gdx.input.isKeyPressed(Input.Keys.D)){
             animationState = AnimationState.WALK_RIGHT;

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.adventure.NPC;
 import com.mygdx.game.adventure.Player;
 import com.mygdx.game.battle.BackPackMenu;
 import com.mygdx.game.battle.BattleMap;
@@ -21,6 +22,7 @@ public class HackmonsGame extends ApplicationAdapter {
 	Texture bg;
 	Trainer player, opponent;
 	Player testPlayer;
+	NPC testNPC;
 	BattleMap battleMap;
 	BackPackMenu backPackMenu;
 	SwitchHackmonMenu switchHackmonMenu;
@@ -75,6 +77,7 @@ public class HackmonsGame extends ApplicationAdapter {
 		switchHackmonMenu = new SwitchHackmonMenu(player);
 
 		testPlayer = new Player(0,0);
+		testNPC = new NPC(800,450);
 	}
 
 	public static void changeScreenState(ScreenState state){
@@ -94,6 +97,7 @@ public class HackmonsGame extends ApplicationAdapter {
 			case ADVENTURE:
 				batch.draw(Colors.green,0,0,1600,900);
 				testPlayer.render(batch);
+				testNPC.render(batch);
 				break;
 			case BATTLEMENU:
 				battleMap.render(batch, font);
