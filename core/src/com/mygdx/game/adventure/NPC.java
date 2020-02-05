@@ -6,12 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.HackmonsGame;
+import com.mygdx.game.RNG;
 
 public class NPC extends AbstractActor{
     public NPC(int x, int y) {
         super(x, y);
         loadAnimations();
         animationState = AnimationState.WALK_DOWN;
+        startMove();
     }
 
     @Override
@@ -45,6 +47,7 @@ public class NPC extends AbstractActor{
                 walkFramesDown);
 		walkUpAnimation = new Animation<TextureRegion>(0.033f,
                 walkFramesUp);
+		currentFrame = walkLeftAnimation.getKeyFrame(stateTime, true);
     }
 
     @Override
@@ -58,14 +61,30 @@ public class NPC extends AbstractActor{
         else
             stateTime += Gdx.graphics.getDeltaTime();
         updateSprite();
-        batch.draw(currentFrame,x,y,96*1,96*1);
+        updatePosition();
+        batch.draw(currentFrame,worldX*Settings.TILE_SIZE,worldY*Settings.TILE_SIZE,
+                Settings.TILE_SIZE,Settings.TILE_SIZE);
         walk();
     }
 
     private void walk(){
-        if (y==0)
-            animationState=AnimationState.WALK_UP;
-        if (y== HackmonsGame.SCREENHEIGHT-96)
-            animationState=AnimationState.WALK_DOWN;
+        if (animationState == AnimationState.STANDING) {
+//            if (y == 0) {
+//                animationState = AnimationState.WALK_UP;
+//                startMove();
+//            }
+//            else if (y == HackmonsGame.SCREENHEIGHT - 96) {
+//                animationState = AnimationState.WALK_DOWN;
+//                startMove();
+//            }
+//            else if (RNG.chance(50)){
+//                animationState = AnimationState.WALK_DOWN;
+//            }
+//            else{
+//                animationState = AnimationState.WALK_UP;
+//            }
+            animationState = AnimationState.WALK_DOWN;
+            startMove();
+        }
     }
 }

@@ -21,7 +21,7 @@ public class Player extends AbstractActor {
 
     @Override
     protected void loadAnimations(){
-        animationState = AnimationState.WALK_RIGHT;
+        animationState = AnimationState.STANDING;
         walkSheet = getWalkSheet();
         TextureRegion[][] tmp = TextureRegion.split(walkSheet,
                 walkSheet.getWidth()/4,walkSheet.getHeight()/4);
@@ -43,6 +43,7 @@ public class Player extends AbstractActor {
                 walkFramesDown);
 		walkUpAnimation = new Animation<TextureRegion>(0.1f,
                 walkFramesUp);
+		currentFrame = walkLeftAnimation.getKeyFrame(stateTime, true);
     }
 
     public void render(SpriteBatch batch){
@@ -51,25 +52,32 @@ public class Player extends AbstractActor {
         else
             stateTime += Gdx.graphics.getDeltaTime();
         updateSprite();
-        batch.draw(currentFrame,x,y,96*1,96*1);
+        updatePosition();
+        batch.draw(currentFrame,worldX*Settings.TILE_SIZE,
+                worldY*Settings.TILE_SIZE,Settings.TILE_SIZE,
+                Settings.TILE_SIZE);
         input();
     }
 
     public void input(){
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-            animationState = AnimationState.WALK_RIGHT;
+        if (animationState == AnimationState.STANDING) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                System.out.println("bruh");
+                animationState = AnimationState.WALK_RIGHT;
+                startMove();
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+                animationState = AnimationState.WALK_LEFT;
+                startMove();
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                animationState = AnimationState.WALK_UP;
+                startMove();
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                animationState = AnimationState.WALK_DOWN;
+                startMove();
+            }
         }
-        else if (Gdx.input.isKeyPressed(Input.Keys.A)){
-            animationState = AnimationState.WALK_LEFT;
-        }
-        else if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            animationState = AnimationState.WALK_UP;
-        }
-        else if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            animationState = AnimationState.WALK_DOWN;
-        }
-        else {
-            animationState = AnimationState.STANDING;
-        }
+//        else {
+//            animationState = AnimationState.STANDING;
+//        }
     }
 }

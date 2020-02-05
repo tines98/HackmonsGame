@@ -33,6 +33,7 @@ public class HackmonsGame extends ApplicationAdapter {
 
 	GridMap mapu;
 
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -80,8 +81,8 @@ public class HackmonsGame extends ApplicationAdapter {
 		battleMap.setBg(bg);
 		switchHackmonMenu = new SwitchHackmonMenu(player);
 
-		testPlayer = new Player(0,0);
-		testNPC = new NPC(800,450);
+		testPlayer = new Player(1,1);
+		testNPC = new NPC(5,5);
 	}
 
 	public static void changeScreenState(ScreenState state){
@@ -113,7 +114,6 @@ public class HackmonsGame extends ApplicationAdapter {
 		}
 		batch.end();
 	}
-	
 	@Override
 	public void dispose () {
 		batch.dispose();
