@@ -81,7 +81,6 @@ public class GridMap {
     }
 
     public void setPlayerPosition(int x, int y) {
-        tiles[y][x].setPlayer();
         playerX = x;
         playerY = y;
     }
@@ -90,6 +89,7 @@ public class GridMap {
         switch (state) {
             case WALK_LEFT:
                 if (!tiles[playerY][playerX-1].isSolid()) {
+
                     playerX--;
                     return true;
                 }
