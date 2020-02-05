@@ -1,46 +1,37 @@
-{
-	"types":
-		[
-			{
-				"INTERNALNAME": "FIRE",
-				"displayName": "Fire",
-				"weakness": [
-					"WATER",
-					"GROUND"
-				],
-				"resistance": [
-					"GRASS"
-				],
-				"immunity": []
-			},
-
-			{
-				"INTERNALNAME": "WATER",
-				"displayName": "Water",
-				"weakness":["GRASS", "ELECTRIC"],
-				"resistance":["FIRE"],
-				"immunity":[]
-			},
-			{
-				"INTERNALNAME": "GRASS",
-				"displayName": "Grass",
-				"weakness":["FIRE"],
-				"resistance":["WATER"],
-				"immunity":[]
-			},
-			{
-				"INTERNALNAME": "ELECTRIC",
-				"displayName": "Electric",
-				"weakness":["GROUND"],
-				"resistance":["WATER"],
-				"immunity":[]
-			},
-			{
-				"INTERNALNAME": "GROUND",
-				"displayName": "Ground",
-				"weakness":["WATER"],
-				"resistance":["FIRE"],
-				"immunity":["ELECTRIC"]
-			}
-		]
-}
+[
+	{
+		"INTERNALNAME": "FIRE",
+		"displayName": "Fire",
+		"weakness": ["WATER", "GROUND"],
+		"resistance": ["GRASS"],
+		"immunity": []
+	},
+	{
+		"INTERNALNAME": "WATER",
+		"displayName": "Water",
+		"weakness":["GRASS", "ELECTRIC"],
+		"resistance":["FIRE"],
+		"immunity":[]
+	},
+	{
+		"INTERNALNAME": "GRASS",
+		"displayName": "Grass",
+		"weakness":["FIRE"],
+		"resistance":["WATER"],
+		"immunity":[]
+	},
+	{
+		"INTERNALNAME": "ELECTRIC",
+		"displayName": "Electric",
+		"weakness":["GROUND"],
+		"resistance":["WATER"],
+		"immunity":[]
+	},
+	{
+		"INTERNALNAME": "GROUND",
+		"displayName": "Ground",
+		"weakness":["WATER"],
+		"resistance":["FIRE"],
+		"immunity":["ELECTRIC"]
+	}
+]

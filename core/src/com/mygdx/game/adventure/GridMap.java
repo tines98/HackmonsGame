@@ -12,10 +12,10 @@ import java.util.Scanner;
 
 public class GridMap {
 
-    private PosCell [][] cells;
+    private int playerX, playerY;
 
+    private PosCell [][] tiles;
     private String name;
-
     private Texture sprite;
 
     private ArrayList<Hackmon> normalEncounters;
@@ -39,25 +39,19 @@ public class GridMap {
 
                     String normalEncountersData = sc.nextLine();
                     String [] normalEncountersList = normalEncountersData.split("=|,");
-                    /*
-                    for (int i=1; i < normalEncountersList.length; i+=2) {
-                        System.out.println(normalEncountersList[i] + " " + normalEncountersList[i+1]);
-                        normalEncounters.add(new Hackmon(
-                            Integer.parseInt(normalEncountersList[i]), Integer.parseInt(normalEncountersList[i+1])));
-                    }
-                    */
+
                     File map = new File("core/assets/maps/" + routeNameList[1] + ".txt");
                     Scanner mapsc = new Scanner(map);
                     while(mapsc.hasNextLine()) {
                         String dimensions = mapsc.nextLine();
                         String [] dimensionsList = dimensions.split(",");
                         System.out.println(Arrays.toString(dimensionsList));
-                        cells = new PosCell[Integer.parseInt(dimensionsList[1])] [Integer.parseInt(dimensionsList[0])];
+                        tiles = new PosCell[Integer.parseInt(dimensionsList[1])] [Integer.parseInt(dimensionsList[0])];
 
-                        for (int y=0; y < cells.length; y++) {
+                        for (int y = tiles.length - 1; y >= 0; y--) {
                             String line = mapsc.nextLine();
-                            for (int x=0; x < cells[0].length; x++) {
-                                cells[y][x] = new PosCell(line.charAt(x));
+                            for (int x = 0; x < tiles[0].length; x++) {
+                                tiles[y][x] = new PosCell(line.charAt(x));
                             }
                         }
                     }
@@ -76,13 +70,51 @@ public class GridMap {
     }
 
     private void printMap() {
-        for (int i=0;  i < cells.length; i++) {
-            System.out.println(Arrays.toString(cells[i]));
+        for (int i = 0; i < tiles.length; i++) {
+            System.out.println(Arrays.toString(tiles[i]));
         }
     }
 
     public static void main(String[] args) {
-        GridMap mapu = new GridMap("Route 1");
+        GridMap mapu = new GridMap("Route1");
         mapu.printMap();
+    }
+
+    public void setPlayerPosition(int x, int y) {
+        tiles[y][x].setPlayer();
+        playerX = x;
+        playerY = y;
+    }
+
+    public boolean canGo(AnimationState state) {
+        switch (state) {
+            case WALK_LEFT:
+                if (!tiles[playerY][playerX-1].isSolid()) {
+                    playerX--;
+                    return true;
+                }
+                break;
+            case WALK_RIGHT:
+                if (!tiles[playerY][playerX+1].isSolid()) {
+                    playerX++;
+                    return true;
+                }
+                break;
+            case WALK_UP:
+                if (!tiles[playerY+1][playerX].isSolid()) {
+                    playerY++;
+                    return true;
+                }
+                break;
+            case WALK_DOWN:
+                if (!tiles[playerY-1][playerX].isSolid()) {
+                    playerY--;
+                    return true;
+                }
+                break;
+            default:
+                return true;
+        }
+        return false;
     }
 }
